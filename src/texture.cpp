@@ -1,6 +1,7 @@
 #include "texture.hpp"
 #include "stb_image.h"
 #include "glad.h"
+#include <GL/gl.h>
 #include <iostream>
 
 void
@@ -39,13 +40,13 @@ Texture::bindTexture()
     glBindTexture(GL_TEXTURE_2D, texture);
 }
 
-void
-Texture::parameters()
-{
-
-}
 Texture::Texture(const char* textureFilePath)
 {   
     Texture::generateTexture();
     Texture::loadTexture(textureFilePath);
+}
+
+Texture::~Texture()
+{
+
 }
