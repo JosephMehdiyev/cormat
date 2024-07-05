@@ -4,17 +4,15 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
-
-
-
+#include <iostream>
+#include <fstream>
+#include <vector>
+#include <sstream>
 
 shader::shader(const char* vertexFilePath, const char* fragmentFilePath)
 {
     const char* vertexShaderSource = getFileSource(vertexFilePath);
 
-
-
-    
     vertexShader = glCreateShader(GL_VERTEX_SHADER);
     glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);
     glCompileShader(vertexShader);
@@ -39,6 +37,10 @@ shader::shader(const char* vertexFilePath, const char* fragmentFilePath)
 
     glDeleteShader(vertexShader);
     glDeleteShader(fragmentShader);
+}
+shader::~shader()
+{
+
 }
 
 
@@ -124,7 +126,7 @@ shader::initializeViewM()
 {
     view = glm::mat4(1.0f);
     view  = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
-    setMat4("view",view);
+    setMat4("view",view);           
 }
 
 void
@@ -133,9 +135,9 @@ shader::initializeProjectionM()
     projection = glm::mat4(1.0f);
     projection = glm::perspective(glm::radians(45.0f), static_cast<float>(SCR_WIDTH) / static_cast<float>(SCR_HEIGHT), 0.1f, 100.0f);
     setMat4("projection", projection);
-}
+}   
 
-void 
+void    
 shader::setInt(const std::string &name, int value) const
 {
     glUniform1i(glGetUniformLocation(shaderProgramID, name.c_str()), value);

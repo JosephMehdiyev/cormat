@@ -1,11 +1,6 @@
 #pragma once 
 
-#include "glad.h"
 #include <string>
-#include <fstream>
-#include <vector>
-#include <sstream>
-#include <iostream>
 #include <glm/glm.hpp>
 
 
@@ -16,6 +11,7 @@ class shader
 {
 public:
     shader(const char* vertexFilePath, const char* fragmentFilePath);
+    ~shader();
     void use();
     void setMat4(const std::string &name, const glm::mat4 &mat) const;
     void setInt(const std::string &name, int value) const;
@@ -24,8 +20,12 @@ public:
     void initializeViewM();
     void initializeProjectionM();
     glm:: mat4 model, view, projection;
-
 private:
+    // Returns a C-style string with input file directory path.
+    // REMARK: you must fully use the return file before recalling this function.
+    // otherwise the new return file will overload the old return file
     const char* getFileSource(const char* filePath);
+    // Checks errors for shader linking and compilations
+    // If it is a shader program, bool must be TRUE, if it is a shader (compilation), then FALSE
     void checkErrors(unsigned int shaderType, bool isProgram);
 };
