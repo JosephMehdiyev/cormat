@@ -4,17 +4,18 @@
 #include <GL/gl.h>
 #include <iostream>
 
+
 void
 Texture::generateTexture()
 {
     glGenTextures(1, &texture);
     glBindTexture(GL_TEXTURE_2D, texture);
-
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);	
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 }
+
 
 void
 Texture::loadTexture(const char* textureFileLocation)
@@ -30,9 +31,9 @@ Texture::loadTexture(const char* textureFileLocation)
     {
        std::cout << "ERROR: COULDN'T LOAD THE TEXTURE" << std::endl;
     }
-
     stbi_image_free(data);
 }
+
 
 void
 Texture::bindTexture()
@@ -40,13 +41,14 @@ Texture::bindTexture()
     glBindTexture(GL_TEXTURE_2D, texture);
 }
 
+
 Texture::Texture(const char* textureFilePath)
 {   
     Texture::generateTexture();
     Texture::loadTexture(textureFilePath);
 }
 
+
 Texture::~Texture()
 {
-
 }
