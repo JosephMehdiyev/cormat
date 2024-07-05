@@ -1,4 +1,12 @@
 #include "shader.hpp"
+#include "glad.h"
+#include "glfw3.h"
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
+
+
+
 
 shader::shader(const char* vertexFilePath, const char* fragmentFilePath)
 {
@@ -35,7 +43,8 @@ shader::shader(const char* vertexFilePath, const char* fragmentFilePath)
 
 
 // A simple function to retrieve source code of shaders from other files.
-// This works for one time for no reason, lol!
+// This works for one time for some reason, do your work before calling it.
+
 const char*
 shader::getFileSource(const char* filePath)
 {
@@ -100,6 +109,30 @@ shader::checkErrors(unsigned int shaderType, bool isProgram)
             return;
         }
     }
+}
+
+void
+shader::initializeModelM()
+{
+    model = glm::mat4(1.0f);
+    model = glm::rotate(model, static_cast<float>(glfwGetTime()), glm::vec3(0.5f, 1.0f, 0.0f));
+    setMat4("model", model);
+}
+
+void 
+shader::initializeViewM()
+{
+    view = glm::mat4(1.0f);
+    view  = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
+    setMat4("view",view);
+}
+
+void
+shader::initializeProjectionM()
+{
+    projection = glm::mat4(1.0f);
+    projection = glm::perspective(glm::radians(45.0f), static_cast<float>(SCR_WIDTH) / static_cast<float>(SCR_HEIGHT), 0.1f, 100.0f);
+    setMat4("projection", projection);
 }
 
 void 
