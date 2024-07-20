@@ -19,6 +19,7 @@ public:
     void initializeModelM();
     void initializeViewM();
     void initializeProjectionM();
+    void updateProjectionM(float fov);
     glm:: mat4 model, view, projection;
 private:
     // Returns a C-style string with input file directory path.

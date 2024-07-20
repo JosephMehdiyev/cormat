@@ -1,15 +1,19 @@
-#include "glfwWindow.hpp"
+#include "glfwCamera.hpp"
 #include "glfw3.h"
-#include <tuple>
+#include <glm/geometric.hpp>
 #include <iostream>
 
+// https://www.songho.ca/opengl/gl_camera.html
 
-glfwWindow::glfwWindow(int screenWidth, int screenHeight)
+glfwCamera::glfwCamera(int screenWidth, int screenHeight)
 {
+    // Window Part
+    // ----------------------------------------------------------------
     glfwInit();
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+    
 
     // create glfw window
     
@@ -17,7 +21,7 @@ glfwWindow::glfwWindow(int screenWidth, int screenHeight)
     if (window == NULL)
     {
         std::cout << "Failed to create GLFW window" << std::endl;
-        glfwTerminate();
+        glfwTerminate();    
     }
     glfwMakeContextCurrent(window);
 
@@ -28,20 +32,33 @@ glfwWindow::glfwWindow(int screenWidth, int screenHeight)
     }    
 
     glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-    glfwMakeContextCurrent(window);
-    glfwSetFramebufferSizeCallback(window, framebufferSizeCallback);
+     glfwSetWindowUserPointer(window, this);        
+    glfwSetFramebufferSizeCallback(window, staticFrameSizeCallBack);
+    glfwSetScrollCallback(window, staticScrollCallBack);
+    
+
+
+
+
+
+    // Camera Part
+    // --------------------------------------------------------------------------
+        cameraPosition = glm::vec3(0.0f,0.0f,0.0f);
+        worldUp = glm::vec3(0.0f, 1.0f, 0.0f);
+        yaw = -90.0f;
+        pitch =  0.0f;
+        roll = 0.0f;
+        updateCameraVectors();  
 
 }
-
-void 
-glfwWindow::framebufferSizeCallback (GLFWwindow *window, int width, int height) 
+glfwCamera::~glfwCamera()
 {
-    glViewport(0, 0, width, height);
-    std::ignore = window;
+
 }
 
+
 void 
-glfwWindow::processInput () 
+glfwCamera::processInput() 
 {
     if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
     {
@@ -89,13 +106,49 @@ glfwWindow::processInput ()
 }
 
 void
-glfwWindow::swapBuffers()
+glfwCamera::swapBuffers()
 {
     glfwSwapBuffers(window);
 }
 
+void 
+glfwCamera::updateCameraVectors()
+{   
+    glm::vec3 bufferCameraFront;
+    bufferCameraFront.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
+    bufferCameraFront.y = sin(glm::radians(pitch));
+    bufferCameraFront.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
+    cameraFront = glm::normalize(bufferCameraFront);
+
+    cameraRight = glm::normalize(glm::cross(cameraFront, worldUp));
+    cameraUp = glm::normalize(glm::cross(cameraRight, cameraFront));
+}
+
+void    
+glfwCamera::processZoom( [[maybe_unused]] GLFWwindow* windoww, [[maybe_unused]] double xoffset, double yoffset)
+{
+    glfwCamera::fov -= static_cast<float>(yoffset);                        
+    if (fov < 1.0f) glfwCamera::fov = 1.0f;
+    if(fov > 45.0f) glfwCamera::fov = 45.0f;
+}
+
+void
+glfwCamera::staticScrollCallBack(GLFWwindow *w, double xoffset, double yoffset)
+{
+     static_cast<glfwCamera*>(glfwGetWindowUserPointer(w))->processZoom( w, xoffset, yoffset);
+}
 
 
+void
+glfwCamera::staticFrameSizeCallBack(GLFWwindow* w, int width, int height) { 
+    //set this in window init
+    static_cast<glfwCamera*>(glfwGetWindowUserPointer(w))->frameSizeCallBack(w, width, height);
+}
+
+
+void glfwCamera::frameSizeCallBack([[maybe_unused]] GLFWwindow* w, int width, int height) {
+     glViewport(0, 0, width, height);
+}
 
 
 
