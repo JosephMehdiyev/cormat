@@ -20,6 +20,7 @@ public:
     void initializeViewM();
     void initializeProjectionM();
     void updateProjectionM(float fov);
+    void updateViewM(glm::vec3 cameraPosition, glm::vec3 cameraFront, glm::vec3 worldUp);
     glm:: mat4 model, view, projection;
 private:
     // Returns a C-style string with input file directory path.

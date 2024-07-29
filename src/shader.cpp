@@ -8,6 +8,7 @@
 #include <fstream>
 #include <vector>
 #include <sstream>
+#include "glfwCamera.hpp"
 
 shader::shader(const char* vertexFilePath, const char* fragmentFilePath)
 {
@@ -126,7 +127,13 @@ shader::initializeViewM()
 {
     view = glm::mat4(1.0f); 
     view  = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
-    setMat4("view",view);           
+    setMat4("view",view);
+}
+void
+shader::updateViewM(glm::vec3 cameraPosition, glm::vec3 cameraFront, glm::vec3 worldUp)
+{
+    view = glm::lookAt(cameraPosition, cameraPosition+ cameraFront, worldUp);
+setMat4("view",view);
 }
 
 void

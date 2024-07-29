@@ -32,10 +32,10 @@ glfwCamera::glfwCamera(int screenWidth, int screenHeight)
     }    
 
     glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-     glfwSetWindowUserPointer(window, this);        
+    glfwSetWindowUserPointer(window, this);        
     glfwSetFramebufferSizeCallback(window, staticFrameSizeCallBack);
     glfwSetScrollCallback(window, staticScrollCallBack);
-    
+    glfwSetCursorPosCallback(window, staticCursorCallBack);
 
 
 
@@ -124,6 +124,26 @@ glfwCamera::updateCameraVectors()
     cameraUp = glm::normalize(glm::cross(cameraRight, cameraFront));
 }
 
+
+void 
+glfwCamera::cursorCallBack( [[maybe_unused]] GLFWwindow* windoww, double xpos, double ypos)
+{
+
+    float sensitivity = 0.01f;
+    xpos *= sensitivity;
+    ypos *= sensitivity;
+
+    yaw += xpos;
+    pitch += ypos;
+
+    if (pitch > 89.0f)
+        pitch = 89.0f;
+    if (pitch < -89.0f)
+        pitch = -89.0f;
+    updateCameraVectors();
+}
+
+
 void    
 glfwCamera::processZoom( [[maybe_unused]] GLFWwindow* windoww, [[maybe_unused]] double xoffset, double yoffset)
 {
@@ -140,14 +160,24 @@ glfwCamera::staticScrollCallBack(GLFWwindow *w, double xoffset, double yoffset)
 
 
 void
-glfwCamera::staticFrameSizeCallBack(GLFWwindow* w, int width, int height) { 
+glfwCamera::staticFrameSizeCallBack(GLFWwindow* w, int width, int height) 
+{ 
     //set this in window init
     static_cast<glfwCamera*>(glfwGetWindowUserPointer(w))->frameSizeCallBack(w, width, height);
 }
 
 
-void glfwCamera::frameSizeCallBack([[maybe_unused]] GLFWwindow* w, int width, int height) {
+void
+glfwCamera::frameSizeCallBack([[maybe_unused]] GLFWwindow* w, int width, int height) 
+{
      glViewport(0, 0, width, height);
+}
+
+
+void
+glfwCamera::staticCursorCallBack(GLFWwindow *w, double xpos, double ypos)
+{
+    static_cast<glfwCamera*>(glfwGetWindowUserPointer(w))->cursorCallBack(w, xpos, ypos);
 }
 
 
