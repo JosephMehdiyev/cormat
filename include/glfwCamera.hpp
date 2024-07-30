@@ -39,6 +39,7 @@ private:
     // Roll is Z axis
     float yaw, pitch, roll;
     bool firstMouse;
+   
 
 public:
     // Camera settings
@@ -49,5 +50,8 @@ public:
     static void staticFrameSizeCallBack(GLFWwindow* w, int width, int height);
     static void staticScrollCallBack(GLFWwindow* w, double xoffset, double yoffset);
     static void staticCursorCallBack(GLFWwindow* w, double xpos, double ypos);
-            
+  
+
+ double changeInX;
+    double changeInY;
 };

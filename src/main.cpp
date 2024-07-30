@@ -48,10 +48,10 @@ int main()
         glEnable(GL_DEPTH_TEST);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        shader.initializeModelM();
         shader.initializeProjectionM();
         shader.updateProjectionM(glfwCamera.fov);
         shader.updateViewM(glfwCamera.cameraPosition, glfwCamera.cameraFront, glfwCamera.worldUp);
+        shader.updateModelM(glfwCamera.changeInX, glfwCamera.changeInY);
 
         glBindVertexArray(render.VAO); 
         glDrawArrays(GL_TRIANGLES, 0, 36);

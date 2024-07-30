@@ -2,6 +2,7 @@
 #include "glfw3.h"
 #include <glm/geometric.hpp>
 #include <iostream>
+#include "shader.hpp"
 
 // https://www.songho.ca/opengl/gl_camera.html
 
@@ -35,7 +36,7 @@ glfwCamera::glfwCamera(int screenWidth, int screenHeight)
     glfwSetWindowUserPointer(window, this);        
     glfwSetFramebufferSizeCallback(window, staticFrameSizeCallBack);
     glfwSetScrollCallback(window, staticScrollCallBack);
-    //glfwSetCursorPosCallback(window, staticCursorCallBack);
+    glfwSetCursorPosCallback(window, staticCursorCallBack);
 
 
 
@@ -86,25 +87,15 @@ glfwCamera::processInput()
     {
         cameraPosition += glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
     }
-    //if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
-    //{
-    //    glm_vec3_add(cameraPos, cameraUp, cameraPos);
-    //}
-    //    if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
-    //{
-    //    glm_vec3_sub(cameraPos, cameraUp, cameraPos);
-    //}
-    //if (glfwGetKey(window, GLFW_KEY_G) == GLFW_PRESS)
-    //{
-    //    gridflag = false;
-    //}
 }
+
 
 void
 glfwCamera::swapBuffers()
 {
     glfwSwapBuffers(window);
 }
+
 
 void 
 glfwCamera::updateCameraVectors()
@@ -123,33 +114,18 @@ glfwCamera::updateCameraVectors()
 void 
 glfwCamera::cursorCallBack( [[maybe_unused]] GLFWwindow* windoww, double xpos, double ypos)
 {
-    
-    float sensitivity = 0.0001f;
-    double lastX = 400;
-    double lastY = 300;
+    float sensitivity = 2.0f;
+    xpos *= sensitivity;
+    ypos *= sensitivity;
+    changeInX = xpos;
+    changeInY = ypos;
+}
 
-    if (firstMouse)
-    {
-        lastX = xpos;
-        lastY = ypos;
-        firstMouse = false;
-    }
 
-    double totalChangeX = xpos - lastX;
-    double totalChangeY = ypos - lastY;
-     lastX = xpos;
-        lastY = ypos;
-    totalChangeX *= sensitivity;
-    totalChangeY*= sensitivity;
-
-    yaw += totalChangeX;
-    pitch += totalChangeY;
-
-    if (pitch > 89.0f)
-        pitch = 89.0f;
-    if (pitch < -89.0f)
-        pitch = -89.0f;
-    updateCameraVectors();
+void
+glfwCamera::frameSizeCallBack([[maybe_unused]] GLFWwindow* w, int width, int height) 
+{
+     glViewport(0, 0, width, height);
 }
 
 
@@ -173,13 +149,6 @@ glfwCamera::staticFrameSizeCallBack(GLFWwindow* w, int width, int height)
 { 
     //set this in window init
     static_cast<glfwCamera*>(glfwGetWindowUserPointer(w))->frameSizeCallBack(w, width, height);
-}
-
-
-void
-glfwCamera::frameSizeCallBack([[maybe_unused]] GLFWwindow* w, int width, int height) 
-{
-     glViewport(0, 0, width, height);
 }
 
 

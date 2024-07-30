@@ -114,23 +114,16 @@ shader::checkErrors(unsigned int shaderType, bool isProgram)
     }
 }
 
+
 void
 shader::initializeModelM()
 {
     model = glm::mat4(1.0f);
-    model = glm::rotate(model, static_cast<float>(glfwGetTime()), glm::vec3(0.5f, 1.0f, 0.0f));
     setMat4("model", model);
 }
 
 
 void
-shader::updateModelM(double changeX, double changeY)
-{
-
-}
-
-
-void 
 shader::initializeViewM()
 {
     view = glm::mat4(1.0f); 
@@ -140,11 +133,22 @@ shader::initializeViewM()
 
 
 void
+shader::updateModelM(double changeX, double changeY)
+{
+    model = glm::mat4(1.0f);
+    model = glm::rotate(model, static_cast<float>(glm::radians(changeX)), glm::vec3(0.0f, 1.0f, 0.0f));
+    model = glm::rotate(model, static_cast<float>(glm::radians(changeY)), glm::vec3(1.0f, 0.0f, 0.0f));
+    setMat4("model", model);
+}
+
+
+void
 shader::updateViewM(glm::vec3 cameraPosition, glm::vec3 cameraFront, glm::vec3 worldUp)
 {
     view = glm::lookAt(cameraPosition, cameraPosition+ cameraFront, worldUp);
-setMat4("view",view);
+    setMat4("view",view);
 }
+
 
 void
 shader::initializeProjectionM()
@@ -154,6 +158,7 @@ shader::initializeProjectionM()
     setMat4("projection", projection);
 }
 
+
 void
 shader::updateProjectionM(float fov)
 {
@@ -162,11 +167,13 @@ shader::updateProjectionM(float fov)
     setMat4("projection", projection);
 }
 
+
 void    
 shader::setInt(const std::string &name, int value) const
 {
     glUniform1i(glGetUniformLocation(shaderProgramID, name.c_str()), value);
 }
+
 
 void
 shader::setMat4(const std::string &name, const glm::mat4 &mat) const
