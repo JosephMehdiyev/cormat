@@ -35,7 +35,7 @@ glfwCamera::glfwCamera(int screenWidth, int screenHeight)
     glfwSetWindowUserPointer(window, this);        
     glfwSetFramebufferSizeCallback(window, staticFrameSizeCallBack);
     glfwSetScrollCallback(window, staticScrollCallBack);
-    glfwSetCursorPosCallback(window, staticCursorCallBack);
+    //glfwSetCursorPosCallback(window, staticCursorCallBack);
 
 
 
@@ -50,7 +50,12 @@ glfwCamera::glfwCamera(int screenWidth, int screenHeight)
         roll = 0.0f;
         updateCameraVectors();  
 
+        firstMouse = true;
+    
+
 }
+
+
 glfwCamera::~glfwCamera()
 {
 
@@ -64,33 +69,23 @@ glfwCamera::processInput()
     {
         glfwSetWindowShouldClose(window, true);
     }   
-    //const float cameraSpeed = 0.01f; 
-    //if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-    //{
-    //    vec3 buffer;
-    //    glm_vec3_scale(cameraFront, cameraSpeed, buffer);
-    //    glm_vec3_add(cameraPos, buffer, cameraPos);
-    //}
-    //if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-    //{
-    //    vec3 buffer;
-    //    glm_vec3_scale(cameraFront, cameraSpeed, buffer);
-    //    glm_vec3_sub(cameraPos, buffer, cameraPos);
-    //}
-    //if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-    //{
-    //    vec3 buffer1, buffer2;
-    //    glm_vec3_crossn(cameraFront, cameraUp, buffer1);
-    //    glm_vec3_scale(buffer1, cameraSpeed, buffer2);
-    //    glm_vec3_sub(cameraPos, buffer2, cameraPos);
-    //}
-    //if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-    //{
-    //    vec3 buffer1, buffer2;
-    //    glm_vec3_crossn(cameraFront, cameraUp, buffer1);
-    //    glm_vec3_scale(buffer1, cameraSpeed, buffer2);
-    //    glm_vec3_add(cameraPos, buffer2, cameraPos);
-    //}
+    const float cameraSpeed = 0.05f; 
+    if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+    {
+        cameraPosition += cameraFront * cameraSpeed;
+    }
+    if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+    {
+        cameraPosition -= cameraFront * cameraSpeed;
+    }
+    if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
+    {
+        cameraPosition -= glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
+    }
+    if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
+    {
+        cameraPosition += glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
+    }
     //if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
     //{
     //    glm_vec3_add(cameraPos, cameraUp, cameraPos);
@@ -128,13 +123,27 @@ glfwCamera::updateCameraVectors()
 void 
 glfwCamera::cursorCallBack( [[maybe_unused]] GLFWwindow* windoww, double xpos, double ypos)
 {
+    
+    float sensitivity = 0.0001f;
+    double lastX = 400;
+    double lastY = 300;
 
-    float sensitivity = 0.01f;
-    xpos *= sensitivity;
-    ypos *= sensitivity;
+    if (firstMouse)
+    {
+        lastX = xpos;
+        lastY = ypos;
+        firstMouse = false;
+    }
 
-    yaw += xpos;
-    pitch += ypos;
+    double totalChangeX = xpos - lastX;
+    double totalChangeY = ypos - lastY;
+     lastX = xpos;
+        lastY = ypos;
+    totalChangeX *= sensitivity;
+    totalChangeY*= sensitivity;
+
+    yaw += totalChangeX;
+    pitch += totalChangeY;
 
     if (pitch > 89.0f)
         pitch = 89.0f;

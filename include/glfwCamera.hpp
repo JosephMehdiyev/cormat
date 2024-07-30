@@ -38,6 +38,7 @@ private:
     // Pitch is X axis
     // Roll is Z axis
     float yaw, pitch, roll;
+    bool firstMouse;
 
 public:
     // Camera settings

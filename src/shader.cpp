@@ -122,6 +122,14 @@ shader::initializeModelM()
     setMat4("model", model);
 }
 
+
+void
+shader::updateModelM(double changeX, double changeY)
+{
+
+}
+
+
 void 
 shader::initializeViewM()
 {
@@ -129,6 +137,8 @@ shader::initializeViewM()
     view  = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
     setMat4("view",view);
 }
+
+
 void
 shader::updateViewM(glm::vec3 cameraPosition, glm::vec3 cameraFront, glm::vec3 worldUp)
 {
