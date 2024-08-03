@@ -55,7 +55,7 @@ int main()
 
         //TODO:  same as the first TODO, rendering structure must be changed, really.
         glBindVertexArray(render.VAO); 
-        glDrawArrays(GL_TRIANGLES, 0, 6);
+        glDrawArrays(GL_TRIANGLES, 0, 36);
 
         glfwCamera.swapBuffers();
         glfwPollEvents();
