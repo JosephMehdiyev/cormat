@@ -4,7 +4,8 @@
 #include <GL/gl.h>
 #include <iostream>
 
-
+//TODO: feature to support more than 1 textures at a time.
+//      also calling the class twice is buggy(?).
 void
 Texture::generateTexture()
 {

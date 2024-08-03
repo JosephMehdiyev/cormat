@@ -36,25 +36,26 @@ int main()
     // render loop
     // -----------
     while (!glfwWindowShouldClose(glfwCamera.window))
-    {
-        // input
-        // -----
+    {   
         glfwCamera.processInput();
-
-        // render
-        // ------
+        
+        //TODO: change the rendering structure for a better, cleaner one.
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         shader.use();
         glEnable(GL_DEPTH_TEST);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+
+        //TODO: currently the matrix generation is a mess, it should be rewritten.
         shader.initializeProjectionM();
         shader.updateProjectionM(glfwCamera.fov);
         shader.updateViewM(glfwCamera.cameraPosition, glfwCamera.cameraFront, glfwCamera.worldUp);
         shader.updateModelM(glfwCamera.changeInX, glfwCamera.changeInY);
+        
 
+        //TODO:  same as the first TODO, rendering structure must be changed, really.
         glBindVertexArray(render.VAO); 
-        glDrawArrays(GL_TRIANGLES, 0, 36);
+        glDrawArrays(GL_TRIANGLES, 0, 6);
 
         glfwCamera.swapBuffers();
         glfwPollEvents();

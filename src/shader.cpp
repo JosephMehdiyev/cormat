@@ -45,9 +45,10 @@ shader::~shader()
 }
 
 
-// A simple function to retrieve source code of shaders from other files.
-// This works for one time for some reason, do your work before calling it.
+// WARNING: the function is buggy, calling it twice in a row rewrites the first call
+//          so, properly use the first function before calling it agian.
 
+// A simple function to retrieve shader source code from a file to the main program.
 const char*
 shader::getFileSource(const char* filePath)
 {
@@ -70,11 +71,13 @@ shader::getFileSource(const char* filePath)
     return fileCode.c_str();
 }
 
+
 void
 shader::use()
 {
     glUseProgram(shader::shaderProgramID);
 }
+
 
 void
 shader::checkErrors(unsigned int shaderType, bool isProgram)
@@ -114,7 +117,7 @@ shader::checkErrors(unsigned int shaderType, bool isProgram)
     }
 }
 
-
+//WARNING: all the matrix functions below should be rewritten for better structure
 void
 shader::initializeModelM()
 {

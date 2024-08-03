@@ -3,6 +3,7 @@
 #include "../data/verticeData/vertices.hpp"
 
 
+//TODO: rewrite this mess
 void
 render::initializeBuffer()
 {
@@ -23,6 +24,7 @@ render::initializeBuffer()
     glEnableVertexAttribArray(1);
 }
 
+
 void
 render::deleteBuffer()
 {
@@ -30,6 +32,7 @@ render::deleteBuffer()
     glDeleteBuffers(1, &VBO);
     glDeleteBuffers(1, &EBO);
 }
+
 
 render::render()
 {

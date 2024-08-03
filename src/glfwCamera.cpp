@@ -8,16 +8,12 @@
 
 glfwCamera::glfwCamera(int screenWidth, int screenHeight)
 {
-    // Window Part
-    // ----------------------------------------------------------------
     glfwInit();
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     
 
-    // create glfw window
-    
     window = glfwCreateWindow(screenWidth, screenHeight, "Cormat", NULL, NULL);
     if (window == NULL)
     {
@@ -26,13 +22,15 @@ glfwCamera::glfwCamera(int screenWidth, int screenHeight)
     }
     glfwMakeContextCurrent(window);
 
-    //GLAD: load OPENGL function pointers
     if (!gladLoadGLLoader(reinterpret_cast<GLADloadproc>(glfwGetProcAddress)))
     {
         std::cout << "Failed to initialize GLAD" << std::endl;
     }    
 
     glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+    
+    //NOTE: this is a workaround for OOP support. Since GLFW doesn't support class pointers,
+    //      we need new static function clones to use them as callbacks.
     glfwSetWindowUserPointer(window, this);        
     glfwSetFramebufferSizeCallback(window, staticFrameSizeCallBack);
     glfwSetScrollCallback(window, staticScrollCallBack);
@@ -50,7 +48,6 @@ glfwCamera::glfwCamera(int screenWidth, int screenHeight)
         pitch =  0.0f;
         roll = 0.0f;
         updateCameraVectors();  
-
         firstMouse = true;
     
 
@@ -111,6 +108,9 @@ glfwCamera::updateCameraVectors()
 }
 
 
+// WARNING: the rotation is relative to the object itself. What it does mean it that, after object 
+//          rotates 180* degrees, the rotation position gets reversed
+//FIXME: fix the warning
 void 
 glfwCamera::cursorCallBack( [[maybe_unused]] GLFWwindow* windoww, double xpos, double ypos)
 {
