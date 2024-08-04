@@ -6,5 +6,6 @@ class render
 public:
     render();
     void initializeBuffer();
+    void initializeBufferLine();
     unsigned int VBO, VAO, EBO;
 };

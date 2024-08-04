@@ -49,6 +49,7 @@ glfwCamera::glfwCamera(int screenWidth, int screenHeight)
         roll = 0.0f;
         updateCameraVectors();  
         firstMouse = true;
+        fov = 45.0f;
     
 
 }
@@ -110,7 +111,7 @@ glfwCamera::updateCameraVectors()
 
 // WARNING: the rotation is relative to the object itself. What it does mean it that, after object 
 //          rotates 180* degrees, the rotation position gets reversed
-//FIXME: fix the warning
+// FIXME:   fix the warning
 void 
 glfwCamera::cursorCallBack( [[maybe_unused]] GLFWwindow* windoww, double xpos, double ypos)
 {
@@ -137,6 +138,8 @@ glfwCamera::processZoom( [[maybe_unused]] GLFWwindow* windoww, [[maybe_unused]] 
     if(fov > 45.0f) glfwCamera::fov = 45.0f;
 }
 
+
+// NOTE: these are  our static function clones. Do not touch!
 void
 glfwCamera::staticScrollCallBack(GLFWwindow *w, double xoffset, double yoffset)
 {
@@ -147,7 +150,6 @@ glfwCamera::staticScrollCallBack(GLFWwindow *w, double xoffset, double yoffset)
 void
 glfwCamera::staticFrameSizeCallBack(GLFWwindow* w, int width, int height) 
 { 
-    //set this in window init
     static_cast<glfwCamera*>(glfwGetWindowUserPointer(w))->frameSizeCallBack(w, width, height);
 }
 

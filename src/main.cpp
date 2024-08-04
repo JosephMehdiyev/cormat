@@ -26,7 +26,7 @@ int main()
     glfwCamera glfwCamera(SCR_WIDTH, SCR_HEIGHT);
     render render;
     Texture texture1("../data/textures/dark.png");
-    shader shader("../shader/basic.vert.glsl", "../shader/basic.frag.glsl");
+    shader shader("../shader/graph.vert.glsl", "../shader/graph.frag.glsl");
 
 
 
@@ -40,7 +40,7 @@ int main()
         glfwCamera.processInput();
         
         //TODO: change the rendering structure for a better, cleaner one.
-        glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+        glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
         shader.use();
         glEnable(GL_DEPTH_TEST);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -54,8 +54,9 @@ int main()
         
 
         //TODO:  same as the first TODO, rendering structure must be changed, really.
-        glBindVertexArray(render.VAO); 
-        glDrawArrays(GL_TRIANGLES, 0, 36);
+        glBindVertexArray(render.VAO);
+        glLineWidth(10.f);
+        glDrawArrays(GL_LINES, 0, 6);
 
         glfwCamera.swapBuffers();
         glfwPollEvents();
