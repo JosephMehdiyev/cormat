@@ -42,14 +42,15 @@ glfwCamera::glfwCamera(int screenWidth, int screenHeight)
 
     // Camera Part
     // --------------------------------------------------------------------------
-        cameraPosition = glm::vec3(0.0f,0.0f,0.0f);
+        cameraPosition = glm::vec3(0.0f,0.0f,1.0f);
         worldUp = glm::vec3(0.0f, 1.0f, 0.0f);
+        cameraFront = glm::vec3(0.0,0.0, 1.0);
         yaw = -90.0f;
         pitch =  0.0f;
         roll = 0.0f;
         updateCameraVectors();  
         firstMouse = true;
-        fov = 45.0f;
+        fov = 60.0f;
     
 
 }

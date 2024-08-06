@@ -138,12 +138,19 @@ shader::initializeViewM()
 }
 
 
+// FIXME:: There is a bug that if there is no input in the beginning of the program, nothing will be rendered
+//         Reason is that the function waits for the input changeX and changeY
+//         Simply rewrite the shader structure in whole.
 void
 shader::updateModelM(double changeX, double changeY)
 {
     model = glm::mat4(1.0f);
+    model = glm::translate(model, glm::vec3(0.0, -0.4, -3.0));
+    setMat4("model", model);
     model = glm::rotate(model, static_cast<float>(glm::radians(changeX)), glm::vec3(0.0f, 1.0f, 0.0f));
+    model = glm::rotate(model, static_cast<float>(glfwGetTime()), glm::vec3(0.0f, 1.0f, 0.0f));
     model = glm::rotate(model, static_cast<float>(glm::radians(changeY)), glm::vec3(1.0f, 0.0f, 0.0f));
+    model = glm::rotate(model, static_cast<float>(glm::radians(85.0)), glm::vec3(1.0,0.0,0.0));
     setMat4("model", model);
 }
 

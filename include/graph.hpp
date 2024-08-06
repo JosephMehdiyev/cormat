@@ -11,5 +11,6 @@ public:
 private:
     int totalBoxes;
     std::vector<float> gridVertices;
+    std::vector<float> findPairSymmetry(std::vector<float> vec, std::string axis);
     class render render;
 };
