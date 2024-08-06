@@ -1,6 +1,7 @@
 #include "shader.hpp"
 #include "glad.h"
 #include "glfw3.h"
+#include <glm/ext/matrix_transform.hpp>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
@@ -47,6 +48,7 @@ shader::~shader()
 
 // WARNING: the function is buggy, calling it twice in a row rewrites the first call
 //          so, properly use the first function before calling it agian.
+//FIXME: fix the warning
 
 // A simple function to retrieve shader source code from a file to the main program.
 const char*
@@ -118,6 +120,7 @@ shader::checkErrors(unsigned int shaderType, bool isProgram)
 }
 
 //WARNING: all the matrix functions below should be rewritten for better structure
+//FIXME: fix the warning
 void
 shader::initializeModelM()
 {

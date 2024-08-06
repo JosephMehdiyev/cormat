@@ -29,7 +29,7 @@ glfwCamera::glfwCamera(int screenWidth, int screenHeight)
 
     glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
     
-    //NOTE: this is a workaround for OOP support. Since GLFW doesn't support class pointers,
+    //NOTE: this is a workaround for OOP support. Since GLFW doesn't support class pointers (C library),
     //      we need new static function clones to use them as callbacks.
     glfwSetWindowUserPointer(window, this);        
     glfwSetFramebufferSizeCallback(window, staticFrameSizeCallBack);

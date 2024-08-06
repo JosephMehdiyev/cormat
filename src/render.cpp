@@ -1,5 +1,6 @@
 #include "render.hpp"
 #include "glad.h"
+#include <GL/gl.h>
 #include "../data/verticeData/vertices.hpp"
 
 float grid[] =
@@ -15,39 +16,37 @@ float grid[] =
 };
 
 //TODO: rewrite this mess
+//
+render::render()
+{
+    this->initializeBuffer();
+}
 void
 render::initializeBuffer()
 {
     VBO, VAO;
     glGenVertexArrays(1, &VAO);
     glGenBuffers(1, &VBO);
-
     glBindVertexArray(VAO);
-
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-
-    // position attribute
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), reinterpret_cast<void*>(0));
-    glEnableVertexAttribArray(0);
-    // texture coord attribute
-    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), reinterpret_cast<void*>((3 * sizeof(float))));
-    glEnableVertexAttribArray(1);
 }
 
 
 void
-render::initializeBufferLine()
+render::setBuffer(std::vector<float> vertice)
 {
-    VBO, VAO;
-    glGenVertexArrays(1, &VAO);
-    glGenBuffers(1, &VBO);
+    glBufferData(GL_ARRAY_BUFFER, static_cast<int>(6* sizeof(float) * vertice.size()), &vertice[0], GL_STATIC_DRAW);
 
-    glBindVertexArray(VAO);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), reinterpret_cast<void*>(0));
+    glEnableVertexAttribArray(0);
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), reinterpret_cast<void*>(3*sizeof(float)));
+    glEnableVertexAttribArray(1);
+}
+void
+render::setBufferLine()
+{
 
-    glBindBuffer(GL_ARRAY_BUFFER, VBO);
     glBufferData(GL_ARRAY_BUFFER, sizeof(grid), grid, GL_STATIC_DRAW);
-
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), reinterpret_cast<void*>(0));
     glEnableVertexAttribArray(0);
     glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), reinterpret_cast<void*>(3*sizeof(float)));
@@ -62,7 +61,3 @@ render::deleteBuffer()
 }
 
 
-render::render()
-{
-    initializeBufferLine();
-}

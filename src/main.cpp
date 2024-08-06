@@ -10,31 +10,14 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
-
-// settings
-
-
-
-
-
-// THIS IS AN INITIALIZATION FILE, NOT INTENDED FOR PRODUCTION IN ANY MEANS
-// THE SOURCE CODE BELOW IS A INTRODUCTORY OPENGL TRIANGLE CODE FROM LEARNOPENGL
-// THIS CODE IS TEMPORARY
+#include "graph.hpp"
 
 int main()
 {
     glfwCamera glfwCamera(SCR_WIDTH, SCR_HEIGHT);
-    render render;
-    Texture texture1("../data/textures/dark.png");
     shader shader("../shader/graph.vert.glsl", "../shader/graph.frag.glsl");
+    graph graph(20);
 
-
-
-
-
-
-    // render loop
-    // -----------
     while (!glfwWindowShouldClose(glfwCamera.window))
     {   
         glfwCamera.processInput();
@@ -45,7 +28,6 @@ int main()
         glEnable(GL_DEPTH_TEST);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-
         //TODO: currently the matrix generation is a mess, it should be rewritten.
         shader.initializeProjectionM();
         shader.updateProjectionM(glfwCamera.fov);
@@ -54,9 +36,7 @@ int main()
         
 
         //TODO:  same as the first TODO, rendering structure must be changed, really.
-        glBindVertexArray(render.VAO);
-        glLineWidth(10.f);
-        glDrawArrays(GL_LINES, 0, 6);
+        graph.draw();
 
         glfwCamera.swapBuffers();
         glfwPollEvents();
