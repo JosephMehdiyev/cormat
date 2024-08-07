@@ -46,3 +46,4 @@ CMakeUserPresets.json
 /build
 /.cache
 *.idx
+.cache

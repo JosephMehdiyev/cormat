@@ -23,7 +23,7 @@ int main()
         glfwCamera.processInput();
         
         //TODO: change the rendering structure for a better, cleaner one.
-        glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+        glClearColor(0.8f, 0.8f, 0.8f, 1.0f);
         shader.use();
         glEnable(GL_DEPTH_TEST);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
