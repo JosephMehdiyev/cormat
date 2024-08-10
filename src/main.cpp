@@ -5,7 +5,6 @@
 #include "glfwCamera.hpp"
 
 #include "texture.hpp"
-#include "render.hpp"
 #include <GL/gl.h>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -21,7 +20,7 @@ int main()
     while (!glfwWindowShouldClose(glfwCamera.window))
     {   
         glfwCamera.processInput();
-        
+       
         //TODO: change the rendering structure for a better, cleaner one.
         glClearColor(0.8f, 0.8f, 0.8f, 1.0f);
         shader.use();
@@ -29,7 +28,6 @@ int main()
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         //TODO: currently the matrix generation is a mess, it should be rewritten.
-        shader.initializeProjectionM();
         shader.updateProjectionM(glfwCamera.fov);
         shader.updateViewM(glfwCamera.cameraPosition, glfwCamera.cameraFront, glfwCamera.worldUp);
         shader.updateModelM(glfwCamera.changeInX, glfwCamera.changeInY);

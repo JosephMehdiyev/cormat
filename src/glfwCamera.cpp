@@ -2,7 +2,6 @@
 #include "glfw3.h"
 #include <glm/geometric.hpp>
 #include <iostream>
-#include "shader.hpp"
 
 // https://www.songho.ca/opengl/gl_camera.html
 

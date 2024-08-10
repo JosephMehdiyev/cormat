@@ -1,3 +1,8 @@
+# The cmake files should be rewritten
+# There should be multiple CMakeLists.txt for each directory
+# FIXME:
+
+
 cmake_minimum_required(VERSION 3.29.6)
 project(cormat)
 include_directories(${cormat_SOURCE_DIR}/lib/glad)

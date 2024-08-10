@@ -9,7 +9,6 @@
 #include <fstream>
 #include <vector>
 #include <sstream>
-#include "glfwCamera.hpp"
 
 shader::shader(const char* vertexFilePath, const char* fragmentFilePath)
 {
@@ -119,24 +118,8 @@ shader::checkErrors(unsigned int shaderType, bool isProgram)
     }
 }
 
-//WARNING: all the matrix functions below should be rewritten for better structure
-//FIXME: fix the warning
-void
-shader::initializeModelM()
-{
-    model = glm::mat4(1.0f);
-    setMat4("model", model);
-}
-
-
-void
-shader::initializeViewM()
-{
-    view = glm::mat4(1.0f); 
-    view  = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
-    setMat4("view",view);
-}
-
+// WARNING: all the matrix functions below should be rewritten for better structure
+// FIXME: fix the warning
 
 // FIXME:: There is a bug that if there is no input in the beginning of the program, nothing will be rendered
 //         Reason is that the function waits for the input changeX and changeY
@@ -148,7 +131,7 @@ shader::updateModelM(double changeX, double changeY)
     model = glm::translate(model, glm::vec3(0.0, -0.4, -3.0));
     setMat4("model", model);
     model = glm::rotate(model, static_cast<float>(glm::radians(changeX)), glm::vec3(0.0f, 1.0f, 0.0f));
-    model = glm::rotate(model, static_cast<float>(glfwGetTime()), glm::vec3(0.0f, 1.0f, 0.0f));
+    model = glm::rotate(model, static_cast<float>(glfwGetTime() * 0.2), glm::vec3(0.0f, 1.0f, 0.0f));
     model = glm::rotate(model, static_cast<float>(glm::radians(changeY)), glm::vec3(1.0f, 0.0f, 0.0f));
     model = glm::rotate(model, static_cast<float>(glm::radians(85.0)), glm::vec3(1.0,0.0,0.0));
     setMat4("model", model);
@@ -161,16 +144,6 @@ shader::updateViewM(glm::vec3 cameraPosition, glm::vec3 cameraFront, glm::vec3 w
     view = glm::lookAt(cameraPosition, cameraPosition+ cameraFront, worldUp);
     setMat4("view",view);
 }
-
-
-void
-shader::initializeProjectionM()
-{
-    projection = glm::mat4(1.0f);
-    projection = glm::perspective(glm::radians(45.0f), static_cast<float>(SCR_WIDTH) / static_cast<float>(SCR_HEIGHT), 0.1f, 100.0f);
-    setMat4("projection", projection);
-}
-
 
 void
 shader::updateProjectionM(float fov)

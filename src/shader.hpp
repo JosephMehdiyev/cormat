@@ -16,9 +16,6 @@ public:
     void setMat4(const std::string &name, const glm::mat4 &mat) const;
     void setInt(const std::string &name, int value) const;
     unsigned int vertexShader, fragmentShader, shaderProgramID;
-    void initializeModelM();
-    void initializeViewM();
-    void initializeProjectionM();
     void updateProjectionM(float fov);
     void updateModelM(double changeX, double changeY);
     void updateViewM(glm::vec3 cameraPosition, glm::vec3 cameraFront, glm::vec3 worldUp);

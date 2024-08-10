@@ -1,25 +1,24 @@
 #include "graph.hpp"
-#include "glm/glm.hpp"
 #include "glad.h"
 #include <GL/gl.h>
 #include <vector>
-#include <iostream>
 
-graph::graph(int numberOfBoxes) {
+graph::graph(int numberOfBoxes)
+{
   totalBoxes = numberOfBoxes;
 
   // NOTE: each vector represents a vertices with its 6 float data.
   //      first 3 floats represent the position in normal coordinates.
   //      later 3 floats represent the color of the vertice.
-  //      2 vertices are in the group to draw a line.
+      //      2 vertices are in the group to draw a line.
   gridVertices = {1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f,
                   -1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f,
 
-                  0.0f, 1.0f, 0.0f, 1.0f, 0.0f, 0.0f,
-                  0.0f, -1.0f, 0.0f, 1.0f, 0.0f, 0.0f,
+                  0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f,
+                  0.0f, -1.0f, 0.0f, 0.0f, 1.0f, 0.0f,
 
-                  0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f,
-                  0.0f, 0.0f, -1.0f, 0.0f, 1.0f, 0.0f};
+                  0.0f, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f,
+                  0.0f, 0.0f, -1.0f, 1.0f, 0.0f, 0.0f};
 
   for (int i = 0; i < totalBoxes + 1; i++)
   {
