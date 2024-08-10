@@ -39,10 +39,9 @@ shader::shader(const char* vertexFilePath, const char* fragmentFilePath)
     glDeleteShader(vertexShader);
     glDeleteShader(fragmentShader);
 }
-shader::~shader()
-{
 
-}
+
+shader::~shader(){}
 
 
 // WARNING: the function is buggy, calling it twice in a row rewrites the first call
@@ -118,17 +117,12 @@ shader::checkErrors(unsigned int shaderType, bool isProgram)
     }
 }
 
-// WARNING: all the matrix functions below should be rewritten for better structure
-// FIXME: fix the warning
 
-// FIXME:: There is a bug that if there is no input in the beginning of the program, nothing will be rendered
-//         Reason is that the function waits for the input changeX and changeY
-//         Simply rewrite the shader structure in whole.
 void
 shader::updateModelM(double changeX, double changeY)
 {
     model = glm::mat4(1.0f);
-    model = glm::translate(model, glm::vec3(0.0, -0.4, -3.0));
+    model = glm::translate(model, glm::vec3(0.0, -0.8, -3.0));
     setMat4("model", model);
     model = glm::rotate(model, static_cast<float>(glm::radians(changeX)), glm::vec3(0.0f, 1.0f, 0.0f));
     model = glm::rotate(model, static_cast<float>(glfwGetTime() * 0.2), glm::vec3(0.0f, 1.0f, 0.0f));
@@ -144,6 +138,7 @@ shader::updateViewM(glm::vec3 cameraPosition, glm::vec3 cameraFront, glm::vec3 w
     view = glm::lookAt(cameraPosition, cameraPosition+ cameraFront, worldUp);
     setMat4("view",view);
 }
+
 
 void
 shader::updateProjectionM(float fov)
