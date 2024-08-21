@@ -30,15 +30,9 @@ graph::graph(int numberOfBoxes) : shader("../shader/graph.vert.glsl", "../shader
         vec[4] = 0.0;
         vec[5] = 0.0;
         vec2 = findPairSymmetry(vec, "X");
-        for (unsigned int j = 0; j < 6; j++)
-        {
-            gridVertices.push_back(vec[j]);
-        }
 
-        for (unsigned int j = 0; j <6 ; j++)
-        {
-            gridVertices.push_back(vec2[j]);
-        }
+        for (unsigned int j = 0; j < 6; j++) gridVertices.push_back(vec[j]);
+        for (unsigned int j = 0; j <6 ; j++) gridVertices.push_back(vec2[j]);
     }
 
     for (int i = 0; i < totalBoxes + 1; i++)
@@ -54,14 +48,8 @@ graph::graph(int numberOfBoxes) : shader("../shader/graph.vert.glsl", "../shader
         vec[5] = 0.0;
         vec2 = findPairSymmetry(vec, "Y");
 
-        for (unsigned int j = 0; j < 6; j++)
-        {
-            gridVertices.push_back(vec[j]);
-        }
-        for (unsigned int j = 0; j <6 ; j++)
-        {
-            gridVertices.push_back(vec2[j]);
-        }
+        for (unsigned int j = 0; j < 6; j++) gridVertices.push_back(vec[j]);
+        for (unsigned int j = 0; j < 6; j++) gridVertices.push_back(vec2[j]);
     }
     render.setBuffer(gridVertices);
 }
@@ -99,7 +87,6 @@ graph::start(glfwCamera glfwCamera)
     graph::setRenderingConfig();
     graph::initializeAndUpdateShaders(glfwCamera);
     graph::draw();
-
 }
 
 
