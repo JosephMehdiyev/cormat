@@ -9,6 +9,7 @@ class graph
 public:
     graph(int numberOfBoxes);
     void start(glfwCamera glfwCamera);
+    unsigned long long int n;
 
 private:
     void draw();
@@ -19,4 +20,5 @@ private:
     class shader shader;
     void initializeAndUpdateShaders(glfwCamera glfwCamera);
     void setRenderingConfig();
+    void pointGenerator();
 };

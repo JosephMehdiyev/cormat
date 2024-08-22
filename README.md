@@ -5,6 +5,7 @@ I want to remind you that I am also very busy with my other projects. Therefore 
 * **MAIN CORE** A point generator from mathematical functions to draw the graphs. Afterwards, the verison **0.1.0** will be ready
 * **BINARIES** Precompiled binaries for WINDOWS/LINUX (arch/ubuntu)/MACOS. This will be done after the verison 0.1.0 release
 * **CMAKE** currently the way I generate my make files are in mess. I am planning to completely change the structure of cmake
+* **Rotation input** Change the way the rotation of the graph is handled, change the cursor type to the visible.
 * **2D/3D mode** A feature to change between the dimensions
 * **Polyhon/Line/Point mode** A feature to change between the style of the graph
 * **User Interface** A small settings window to change the settings of the graph

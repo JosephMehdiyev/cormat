@@ -10,7 +10,7 @@ graph::graph(int numberOfBoxes) : shader("../shader/graph.vert.glsl", "../shader
     //      first 3 floats represent the position in normal coordinates.
     //      later 3 floats represent the color of the vertice.
     //      2 vertices are in the group to draw a line.
-    gridVertices = {1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f,
+    gridVertices =  gridVertices = {1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f,
                     -1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f,
 
                     0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f,
@@ -18,6 +18,7 @@ graph::graph(int numberOfBoxes) : shader("../shader/graph.vert.glsl", "../shader
 
                     0.0f, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f,
                     0.0f, 0.0f, -1.0f, 1.0f, 0.0f, 0.0f};
+    n = 0;
     for (int i = 0; i < totalBoxes + 1; i++)
     {
         std::vector<float> vec(6);
@@ -51,7 +52,7 @@ graph::graph(int numberOfBoxes) : shader("../shader/graph.vert.glsl", "../shader
         for (unsigned int j = 0; j < 6; j++) gridVertices.push_back(vec[j]);
         for (unsigned int j = 0; j < 6; j++) gridVertices.push_back(vec2[j]);
     }
-    render.setBuffer(gridVertices);
+    pointGenerator();
 }
 
 
@@ -74,9 +75,13 @@ std::vector<float> graph::findPairSymmetry(std::vector<float> vec, std::string a
 void
 graph::draw()
 {
+    unsigned long long int x = gridVertices.size()/6;
+    render.setBuffer(gridVertices);
     glBindVertexArray(render.VAO);
     glLineWidth(1.3f);
-    glDrawArrays(GL_LINES, 0, gridVertices.size()/6);
+    glPointSize(3.0f);
+    glDrawArrays(GL_LINES, 0, x-n);
+    glDrawArrays(GL_POINTS, x-n,  n);
 }
 
 
@@ -105,4 +110,23 @@ graph::setRenderingConfig()
     glClearColor(0.8f, 0.8f, 0.8f, 1.0f);
     glEnable(GL_DEPTH_TEST);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+}
+
+
+void
+graph::pointGenerator()
+{
+    for(float i = -1.0; i < 1; i += 0.1)
+    {
+        for(float j = -1.0; j < 1; j += 0.1)
+        {
+            gridVertices.push_back(-i);
+            gridVertices.push_back(-j);
+            gridVertices.push_back(-pow(i, 2) -pow(j, 2));
+            gridVertices.push_back(1.0);
+            gridVertices.push_back(0.0);
+            gridVertices.push_back(0.0);
+            n++;
+        }
+    }
 }
