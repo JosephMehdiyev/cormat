@@ -19,7 +19,7 @@ graph::graph(int numberOfBoxes) : shader("../shader/graph.vert.glsl", "../shader
                     0.0f, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f,
                     0.0f, 0.0f, -1.0f, 1.0f, 0.0f, 0.0f};
     n = 0;
-    for (int i = 0; i < totalBoxes + 1; i++)
+    for (int i = 0; i < totalBoxes ; i++)
     {
         std::vector<float> vec(6);
         std::vector<float> vec2(6);
@@ -33,7 +33,7 @@ graph::graph(int numberOfBoxes) : shader("../shader/graph.vert.glsl", "../shader
         vec2 = findPairSymmetry(vec, "X");
 
         for (unsigned int j = 0; j < 6; j++) gridVertices.push_back(vec[j]);
-        for (unsigned int j = 0; j <6 ; j++) gridVertices.push_back(vec2[j]);
+        for (unsigned int j = 0; j < 6 ; j++) gridVertices.push_back(vec2[j]);
     }
 
     for (int i = 0; i < totalBoxes + 1; i++)
@@ -75,8 +75,7 @@ std::vector<float> graph::findPairSymmetry(std::vector<float> vec, std::string a
 void
 graph::draw()
 {
-    unsigned long long int x = gridVertices.size()/6;
-    render.setBuffer(gridVertices);
+    int x = gridVertices.size()/6;
     glBindVertexArray(render.VAO);
     glLineWidth(1.3f);
     glPointSize(3.0f);
@@ -112,13 +111,12 @@ graph::setRenderingConfig()
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
-
 void
 graph::pointGenerator()
 {
-    for(float i = -1.0; i < 1; i += 0.1)
+    for(float i = -1.0; i < 1; i += 0.2)
     {
-        for(float j = -1.0; j < 1; j += 0.1)
+        for(float j = -1.0; j < 1; j += 0.2)
         {
             gridVertices.push_back(-i);
             gridVertices.push_back(-j);
@@ -126,7 +124,7 @@ graph::pointGenerator()
             gridVertices.push_back(1.0);
             gridVertices.push_back(0.0);
             gridVertices.push_back(0.0);
-            n++;
+            n++; // counts the number of parabole vertices
         }
     }
 }

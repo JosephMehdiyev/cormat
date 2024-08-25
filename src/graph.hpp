@@ -9,16 +9,19 @@ class graph
 public:
     graph(int numberOfBoxes);
     void start(glfwCamera glfwCamera);
-    unsigned long long int n;
+    std::vector<float> gridVertices;
+
+    class render render;
+    class shader shader;
+    int n;
+    void initializeAndUpdateShaders(glfwCamera glfwCamera);
+
 
 private:
     void draw();
     int totalBoxes;
-    std::vector<float> gridVertices;
     std::vector<float> findPairSymmetry(std::vector<float> vec, std::string axis);
-    class render render;
-    class shader shader;
-    void initializeAndUpdateShaders(glfwCamera glfwCamera);
+
     void setRenderingConfig();
     void pointGenerator();
 };

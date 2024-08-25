@@ -12,21 +12,23 @@
 
 shader::shader(const char* vertexFilePath, const char* fragmentFilePath)
 {
-    const char* vertexShaderSource = getFileSource(vertexFilePath);
+    std::string vertexShaderSource = getFileSource(vertexFilePath);
+    const char* cvertexShaderSource = vertexShaderSource.c_str();
 
     vertexShader = glCreateShader(GL_VERTEX_SHADER);
-    glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);
+    glShaderSource(vertexShader, 1, &cvertexShaderSource, NULL);
     glCompileShader(vertexShader);
     shader::checkErrors(vertexShader, false);
 
-    // IMPORTANT
+    // FIXME:
     // getFileSource has to be called one by one
     // otherwise it will overwrite source files
     // I couldn't debug this so it will stay like that.
     
-    const char* fragmentShaderSource = getFileSource(fragmentFilePath);
+    std::string fragmentShaderSource = getFileSource(fragmentFilePath);
+    const char* cfragmentShaderSource = fragmentShaderSource.c_str();
     fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(fragmentShader, 1, &fragmentShaderSource, NULL);
+    glShaderSource(fragmentShader, 1, &cfragmentShaderSource, NULL);
     glCompileShader(fragmentShader);
     shader::checkErrors(fragmentShader, false);
 
@@ -49,10 +51,10 @@ shader::~shader(){}
 //FIXME: fix the warning
 
 // A simple function to retrieve shader source code from a file to the main program.
-const char*
+std::string
 shader::getFileSource(const char* filePath)
 {
-    static std::string fileCode;
+    std::string fileCode;
     std::ifstream fileFile;
     fileFile.exceptions( std::ifstream::failbit | std::ifstream::badbit);
     try 
@@ -68,7 +70,7 @@ shader::getFileSource(const char* filePath)
         std::cout << "ERROR: Couldn't Retrieve " << filePath << "  \n" << e.what() << std::endl;
     }
 
-    return fileCode.c_str();
+    return fileCode;
 }
 
 

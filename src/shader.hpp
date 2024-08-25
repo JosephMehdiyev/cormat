@@ -24,7 +24,7 @@ private:
     // Returns a C-style string with input file directory path.
     // REMARK: you must fully use the return file before recalling this function.
     // otherwise the new return file will overload the old return file
-    const char* getFileSource(const char* filePath);
+    std::string getFileSource(const char* filePath);
     // Checks errors for shader linking and compilations
     // If it is a shader program, bool must be TRUE, if it is a shader (compilation), then FALSE
     void checkErrors(unsigned int shaderType, bool isProgram);

@@ -9,6 +9,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include "graph.hpp"
+#include <iostream>
 
 
 int main()
@@ -19,6 +20,8 @@ int main()
     while (!glfwWindowShouldClose(glfwCamera.window))
     {
         glfwCamera.processInput();
+            graph.render.setBuffer(graph.gridVertices);
+
         graph.start(glfwCamera);
         glfwCamera.swapBuffers();
         glfwPollEvents();
