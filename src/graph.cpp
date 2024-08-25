@@ -53,6 +53,9 @@ graph::graph(int numberOfBoxes) : shader("../shader/graph.vert.glsl", "../shader
         for (unsigned int j = 0; j < 6; j++) gridVertices.push_back(vec2[j]);
     }
     pointGenerator();
+    render.setBuffer(gridVertices);
+
+
 }
 
 
@@ -87,8 +90,9 @@ graph::draw()
 void
 graph::start(glfwCamera glfwCamera)
 {
-    shader.use();
+
     graph::setRenderingConfig();
+    shader.use();
     graph::initializeAndUpdateShaders(glfwCamera);
     graph::draw();
 }
@@ -114,9 +118,9 @@ graph::setRenderingConfig()
 void
 graph::pointGenerator()
 {
-    for(float i = -1.0; i < 1; i += 0.2)
+    for(float i = -1.0; i < 1; i += 0.01)
     {
-        for(float j = -1.0; j < 1; j += 0.2)
+        for(float j = -1.0; j < 1; j += 0.01)
         {
             gridVertices.push_back(-i);
             gridVertices.push_back(-j);

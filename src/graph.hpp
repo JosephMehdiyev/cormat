@@ -17,7 +17,7 @@ public:
     void initializeAndUpdateShaders(glfwCamera glfwCamera);
 
 
-private:
+public:
     void draw();
     int totalBoxes;
     std::vector<float> findPairSymmetry(std::vector<float> vec, std::string axis);
