@@ -26,7 +26,7 @@ glfwCamera::glfwCamera(int screenWidth, int screenHeight)
         std::cout << "Failed to initialize GLAD" << std::endl;
     }    
 
-    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR);
     
     //NOTE: this is a workaround for OOP support. Since GLFW doesn't support class pointers (C library),
     //      we need new static function clones to use them as callbacks.
@@ -115,11 +115,12 @@ glfwCamera::updateCameraVectors()
 void 
 glfwCamera::cursorCallBack( [[maybe_unused]] GLFWwindow* windoww, double xpos, double ypos)
 {
+   if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS){
     float sensitivity = 2.0f;
     xpos *= sensitivity;
     ypos *= sensitivity;
     changeInX = xpos;
-    changeInY = ypos;
+    changeInY = ypos;}
 }
 
 

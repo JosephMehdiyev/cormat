@@ -2,20 +2,22 @@
 **Cormat** is a graphical 3D math software intended for visualizing mathematical functions. In the future, I am planning to make this project expand to a 3D engine, mainly for physics simulations. Currently, it only is a graph software.
 # Roadmap
 I want to remind you that I am also very busy with my other projects. Therefore the development will be slow, especially the simulation part, since I have to learn lots of new things to do that.
+* ~~**Rotation input** Change the way the rotation of the graph is handled, change the cursor type to the visible.~~
+* <span style="color:red">**IMPORTANT BUG:**</span> Whenever the program is run, there is a change it throws a segmentation fault. With running multiple times, eventually it be run succesfully.
 * **MAIN CORE** A point generator from mathematical functions to draw the graphs. Afterwards, the verison **0.1.0** will be ready
 * **BINARIES** Precompiled binaries for WINDOWS/LINUX (arch/ubuntu)/MACOS. This will be done after the verison 0.1.0 release
 * **CMAKE** currently the way I generate my make files are in mess. I am planning to completely change the structure of cmake
-* **Rotation input** Change the way the rotation of the graph is handled, change the cursor type to the visible.
+
 * **2D/3D mode** A feature to change between the dimensions
 * **Polyhon/Line/Point mode** A feature to change between the style of the graph
-* **User Interface** A small settings window to change the settings of the graph
+* **User Interface, ImGui** A small settings window to change the settings of the graph
 * **Anti-aliasing** To increase the details of the graph, making individual pixels more invisible
 * **FUTURE** I have not yet planed it in detail, but the software will have simulation features
 # Dependecies
 * [OpenGL](https://www.khronos.org/opengl/wiki/Getting_Started#Downloading_OpenGL)  API for rendering 2D-3D graphics
 * [GLFW](https://github.com/glfw/glfw) API for creating windows, reading input and handling events
 * [stb_image](https://github.com/nothings/stb/blob/master/stb_image.h) for textures
-* [GLM](https://github.com/recp/cglm) for linear algebra 
+* [GLM](https://github.com/g-truc/glm) for linear algebra, trigonometry and calculus.
 * [CMAKE](https://cmake.org/about/) to generate make files
 * [GCC](https://gcc.gnu.org/install/) to compile the project
 

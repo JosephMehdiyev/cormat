@@ -23,7 +23,6 @@ int main()
         glfwCamera.swapBuffers();
         glfwPollEvents();
     }
-
     glfwTerminate();
     return 0;
 }
