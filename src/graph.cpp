@@ -115,6 +115,9 @@ graph::setRenderingConfig()
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
+
+// NOTE: Z axis is the line that comes through the screen to the real world, it is not "up" axis.
+// "up" axis is the Y axis, hence the function must be sent to the y corresponding index of our vector.
 void
 graph::pointGenerator()
 {
