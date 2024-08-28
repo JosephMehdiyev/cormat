@@ -10,7 +10,7 @@ graph::graph(int numberOfBoxes) : shader("../shader/graph.vert.glsl", "../shader
     //      first 3 floats represent the position in normal coordinates.
     //      later 3 floats represent the color of the vertice.
     //      2 vertices are in the group to draw a line.
-    gridVertices =  gridVertices = {1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f,
+    gridVertices  = {1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f,
                     -1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f,
 
                     0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f,
@@ -19,39 +19,39 @@ graph::graph(int numberOfBoxes) : shader("../shader/graph.vert.glsl", "../shader
                     0.0f, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f,
                     0.0f, 0.0f, -1.0f, 1.0f, 0.0f, 0.0f};
     n = 0;
-    for (int i = 0; i < totalBoxes ; i++)
-    {
-        std::vector<float> vec(6);
-        std::vector<float> vec2(6);
+   // for (int i = 0; i < totalBoxes + 1; i++)
+   // {
+   //     std::vector<float> vec(6);
+   //     std::vector<float> vec2(6);
 
-        vec[0] = -1.0f + static_cast<float>(i) / totalBoxes * 2.0f;
-        vec[1] = +1.0f;
-        vec[2] = 0.0f;
-        vec[3] = 0.0;
-        vec[4] = 0.0;
-        vec[5] = 0.0;
-        vec2 = findPairSymmetry(vec, "X");
+   //     vec[0] = -10.0f + 10.0* static_cast<float>(i) / totalBoxes * 2.0f;
+   //     vec[1] = +10.0f;
+   //     vec[2] = 0.0f;
+   //     vec[3] = 0.0;
+   //     vec[4] = 0.0;
+   //     vec[5] = 0.0;
+   //     vec2 = findPairSymmetry(vec, "X");
 
-        for (unsigned int j = 0; j < 6; j++) gridVertices.push_back(vec[j]);
-        for (unsigned int j = 0; j < 6 ; j++) gridVertices.push_back(vec2[j]);
-    }
+   //     for (unsigned int j = 0; j < 6; j++) gridVertices.push_back(vec[j]);
+   //     for (unsigned int j = 0; j < 6 ; j++) gridVertices.push_back(vec2[j]);
+   // }
 
-    for (int i = 0; i < totalBoxes + 1; i++)
-    {
-        std::vector<float> vec(6);
-        std::vector<float> vec2(6);
+   // for (int i = 0; i < totalBoxes + 1; i++)
+   // {
+   //     std::vector<float> vec(6);
+   //     std::vector<float> vec2(6);
 
-        vec[0] = -1.0f ;
-        vec[1] = +1.0f - static_cast<float>(i) / totalBoxes * 2.0f;
-        vec[2] = 0.0f;
-        vec[3] = 0.0;
-        vec[4] = 0.0;
-        vec[5] = 0.0;
-        vec2 = findPairSymmetry(vec, "Y");
+   //     vec[0] = -10.0f ;
+   //     vec[1] = +10.0f - 10.0* static_cast<float>(i) / totalBoxes * 2.0f;
+   //     vec[2] = 0.0f;
+   //     vec[3] = 0.0;
+   //     vec[4] = 0.0;
+   //     vec[5] = 0.0;
+   //     vec2 = findPairSymmetry(vec, "Y");
 
-        for (unsigned int j = 0; j < 6; j++) gridVertices.push_back(vec[j]);
-        for (unsigned int j = 0; j < 6; j++) gridVertices.push_back(vec2[j]);
-    }
+   //     for (unsigned int j = 0; j < 6; j++) gridVertices.push_back(vec[j]);
+   //     for (unsigned int j = 0; j < 6; j++) gridVertices.push_back(vec2[j]);
+   // }
     pointGenerator();
     render.setBuffer(gridVertices);
 
@@ -118,13 +118,13 @@ graph::setRenderingConfig()
 void
 graph::pointGenerator()
 {
-    for(float i = -1.0; i < 1; i += 0.1)
+    for(float i = -10.0; i < 10; i += 0.1)
     {
-        for(float j = -1.0; j < 1; j += 0.1)
+        for(float j = -10.0; j < 10; j += 0.11)
         {
-            gridVertices.push_back(-i);
-            gridVertices.push_back(-j);
-            gridVertices.push_back(-pow(i, 2) -pow(j, 2));
+            gridVertices.push_back(i);
+            gridVertices.push_back(pow(i, 2) + pow(j, 2));
+            gridVertices.push_back(j); 
             gridVertices.push_back(1.0);
             gridVertices.push_back(0.0);
             gridVertices.push_back(0.0);

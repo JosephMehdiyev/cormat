@@ -124,12 +124,10 @@ void
 shader::updateModelM(double changeX, double changeY)
 {
     model = glm::mat4(1.0f);
-    model = glm::translate(model, glm::vec3(0.0, -0.8, -3.0));
     setMat4("model", model);
     model = glm::rotate(model, static_cast<float>(glm::radians(changeX)), glm::vec3(0.0f, 1.0f, 0.0f));
     model = glm::rotate(model, static_cast<float>(glfwGetTime() * 0.2), glm::vec3(0.0f, 1.0f, 0.0f));
     model = glm::rotate(model, static_cast<float>(glm::radians(changeY)), glm::vec3(1.0f, 0.0f, 0.0f));
-    model = glm::rotate(model, static_cast<float>(glm::radians(85.0)), glm::vec3(1.0,0.0,0.0));
     setMat4("model", model);
 }
 

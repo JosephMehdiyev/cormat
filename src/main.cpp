@@ -13,7 +13,7 @@
 int main()
 {
     glfwCamera glfwCamera(SCR_WIDTH, SCR_HEIGHT);
-    graph graph(20);
+    graph graph(200);
 
     while (!glfwWindowShouldClose(glfwCamera.window))
     {
