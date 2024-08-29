@@ -1,0 +1,36 @@
+{
+  "version": 3,
+  "configurePresets": 
+  [
+    {
+      "name": "default",
+      "hidden": false,
+      "cacheVariables": 
+      {
+        "CMAKE_BUILD_TYPE": "Default compiling option used by developer",
+        "CMAKE_CXX_COMPILER": "/usr/bin/g++",
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
+        "CMAKE_CXX_FLAGS":  "-pedantic -Wall -Wextra -Wcast-align -Wcast-qual -Wctor-dtor-privacy -Wdisabled-optimization -Wformat=2 -Winit-self -Wlogical-op -Wmissing-declarations -Wmissing-include-dirs -Wnoexcept -Wold-style-cast -Woverloaded-virtual -Wredundant-decls -Wshadow -Wsign-conversion -Wsign-promo -Wstrict-null-sentinel -Wstrict-overflow=3 -Wswitch-default -Wundef -Werror -Wno-unused"
+      }
+    },
+    {
+      "name": "release",
+      "hidden": false,
+      "cacheVariables": 
+      {
+        "CMAKE_BUILD_TYPE": "Release",
+        "CMAKE_CXX_FLAGS": "-O3"
+      }
+    },
+    {
+      "name": "debug",
+      "hidden": false,
+      "cacheVariables": 
+      {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_CXX_FLAGS": "-g3"
+      }
+    }
+  ]
+}
+
