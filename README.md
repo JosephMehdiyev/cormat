@@ -6,8 +6,8 @@ I want to remind you that I am also very busy with my other projects. Therefore 
 * ~~<span style="color:red">**IMPORTANT BUG:**</span> Whenever the program is run, there is a change it throws a segmentation fault. With running multiple times, eventually it be run succesfully.~~ The bug is fixed now.
 * **MAIN CORE** A point generator from mathematical functions to draw the graphs. Afterwards, the verison **0.1.0** will be ready
 * **BINARIES** Precompiled binaries for WINDOWS/LINUX (arch/ubuntu)/MACOS. This will be done after the verison 0.1.0 release
-* **CMAKE** currently the way I generate my make files are in mess. I am planning to completely change the structure of cmake
-
+* ~~**CMAKE** currently the way I generate my make files are in mess. I am planning to completely change the structure of cmake~~
+* **CMAKE second change** As the project gets bigger, I will transition to nested cmake structure. For now, only one simple txt is enough.
 * **2D/3D mode** A feature to change between the dimensions
 * **Polyhon/Line/Point mode** A feature to change between the style of the graph
 * **User Interface, ImGui** A small settings window to change the settings of the graph
@@ -30,13 +30,15 @@ I want to remind you that I am also very busy with my other projects. Therefore 
 To build and run, run these commands.
 ```
 git clone https://github.com/JosephMehdiyev/cormat
-cd /to/your/folder/path
-cd  build
-cmake ..
+cd cormat # the directory may vary, just cd to the project root
+mkdir build
+cd build
+cmake --preset release  # you may also use --preset debug or --preset default, release is recommended
 make
 ./cormat
 ```
 I only compiled this in Linux ARCH. I did not test this program on other distros.
+There are no system specific code in the project (yet?). I believe it should run smoothly on all the popular systems.
 In future, there will be precompiled binaries for WINDOWS/LINUX/MACOS. Do not worry!
 
 # License

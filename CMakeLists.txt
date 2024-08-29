@@ -1,10 +1,16 @@
-# The cmake files should be rewritten
-# There should be multiple CMakeLists.txt for each directory
-# FIXME:
+# This is the initical CMAKE setup
+# I am planning to change it to a nested cmake txt setup once the project gets bigger
+# for now, this is enough
 
 
 cmake_minimum_required(VERSION 3.29.6)
-project(cormat)
+project(cormat
+        VERSION 0.0.1
+        DESCRIPTION "A 3D software for visualization of mathematical graphs"
+        HOMEPAGE_URL "https://github.com/JosephMehdiyev/cormat"
+        LANGUAGES CXX C
+        )
+
 include_directories(${cormat_SOURCE_DIR}/lib/glad)
 include_directories(${cormat_SOURCE_DIR}/lib/stb_image)
 include_directories(${cormat_SOURCE_DIR}/lib/glfw)
@@ -22,7 +28,8 @@ file(GLOB_RECURSE SOURCE
     src/*.hpp
     src/*.h
     src/*.cpp)
-add_executable(cormat  ${SOURCE} )
+
+add_executable(cormat  ${SOURCE})
 
 
 
