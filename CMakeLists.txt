@@ -7,6 +7,7 @@ cmake_minimum_required(VERSION 3.29.6)
 project(cormat)
 include_directories(${cormat_SOURCE_DIR}/lib/glad)
 include_directories(${cormat_SOURCE_DIR}/lib/stb_image)
+include_directories(${cormat_SOURCE_DIR}/lib/glfw)
 
 
 find_package(OpenGL REQUIRED)
