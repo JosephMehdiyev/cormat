@@ -33,7 +33,7 @@ git clone https://github.com/JosephMehdiyev/cormat
 cd cormat # the directory may vary, just cd to the project root
 mkdir build
 cd build
-cmake --preset release  # you may also use --preset debug or --preset default, release is recommended
+cmake --preset release .. # you may also use --preset debug or --preset default, release is recommended
 make
 ./cormat
 ```

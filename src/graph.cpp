@@ -123,15 +123,17 @@ graph::pointGenerator()
 {
     for(float i = -10.0; i < 10; i += 0.1)
     {
-        for(float j = -10.0; j < 10; j += 0.11)
+        for(float j = -10.0; j < 10; j += 0.1)
         {
             gridVertices.push_back(i);
-            gridVertices.push_back(pow(i, 2) + pow(j, 2));
+            gridVertices.push_back(sin(i) + cos(j));
             gridVertices.push_back(j); 
             gridVertices.push_back(1.0);
             gridVertices.push_back(0.0);
             gridVertices.push_back(0.0);
-            n++; // counts the number of parabole vertices
+            n++; // counts the number of function vertices
+                 // NOTE: it tracks number of ALL the function vertices, not just one.
+                 // if this function is called once, n is just a local counter, otherwise it is global.
         }
     }
 }
