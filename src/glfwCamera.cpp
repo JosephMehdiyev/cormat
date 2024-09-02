@@ -17,7 +17,7 @@ glfwCamera::glfwCamera(int screenWidth, int screenHeight)
     if (window == NULL)
     {
         std::cout << "Failed to create GLFW window" << std::endl;
-        glfwTerminate();    
+        glfwTerminate();
     }
     glfwMakeContextCurrent(window);
 
