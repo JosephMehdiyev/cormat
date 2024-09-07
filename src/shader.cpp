@@ -1,6 +1,6 @@
 #include "shader.hpp"
 #include "glad.h"
-#include "glfw3.h"
+#include <GLFW/glfw3.h>
 #include <glm/ext/matrix_transform.hpp>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>

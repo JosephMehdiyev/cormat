@@ -15,7 +15,7 @@ I want to remind you that I am also very busy with my other projects. Therefore 
 * **FUTURE** I have not yet planed it in detail, but the software will have simulation features
 # Dependecies
 * [OpenGL](https://www.khronos.org/opengl/wiki/Getting_Started#Downloading_OpenGL)  API for rendering 2D-3D graphics
-* [GLFW](https://github.com/glfw/glfw) API for creating windows, reading input and handling events
+* [GLFW](https://github.com/glfw/glfw) API for creating windows, reading input and handling events. **CMAKE AUTOMATICALLY INSTALLS LOCALLY VIA GIT**
 * [stb_image](https://github.com/nothings/stb/blob/master/stb_image.h) for textures
 * [GLM](https://github.com/g-truc/glm) for linear algebra, trigonometry and calculus.
 * [CMAKE](https://cmake.org/about/) to generate make files
@@ -33,7 +33,7 @@ git clone https://github.com/JosephMehdiyev/cormat
 cd cormat # the directory may vary, just cd to the project root
 mkdir build
 cd build
-cmake --preset release .. # you may also use --preset debug or --preset default, release is recommended
+cmake --preset release -S ../ -B . # you may also use --preset debug or --preset default, release is recommended
 make
 ./cormat
 ```
