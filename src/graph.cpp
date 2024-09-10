@@ -118,12 +118,13 @@ graph::setRenderingConfig()
 
 // NOTE: Z axis is the line that comes through the screen to the real world, it is not "up" axis.
 // "up" axis is the Y axis, hence the function must be sent to the y corresponding index of our vector.
+// i and j are equivalent to x and y.
 void
 graph::pointGenerator()
 {
-    for(float i = -100.0; i < 100; i += 0.1)
+    for(float i = -10; i < 10; i += 0.1)
     {
-        for(float j = -100.0; j < 100; j += 0.1)
+        for(float j = -10; j < 10; j += 0.1)
         {
             gridVertices.push_back(i);
             gridVertices.push_back(sin(i) + cos(j));
