@@ -121,9 +121,9 @@ graph::setRenderingConfig()
 void
 graph::pointGenerator()
 {
-    for(float i = -10.0; i < 10; i += 0.1)
+    for(float i = -100.0; i < 100; i += 0.1)
     {
-        for(float j = -10.0; j < 10; j += 0.1)
+        for(float j = -100.0; j < 100; j += 0.1)
         {
             gridVertices.push_back(i);
             gridVertices.push_back(sin(i) + cos(j));
