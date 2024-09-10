@@ -29,6 +29,8 @@ int main()
 
     while (!glfwWindowShouldClose(glfwCamera.window))
     {
+        glfwPollEvents();
+
         // (Your code calls glfwPollEvents())
         // ...
         // Start the Dear ImGui frame
@@ -38,10 +40,10 @@ int main()
         ImGui::ShowDemoWindow(); // Show demo window! :)
         glfwCamera.processInput();
         graph.start(glfwCamera);
-        glfwCamera.swapBuffers();
-        glfwPollEvents();
         ImGui::Render();
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+        glfwCamera.swapBuffers();
+
     }
     glfwTerminate();
     return 0;
