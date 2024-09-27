@@ -2,6 +2,7 @@ set(CMAKE_DISABLE_SOURCE_CHANGES ON)
 set(CMAKE_DISABLE_IN_SOURCE_BUILD ON)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_LIST_DIR}/cmake")
 include(libraries)
 
@@ -22,8 +23,6 @@ message("Fetching glfw")
 FetchContent_MakeAvailable(glfw)
 include_directories(${glm_SOURCE_DIR})
 include_directories(${cormat_SOURCE_DIR}/lib/glad)
-include_directories(${cormat_SOURCE_DIR}/lib/imgui)
-include_directories(${cormat_SOURCE_DIR}/lib/imgui/backends)
 include_directories(${cormat_SOURCE_DIR}/lib/stb_image)
 
 
@@ -33,8 +32,6 @@ find_package(glm REQUIRED)
 file(GLOB_RECURSE SOURCE 
     lib/stb_image/*.cpp
     lib/stb_image/*.hpp
-    lib/imgui/*.cpp
-    lib/imgui/imgui.h
     lib/glad/glad.c
     lib/glad/glad.h
     src/*.c
@@ -43,4 +40,6 @@ file(GLOB_RECURSE SOURCE
     src/*.cpp)
 
 add_executable(cormat  ${SOURCE})
-target_link_libraries(cormat glfw)
+add_subdirectory(lib)
+
+target_link_libraries(cormat glfw imgui)

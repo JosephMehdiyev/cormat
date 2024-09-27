@@ -42,6 +42,7 @@ glfwCamera::glfwCamera(int screenWidth, int screenHeight)
     // Camera Part
     // --------------------------------------------------------------------------
         cameraPosition = glm::vec3(0.0f,0.0f,1.0f);
+        cameraRotationSpeed = 0.2;
         worldUp = glm::vec3(0.0f, 1.0f, 0.0f);
         cameraFront = glm::vec3(0.0,0.0, 1.0);
         yaw = -90.0f;

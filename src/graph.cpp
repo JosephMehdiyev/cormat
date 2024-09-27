@@ -103,7 +103,7 @@ graph::initializeAndUpdateShaders(glfwCamera glfwCamera)
 {
     shader.updateProjectionM(glfwCamera.fov);
     shader.updateViewM(glfwCamera.cameraPosition, glfwCamera.cameraFront, glfwCamera.worldUp);
-    shader.updateModelM(glfwCamera.changeInX, glfwCamera.changeInY);
+    shader.updateModelM(glfwCamera.changeInX, glfwCamera.changeInY, glfwCamera.cameraRotationSpeed);
 }
 
 

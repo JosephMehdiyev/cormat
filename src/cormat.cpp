@@ -4,6 +4,7 @@
 #include "imgui_impl_glfw.h"
 #include "imgui_impl_opengl3.h"
 #include "glfwCamera.hpp"
+#include "imgui.hpp"
 
 //#include "texture.hpp"
 #include <GL/gl.h>
@@ -16,35 +17,23 @@ int main()
 {
     glfwCamera glfwCamera(SCR_WIDTH, SCR_HEIGHT);
     graph graph(200);
-    // Setup Dear ImGui context
-    IMGUI_CHECKVERSION();
-    ImGui::CreateContext();
-    ImGuiIO& io = ImGui::GetIO();
-    io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
-    io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
-    
-    // Setup Platform/Renderer backends
-    ImGui_ImplGlfw_InitForOpenGL(glfwCamera.window, true);          // Second param install_callback=true will install GLFW callbacks and chain to existing ones.
-    ImGui_ImplOpenGL3_Init();
+    myGui::initializeGui();
+    myGui::setupPlatform(glfwCamera);
 
     while (!glfwWindowShouldClose(glfwCamera.window))
     {
         glfwPollEvents();
-
-        // (Your code calls glfwPollEvents())
-        // ...
-        // Start the Dear ImGui frame
-        ImGui_ImplOpenGL3_NewFrame();
-        ImGui_ImplGlfw_NewFrame();
-        ImGui::NewFrame();
-        ImGui::ShowDemoWindow();
+        myGui::startGuiFrames();
+        ImGui::Begin("Rotation Speed");
+        ImGui::SliderFloat("rotation", &glfwCamera.cameraRotationSpeed, 0, 2);
+        ImGui::Button("Hello!");
+        ImGui::End();
         glfwCamera.processInput();
         graph.start(glfwCamera);
-        ImGui::Render();
-        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+        myGui::renderGuiFrames();
         glfwCamera.swapBuffers();
-
     }
+    myGui::closeGui();
     glfwTerminate();
     return 0;
 }
