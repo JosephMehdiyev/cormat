@@ -124,10 +124,11 @@ graph::pointGenerator()
 {
     for(float i = -10; i < 10; i += 0.1)
     {
-        for(float j = -10; j < 10; j += 0.1)
+        for(float j = -10; j < 10; j += 0.1) // NOTE: you may change the intervals i and j goes through, it will change the size of the graph.
+                                             // You may also change the addition value (here for example 0.1), it will change the density of the points of the graph.
         {
             gridVertices.push_back(i);
-            gridVertices.push_back(sin(i) + cos(j));
+            gridVertices.push_back(sin(i) + cos(j)); //NOTE: change the functon here, i and j are equivalent to x and y. 
             gridVertices.push_back(j); 
             gridVertices.push_back(1.0);
             gridVertices.push_back(0.0);

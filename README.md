@@ -1,8 +1,11 @@
 
 # About the project (In development) ![C++](https://img.shields.io/badge/c++-%2300599C.svg?style=Plastic&logo=c%2B%2B&logoColor=white) ![OpenGL](https://img.shields.io/badge/OpenGL-%23FFFFFF.svg?style=Plastic&logo=opengl) ![CMake](https://img.shields.io/badge/CMake-%23008FBA.svg?style=Plastic&logo=cmake&logoColor=white)
 **Cormat** is a graphical 3D math software intended for visualizing mathematical functions. In the future, I am planning to make this project expand to a 3D engine, mainly for physics simulations. Currently, it only is a graph software.
+# IMPORTANT
+If you want to change the function that is drawn, **You must change the source code**. Goto **src** directory, find the **graph.cpp**, go all the down to the **pointGenerator()** function. Change the parameters of the function (there are comments that explains how it works), and recompile the project. Inputting different functions is a bit tricky, and I am working on it.
 # Roadmap
 I want to remind you that I am also very busy with my other projects. Therefore the development will be slow, especially the simulation part, since I have to learn lots of new things to do that.
+* **Function Inputs** see the **IMPORTANT** header above.
 * ~~**Rotation input** Change the way the rotation of the graph is handled, change the cursor type to the visible.~~
 * ~~<span style="color:red">**IMPORTANT BUG:**</span> Whenever the program is run, there is a change it throws a segmentation fault. With running multiple times, eventually it be run succesfully.~~ The bug is fixed now.
 * ~~**User Interface, ImGui** A small settings window to change the settings of the graph~~
