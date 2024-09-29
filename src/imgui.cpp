@@ -21,7 +21,6 @@ myGui::mainGui(glfwCamera &glfwCamera, graph &graph)
     }
     else glfwCamera.cameraRotationSpeed = x;
 
-    ImGui::ShowDemoWindow();
     ImGui::End();
 }
 
