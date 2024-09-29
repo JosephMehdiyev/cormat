@@ -24,10 +24,7 @@ int main()
     {
         glfwPollEvents();
         myGui::startGuiFrames();
-        ImGui::Begin("Rotation Speed");
-        ImGui::SliderFloat("rotation", &glfwCamera.cameraRotationSpeed, 0, 2);
-        ImGui::Button("Hello!");
-        ImGui::End();
+        myGui::mainGui(glfwCamera, graph);
         glfwCamera.processInput();
         graph.start(glfwCamera);
         myGui::renderGuiFrames();

@@ -20,5 +20,5 @@ public:
     static void startGuiFrames();
     static void renderGuiFrames();
     static void closeGui();
-    static void mainGui(glfwCamera ourCamera, graph OurGraph);
+    static void mainGui(glfwCamera &glfwCamera, graph &graph);
 };

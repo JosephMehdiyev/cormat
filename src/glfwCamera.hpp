@@ -21,7 +21,9 @@ public:
               cameraFront,      // Z axis of camera bu reversed i.e the direction camera looks at i.e negative z axis
                                 // In openGL by convention camera direction is negative z axis
               worldUp;
-    float    cameraRotationSpeed;
+    float cameraRotationSpeed;
+    float cameraSpeed;
+
 private:
     // Remark: these vectors are relative to camera system, except for cameraPosition
     // Could have made struct, but would be pointless anyways, since we would intiialize it once
@@ -40,6 +42,7 @@ private:
     // Roll is Z axis
     float yaw, pitch, roll;
     bool firstMouse;
+
    
 
 public:

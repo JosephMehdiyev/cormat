@@ -51,6 +51,8 @@ glfwCamera::glfwCamera(int screenWidth, int screenHeight)
         updateCameraVectors();  
         firstMouse = true;
         fov = 60.0f;
+        cameraSpeed = 0.05f; 
+
     
 
 }
@@ -69,7 +71,6 @@ glfwCamera::processInput()
     {
         glfwSetWindowShouldClose(window, true);
     }   
-    const float cameraSpeed = 0.05f; 
     if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
     {
         cameraPosition += cameraFront * cameraSpeed;
@@ -86,6 +87,16 @@ glfwCamera::processInput()
     {
         cameraPosition += glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
     }
+    if (glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS)
+    {
+        cameraPosition += cameraUp * cameraSpeed;
+    }
+    if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS)
+    {
+        cameraPosition -= cameraUp * cameraSpeed;
+    }
+
+
 }
 
 
