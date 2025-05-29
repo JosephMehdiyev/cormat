@@ -2,14 +2,13 @@
 #include <vector>
 class render
 {
-public:
+  public:
     render();
     unsigned int VBO, VAO, EBO;
     void setBuffer(std::vector<float> vertice);
-    void generateNewVAO(std::vector<float> vertice);
+    void getNewVAO(std::vector<float> vertice);
 
-
-private:
+  private:
     void initializeBuffer();
     void deleteBuffer();
 };

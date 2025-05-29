@@ -1,10 +1,9 @@
 #include "imgui.hpp"
 #include "imgui.h"
 
-void
-myGui::mainGui(glfwCamera &glfwCamera, graph &graph)
+void myGui::mainGui(glfwCamera &glfwCamera, graph &graph)
 {
-    ImVec2 windowSize(600,300);
+    ImVec2 windowSize(600, 300);
     ImGui::SetWindowSize(windowSize);
     ImGui::Begin("Graph Control");
     ImGui::SliderFloat("Rotation speed", &glfwCamera.cameraRotationSpeed, 0, 3);
@@ -19,67 +18,46 @@ myGui::mainGui(glfwCamera &glfwCamera, graph &graph)
         ImGui::SameLine();
         glfwCamera.cameraRotationSpeed = 0;
     }
-    else glfwCamera.cameraRotationSpeed = x;
+    else
+        glfwCamera.cameraRotationSpeed = x;
 
     ImGui::End();
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 // Elementary functions to make imGui work
 //
 //
 //
 
-
-void
-myGui::initializeGui()
+void myGui::initializeGui()
 {
-     IMGUI_CHECKVERSION();
+    IMGUI_CHECKVERSION();
     ImGui::CreateContext();
-    ImGuiIO& io = ImGui::GetIO();
+    ImGuiIO &io = ImGui::GetIO();
     io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
     io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;
 }
 
-
-void
-myGui::setupPlatform(glfwCamera glfwCamera)
+void myGui::setupPlatform(glfwCamera glfwCamera)
 {
     ImGui_ImplGlfw_InitForOpenGL(glfwCamera.window, true);
     ImGui_ImplOpenGL3_Init();
 }
 
-
-void
-myGui::startGuiFrames()
+void myGui::startGuiFrames()
 {
     ImGui_ImplOpenGL3_NewFrame();
     ImGui_ImplGlfw_NewFrame();
     ImGui::NewFrame();
 }
 
-
-void
-myGui::renderGuiFrames()
+void myGui::renderGuiFrames()
 {
     ImGui::Render();
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }
 
-
-void
-myGui::closeGui()
+void myGui::closeGui()
 {
     ImGui_ImplOpenGL3_Shutdown();
     ImGui_ImplGlfw_Shutdown();

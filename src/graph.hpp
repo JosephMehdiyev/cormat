@@ -1,12 +1,12 @@
 #pragma once
-#include <vector>
-#include <string>
+#include "glfwCamera.hpp"
 #include "render.hpp"
 #include "shader.hpp"
-#include "glfwCamera.hpp"
+#include <string>
+#include <vector>
 class graph
 {
-public:
+  public:
     graph(int numberOfBoxes);
     void start(glfwCamera glfwCamera);
     std::vector<float> gridVertices;
@@ -16,8 +16,7 @@ public:
     int n;
     void initializeAndUpdateShaders(glfwCamera glfwCamera);
 
-
-public:
+  public:
     void draw();
     int totalBoxes;
     std::vector<float> findPairSymmetry(std::vector<float> vec, std::string axis);

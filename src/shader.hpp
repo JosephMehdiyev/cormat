@@ -1,16 +1,15 @@
-#pragma once 
+#pragma once
 
-#include <string>
 #include <glm/glm.hpp>
-
+#include <string>
 
 const unsigned int SCR_WIDTH = 1920;
 const unsigned int SCR_HEIGHT = 1080;
 
 class shader
 {
-public:
-    shader(const char* vertexFilePath, const char* fragmentFilePath);
+  public:
+    shader(const char *vertexFilePath, const char *fragmentFilePath);
     ~shader();
     void use();
     void setMat4(const std::string &name, const glm::mat4 &mat) const;
@@ -19,12 +18,13 @@ public:
     void updateProjectionM(float fov);
     void updateModelM(double changeX, double changeY, float rotationSpeed);
     void updateViewM(glm::vec3 cameraPosition, glm::vec3 cameraFront, glm::vec3 worldUp);
-    glm:: mat4 model, view, projection;
-private:
+    glm::mat4 model, view, projection;
+
+  private:
     // Returns a C-style string with input file directory path.
     // REMARK: you must fully use the return file before recalling this function.
     // otherwise the new return file will overload the old return file
-    std::string getFileSource(const char* filePath);
+    std::string getFileSource(const char *filePath);
     // Checks errors for shader linking and compilations
     // If it is a shader program, bool must be TRUE, if it is a shader (compilation), then FALSE
     void checkErrors(unsigned int shaderType, bool isProgram);

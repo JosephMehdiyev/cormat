@@ -1,19 +1,19 @@
 #include "shader.hpp"
 #include "glad.h"
 #include <GLFW/glfw3.h>
+#include <fstream>
 #include <glm/ext/matrix_transform.hpp>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include <iostream>
-#include <fstream>
-#include <vector>
 #include <sstream>
+#include <vector>
 
-shader::shader(const char* vertexFilePath, const char* fragmentFilePath)
+shader::shader(const char *vertexFilePath, const char *fragmentFilePath)
 {
     std::string vertexShaderSource = getFileSource(vertexFilePath);
-    const char* cvertexShaderSource = vertexShaderSource.c_str();
+    const char *cvertexShaderSource = vertexShaderSource.c_str();
 
     vertexShader = glCreateShader(GL_VERTEX_SHADER);
     glShaderSource(vertexShader, 1, &cvertexShaderSource, NULL);
@@ -24,9 +24,9 @@ shader::shader(const char* vertexFilePath, const char* fragmentFilePath)
     // getFileSource has to be called one by one
     // otherwise it will overwrite source files
     // I couldn't debug this so it will stay like that.
-    
+
     std::string fragmentShaderSource = getFileSource(fragmentFilePath);
-    const char* cfragmentShaderSource = fragmentShaderSource.c_str();
+    const char *cfragmentShaderSource = fragmentShaderSource.c_str();
     fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
     glShaderSource(fragmentShader, 1, &cfragmentShaderSource, NULL);
     glCompileShader(fragmentShader);
@@ -42,22 +42,20 @@ shader::shader(const char* vertexFilePath, const char* fragmentFilePath)
     glDeleteShader(fragmentShader);
 }
 
-
-shader::~shader(){}
-
+shader::~shader()
+{
+}
 
 // WARNING: the function is buggy, calling it twice in a row rewrites the first call
 //          so, properly use the first function before calling it agian.
-//FIXME: fix the warning
 
 // A simple function to retrieve shader source code from a file to the main program.
-std::string
-shader::getFileSource(const char* filePath)
+std::string shader::getFileSource(const char *filePath)
 {
     std::string fileCode;
     std::ifstream fileFile;
-    fileFile.exceptions( std::ifstream::failbit | std::ifstream::badbit);
-    try 
+    fileFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
+    try
     {
         fileFile.open(filePath);
         std::stringstream fileStream;
@@ -65,7 +63,7 @@ shader::getFileSource(const char* filePath)
         fileFile.close();
         fileCode = fileStream.str();
     }
-    catch (const std::ifstream::failure& e)
+    catch (const std::ifstream::failure &e)
     {
         std::cout << "ERROR: Couldn't Retrieve " << filePath << "  \n" << e.what() << std::endl;
     }
@@ -73,16 +71,12 @@ shader::getFileSource(const char* filePath)
     return fileCode;
 }
 
-
-void
-shader::use()
+void shader::use()
 {
     glUseProgram(shader::shaderProgramID);
 }
 
-
-void
-shader::checkErrors(unsigned int shaderType, bool isProgram)
+void shader::checkErrors(unsigned int shaderType, bool isProgram)
 {
     if (isProgram == false)
     {
@@ -100,11 +94,11 @@ shader::checkErrors(unsigned int shaderType, bool isProgram)
             return;
         }
     }
-    else 
+    else
     {
         int isLinked = 0;
         glGetProgramiv(shaderType, GL_LINK_STATUS, &isLinked);
-        if (isLinked == 0 )
+        if (isLinked == 0)
         {
             int logLength = 0;
             glGetShaderiv(shaderType, GL_INFO_LOG_LENGTH, &logLength);
@@ -119,9 +113,7 @@ shader::checkErrors(unsigned int shaderType, bool isProgram)
     }
 }
 
-
-void
-shader::updateModelM(double changeX, double changeY, float rotationSpeed)
+void shader::updateModelM(double changeX, double changeY, float rotationSpeed)
 {
     model = glm::mat4(1.0f);
     setMat4("model", model);
@@ -131,33 +123,25 @@ shader::updateModelM(double changeX, double changeY, float rotationSpeed)
     setMat4("model", model);
 }
 
-
-void
-shader::updateViewM(glm::vec3 cameraPosition, glm::vec3 cameraFront, glm::vec3 worldUp)
+void shader::updateViewM(glm::vec3 cameraPosition, glm::vec3 cameraFront, glm::vec3 worldUp)
 {
-    view = glm::lookAt(cameraPosition, cameraPosition+ cameraFront, worldUp);
-    setMat4("view",view);
+    view = glm::lookAt(cameraPosition, cameraPosition + cameraFront, worldUp);
+    setMat4("view", view);
 }
 
-
-void
-shader::updateProjectionM(float fov)
+void shader::updateProjectionM(float fov)
 {
     projection = glm::mat4(1.0f);
     projection = glm::perspective(glm::radians(fov), static_cast<float>(SCR_WIDTH) / static_cast<float>(SCR_HEIGHT), 0.1f, 100.0f);
     setMat4("projection", projection);
 }
 
-
-void    
-shader::setInt(const std::string &name, int value) const
+void shader::setInt(const std::string &name, int value) const
 {
     glUniform1i(glGetUniformLocation(shaderProgramID, name.c_str()), value);
 }
 
-
-void
-shader::setMat4(const std::string &name, const glm::mat4 &mat) const
+void shader::setMat4(const std::string &name, const glm::mat4 &mat) const
 {
     glUniformMatrix4fv(glGetUniformLocation(shaderProgramID, name.c_str()), 1, GL_FALSE, &mat[0][0]);
 }
