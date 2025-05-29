@@ -1,5 +1,5 @@
 #include "glad.h"
-#include "glfwCamera.hpp"
+#include "glfwWindow.hpp"
 #include "imgui.h"
 #include "imgui_impl_glfw.h"
 #include "imgui_impl_opengl3.h"
@@ -16,9 +16,9 @@ class myGui
 {
   public:
     static void initializeGui();
-    static void setupPlatform(glfwCamera glfwCamera);
+    static void setupPlatform(glfwWindow glfwCamera);
     static void startGuiFrames();
     static void renderGuiFrames();
     static void closeGui();
-    static void mainGui(glfwCamera &glfwCamera, graph &graph);
+    static void mainGui(camera &camera, graph &graph);
 };

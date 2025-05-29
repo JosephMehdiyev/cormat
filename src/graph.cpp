@@ -43,20 +43,20 @@ void graph::draw()
     glDrawArrays(GL_POINTS, x - n, n);
 }
 
-void graph::start(glfwCamera glfwCamera)
+void graph::start(camera camera)
 {
 
     graph::setRenderingConfig();
     shader.use();
-    graph::initializeAndUpdateShaders(glfwCamera);
+    graph::initializeAndUpdateShaders(camera);
     graph::draw();
 }
 
-void graph::initializeAndUpdateShaders(glfwCamera glfwCamera)
+void graph::initializeAndUpdateShaders(camera camera)
 {
-    shader.updateProjectionM(glfwCamera.fov);
-    shader.updateViewM(glfwCamera.cameraPosition, glfwCamera.cameraFront, glfwCamera.worldUp);
-    shader.updateModelM(glfwCamera.changeInX, glfwCamera.changeInY, glfwCamera.cameraRotationSpeed);
+    shader.updateProjectionM(camera.fov);
+    shader.updateViewM(camera.cameraPosition, camera.cameraFront, camera.worldUp);
+    shader.updateModelM(camera.changeInX, camera.changeInY, camera.cameraRotationSpeed);
 }
 
 void graph::setRenderingConfig()

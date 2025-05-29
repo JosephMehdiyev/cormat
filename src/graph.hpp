@@ -1,5 +1,5 @@
 #pragma once
-#include "glfwCamera.hpp"
+#include "glfwWindow.hpp"
 #include "render.hpp"
 #include "shader.hpp"
 #include <string>
@@ -8,13 +8,13 @@ class graph
 {
   public:
     graph(int numberOfBoxes);
-    void start(glfwCamera glfwCamera);
+    void start(camera camera);
     std::vector<float> gridVertices;
 
     class render render;
     class shader shader;
     int n;
-    void initializeAndUpdateShaders(glfwCamera glfwCamera);
+    void initializeAndUpdateShaders(camera camera);
 
   public:
     void draw();

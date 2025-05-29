@@ -1,5 +1,5 @@
 #include "glad.h"
-#include "glfwCamera.hpp"
+#include "glfwWindow.hpp"
 #include "imgui.h"
 #include "imgui.hpp"
 #include "imgui_impl_glfw.h"
@@ -14,7 +14,7 @@
 
 int main()
 {
-    glfwCamera glfwCamera(SCR_WIDTH, SCR_HEIGHT);
+    glfwWindow glfwCamera(SCR_WIDTH, SCR_HEIGHT);
     graph graph(200);
     myGui::initializeGui();
     myGui::setupPlatform(glfwCamera);
@@ -23,9 +23,9 @@ int main()
     {
         glfwPollEvents();
         myGui::startGuiFrames();
-        myGui::mainGui(glfwCamera, graph);
+        myGui::mainGui(glfwCamera.worldCamera, graph);
         glfwCamera.getInput();
-        graph.start(glfwCamera);
+        graph.start(glfwCamera.worldCamera);
         myGui::renderGuiFrames();
         glfwCamera.swapBuffers();
     }
