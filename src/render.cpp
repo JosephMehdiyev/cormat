@@ -4,11 +4,11 @@
 
 render::render()
 {
-    this->initializeBuffer();
+    this->initBuffer();
 }
 void
 
-render::initializeBuffer()
+render::initBuffer()
 {
     glGenVertexArrays(1, &VAO);
     glGenBuffers(1, &VBO);

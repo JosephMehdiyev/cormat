@@ -39,9 +39,9 @@ glfwCamera::glfwCamera(int screenWidth, int screenHeight)
     cameraRotationSpeed = 0.2;
     worldUp = glm::vec3(0.0f, 1.0f, 0.0f);
     cameraFront = glm::vec3(0.0, 0.0, 1.0);
-    yaw = -90.0f;
-    pitch = 0.0f;
-    roll = 0.0f;
+    rotationY = -90.0f;
+    rotationX = 0.0f;
+    rotationZ = 0.0f;
     updateCameraVectors();
     firstMouse = true;
     fov = 60.0f;
@@ -52,7 +52,6 @@ glfwCamera::~glfwCamera()
 {
 }
 
-// Processes the keyboard input for the camera
 void glfwCamera::getInput()
 {
     if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
@@ -85,9 +84,9 @@ void glfwCamera::swapBuffers()
 void glfwCamera::updateCameraVectors()
 {
     glm::vec3 bufferCameraFront;
-    bufferCameraFront.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
-    bufferCameraFront.y = sin(glm::radians(pitch));
-    bufferCameraFront.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
+    bufferCameraFront.x = cos(glm::radians(rotationY)) * cos(glm::radians(rotationX));
+    bufferCameraFront.y = sin(glm::radians(rotationX));
+    bufferCameraFront.z = sin(glm::radians(rotationY)) * cos(glm::radians(rotationX));
     cameraFront = glm::normalize(bufferCameraFront);
 
     cameraRight = glm::normalize(glm::cross(cameraFront, worldUp));
@@ -96,7 +95,6 @@ void glfwCamera::updateCameraVectors()
 
 // WARNING: the rotation is relative to the object itself. What it does mean it that, after object
 //          rotates 180* degrees, the rotation position gets reversed
-// FIXME:   fix the warning
 void glfwCamera::cursorCallBack([[maybe_unused]] GLFWwindow *windoww, double xpos, double ypos)
 {
     if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS)
@@ -114,7 +112,7 @@ void glfwCamera::frameSizeCallBack([[maybe_unused]] GLFWwindow *w, int width, in
     glViewport(0, 0, width, height);
 }
 
-void glfwCamera::getZoom([[maybe_unused]] GLFWwindow *windoww, [[maybe_unused]] double xoffset, double yoffset)
+void glfwCamera::getZoomInput([[maybe_unused]] GLFWwindow *windoww, [[maybe_unused]] double xoffset, double yoffset)
 {
     glfwCamera::fov -= static_cast<float>(yoffset);
     if (fov < 1.0f)
@@ -123,10 +121,9 @@ void glfwCamera::getZoom([[maybe_unused]] GLFWwindow *windoww, [[maybe_unused]] 
         glfwCamera::fov = 45.0f;
 }
 
-// NOTE: these are  our static function clones. Do not touch!
 void glfwCamera::staticScrollCallBack(GLFWwindow *w, double xoffset, double yoffset)
 {
-    static_cast<glfwCamera *>(glfwGetWindowUserPointer(w))->getZoom(w, xoffset, yoffset);
+    static_cast<glfwCamera *>(glfwGetWindowUserPointer(w))->getZoomInput(w, xoffset, yoffset);
 }
 
 void glfwCamera::staticFrameSizeCallBack(GLFWwindow *w, int width, int height)

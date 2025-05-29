@@ -13,7 +13,6 @@ graph::graph(int numberOfBoxes) : shader("../shader/graph.vert.glsl", "../shader
     gridVertices = {1.0f, 0.0f,  0.0f, 0.0f, 0.0f, 1.0f, -1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f,  0.0f, 1.0f, 0.0f,
                     0.0f, -1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f,  0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, -1.0f, 1.0f, 0.0f, 0.0f};
     n = 0;
-    pointGenerator();
     render.setBuffer(gridVertices);
 }
 

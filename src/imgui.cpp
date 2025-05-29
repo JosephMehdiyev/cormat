@@ -24,11 +24,6 @@ void myGui::mainGui(glfwCamera &glfwCamera, graph &graph)
     ImGui::End();
 }
 
-// Elementary functions to make imGui work
-//
-//
-//
-
 void myGui::initializeGui()
 {
     IMGUI_CHECKVERSION();

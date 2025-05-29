@@ -21,14 +21,14 @@ class glfwCamera
     void getKeyboard();
     void getMouseMovement();
     void getMouseScroll();
-    void getZoom(GLFWwindow *window, double xoffset, double yoffset);
+    void getZoomInput(GLFWwindow *window, double xoffset, double yoffset);
     void cursorCallBack(GLFWwindow *window, double xpos, double ypos);
 
     // Angles, used for rotating the camera
     // Yaw is Y axis
     // Pitch is X axis
     // Roll is Z axis
-    float yaw, pitch, roll;
+    float rotationY, rotationX, rotationZ;
     bool firstMouse;
 
   public:

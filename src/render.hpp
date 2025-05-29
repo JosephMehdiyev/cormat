@@ -9,6 +9,6 @@ class render
     void getNewVAO(std::vector<float> vertice);
 
   private:
-    void initializeBuffer();
+    void initBuffer();
     void deleteBuffer();
 };
