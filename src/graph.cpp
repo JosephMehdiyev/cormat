@@ -10,7 +10,7 @@ graph::graph(int numberOfBoxes) : shader("../shader/graph.vert.glsl", "../shader
     //      first 3 floats represent the position in normal coordinates.
     //      later 3 floats represent the color of the vertice.
     //      2 vertices are in the group to draw a line.
-    gridVertices = {1.0f, 0.0f,  0.0f, 0.0f, 0.0f, 1.0f, -1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f,  0.0f, 1.0f, 0.0f,
+    gridVertices = {1.0f, 0.0f,  0.0f, 0.0f, 0.0f, 0.0f, -1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f,  0.0f, 1.0f, 0.0f,
                     0.0f, -1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f,  0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, -1.0f, 1.0f, 0.0f, 0.0f};
     n = 0;
     render.setBuffer(gridVertices);
