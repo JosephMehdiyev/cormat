@@ -1,15 +1,20 @@
 #pragma once
-#include "objects.hpp"
+#include "buffer.hpp"
+#include "glfwWindow.hpp"
+#include "shader.hpp"
+#include <string>
 #include <vector>
-class render
+class graph
 {
   public:
-    render();
-    unsigned int VBO, VAO, EBO;
-    void setBuffer(cube shape);
-    void getNewVAO(std::vector<float> vertice);
+    graph();
+    void start(camera camera);
 
-  private:
-    void initBuffer();
-    void deleteBuffer();
+    class render render;
+    class shader shader;
+    void initializeAndUpdateShaders(camera camera);
+
+  public:
+    void draw();
+    void setRenderingConfig();
 };
