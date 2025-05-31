@@ -16,4 +16,5 @@ class cube
     cube();
     std::vector<float> coordData;
     std::vector<unsigned int> indiceData;
+    glm::mat4 modelMatrix;
 };

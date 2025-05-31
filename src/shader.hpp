@@ -1,6 +1,7 @@
 #pragma once
 
 #include "glad.h"
+#include "objects.hpp"
 #include <GLFW/glfw3.h>
 #include <fstream>
 #include <glm/ext/matrix_transform.hpp>
@@ -25,9 +26,9 @@ class shader
     void setInt(const std::string &name, int value) const;
     unsigned int vertexShader, fragmentShader, shaderProgramID;
     void updateProjectionM(float fov);
-    void updateModelM(double changeX, double changeY, float rotationSpeed);
+    void updateModelM(double changeX, double changeY, float rotationSpeed, cube cube);
     void updateViewM(glm::vec3 cameraPosition, glm::vec3 cameraFront, glm::vec3 worldUp);
-    glm::mat4 model, view, projection;
+    glm::mat4 view, projection;
 
   private:
     // Returns a C-style string with input file directory path.

@@ -15,7 +15,7 @@
 int main()
 {
     glfwWindow glfwCamera(SCR_WIDTH, SCR_HEIGHT);
-    render graph;
+    render scene;
     myGui::initializeGui();
     myGui::setupPlatform(glfwCamera);
 
@@ -25,7 +25,7 @@ int main()
         myGui::startGuiFrames();
         myGui::mainGui(glfwCamera.worldCamera);
         glfwCamera.getInput();
-        graph.start(glfwCamera.worldCamera);
+        scene.start(glfwCamera.worldCamera);
         myGui::renderGuiFrames();
         glfwCamera.swapBuffers();
     }
