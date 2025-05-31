@@ -15,7 +15,7 @@
 int main()
 {
     glfwWindow glfwCamera(SCR_WIDTH, SCR_HEIGHT);
-    graph graph(200);
+    graph graph;
     myGui::initializeGui();
     myGui::setupPlatform(glfwCamera);
 
@@ -23,7 +23,7 @@ int main()
     {
         glfwPollEvents();
         myGui::startGuiFrames();
-        myGui::mainGui(glfwCamera.worldCamera, graph);
+        myGui::mainGui(glfwCamera.worldCamera);
         glfwCamera.getInput();
         graph.start(glfwCamera.worldCamera);
         myGui::renderGuiFrames();

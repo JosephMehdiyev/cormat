@@ -1,7 +1,7 @@
 #include "imgui.hpp"
 #include "imgui.h"
 
-void myGui::mainGui(camera &camera, graph &graph)
+void myGui::mainGui(camera &camera)
 {
     ImVec2 windowSize(600, 300);
     ImGui::SetWindowSize(windowSize);

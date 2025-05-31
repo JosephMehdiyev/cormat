@@ -1,4 +1,4 @@
-#include "shapes.hpp"
+#include "objects.hpp"
 
 cube::cube()
 {

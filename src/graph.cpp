@@ -1,10 +1,9 @@
 #include "graph.hpp"
 #include "glad.h"
-#include "shapes.hpp"
 #include <GL/gl.h>
 #include <vector>
 
-graph::graph(int numberOfBoxes) : shader("../shader/graph.vert.glsl", "../shader/graph.frag.glsl")
+graph::graph() : shader("../shader/graph.vert.glsl", "../shader/graph.frag.glsl")
 {
     cube test;
     render.setBuffer(test);
