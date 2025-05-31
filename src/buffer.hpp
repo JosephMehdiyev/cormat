@@ -1,10 +1,10 @@
 #pragma once
 #include "objects.hpp"
 #include <vector>
-class render
+class buffer
 {
   public:
-    render();
+    buffer();
     unsigned int VBO, VAO, EBO;
     void setBuffer(cube shape);
     void getNewVAO(std::vector<float> vertice);

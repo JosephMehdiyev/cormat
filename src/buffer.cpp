@@ -1,21 +1,21 @@
-#include "render.hpp"
 #include "glad.h"
+#include "render.hpp"
 #include <GL/gl.h>
 
-render::render()
+buffer::buffer()
 {
     this->initBuffer();
 }
 void
 
-render::initBuffer()
+buffer::initBuffer()
 {
     glGenVertexArrays(1, &VAO);
     glGenBuffers(1, &VBO);
     glGenBuffers(1, &EBO);
 }
 
-void render::setBuffer(cube shape)
+void buffer::setBuffer(cube shape)
 {
     glBindVertexArray(VAO);
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
@@ -32,7 +32,7 @@ void render::setBuffer(cube shape)
     glEnableVertexAttribArray(1);
 }
 
-void render::deleteBuffer()
+void buffer::deleteBuffer()
 {
     glDeleteVertexArrays(1, &VAO);
     glDeleteBuffers(1, &VBO);

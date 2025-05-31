@@ -3,35 +3,35 @@
 #include <GL/gl.h>
 #include <vector>
 
-graph::graph() : shader("../shader/graph.vert.glsl", "../shader/graph.frag.glsl")
+render::render() : shader("../shader/graph.vert.glsl", "../shader/graph.frag.glsl")
 {
     cube test;
-    render.setBuffer(test);
+    buffer.setBuffer(test);
 }
 
-void graph::draw()
+void render::draw()
 {
-    glBindVertexArray(render.VAO);
+    glBindVertexArray(buffer.VAO);
     glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
 }
 
-void graph::start(camera camera)
+void render::start(camera camera)
 {
 
-    graph::setRenderingConfig();
+    render::setRenderingConfig();
     shader.use();
-    graph::initializeAndUpdateShaders(camera);
-    graph::draw();
+    render::initializeAndUpdateShaders(camera);
+    render::draw();
 }
 
-void graph::initializeAndUpdateShaders(camera camera)
+void render::initializeAndUpdateShaders(camera camera)
 {
     shader.updateProjectionM(camera.fov);
     shader.updateViewM(camera.cameraPosition, camera.cameraFront, camera.worldUp);
     shader.updateModelM(camera.changeInX, camera.changeInY, camera.cameraRotationSpeed);
 }
 
-void graph::setRenderingConfig()
+void render::setRenderingConfig()
 {
     glClearColor(0.8f, 0.8f, 0.8f, 1.0f);
     glEnable(GL_DEPTH_TEST);

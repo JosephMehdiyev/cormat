@@ -4,13 +4,13 @@
 #include "shader.hpp"
 #include <string>
 #include <vector>
-class graph
+class render
 {
   public:
-    graph();
+    render();
     void start(camera camera);
 
-    class render render;
+    class buffer buffer;
     class shader shader;
     void initializeAndUpdateShaders(camera camera);
 

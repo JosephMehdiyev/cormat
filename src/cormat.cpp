@@ -15,7 +15,7 @@
 int main()
 {
     glfwWindow glfwCamera(SCR_WIDTH, SCR_HEIGHT);
-    graph graph;
+    render graph;
     myGui::initializeGui();
     myGui::setupPlatform(glfwCamera);
 
