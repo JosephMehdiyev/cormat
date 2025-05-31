@@ -11,7 +11,7 @@ class render
   public:
     render();
     void start(camera camera);
-    cube test;
+    sphere test;
     class buffer buffer;
     class shader shader;
     void initializeAndUpdateShaders(camera camera);

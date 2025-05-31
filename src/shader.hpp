@@ -26,7 +26,7 @@ class shader
     void setInt(const std::string &name, int value) const;
     unsigned int vertexShader, fragmentShader, shaderProgramID;
     void updateProjectionM(float fov);
-    void updateModelM(double changeX, double changeY, float rotationSpeed, cube cube);
+    void updateModelM(double changeX, double changeY, float rotationSpeed, object &cube);
     void updateViewM(glm::vec3 cameraPosition, glm::vec3 cameraFront, glm::vec3 worldUp);
     glm::mat4 view, projection;
 

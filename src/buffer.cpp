@@ -15,7 +15,7 @@ buffer::initBuffer()
     glGenBuffers(1, &EBO);
 }
 
-void buffer::setBuffer(cube shape)
+void buffer::setBuffer(object shape)
 {
     glBindVertexArray(VAO);
     glBindBuffer(GL_ARRAY_BUFFER, VBO);

@@ -10,7 +10,7 @@ render::render() : shader("../shader/graph.vert.glsl", "../shader/graph.frag.gls
 
 void render::draw()
 {
-    glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+    glDrawElements(GL_TRIANGLES, test.indiceData.size(), GL_UNSIGNED_INT, 0);
 }
 
 void render::start(camera camera)
@@ -20,10 +20,12 @@ void render::start(camera camera)
     shader.use();
     render::initializeAndUpdateShaders(camera);
     glBindVertexArray(buffer.VAO);
-    // identity or your desired transform
+    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+    test.modelMatrix = glm::mat4(1.0f);
+    shader.updateModelM(camera.changeInX, camera.changeInY, camera.cameraRotationSpeed, test);
     render::draw();
-    test.modelMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(2.0f, 5.0f, -5.0f));
-    shader.setMat4("model", test.modelMatrix);
+    test.modelMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(2.0f, 2.0f, -2.0f));
+    shader.updateModelM(camera.changeInX, camera.changeInY, camera.cameraRotationSpeed, test);
     render::draw();
 }
 

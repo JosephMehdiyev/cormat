@@ -10,11 +10,23 @@
 #define GREEN 0.0f, 1.0f, 0.0f
 #define BLUE 0.0f, 0.0f, 1.0f
 
-class cube
+class object
 {
   public:
-    cube();
+    object();
     std::vector<float> coordData;
     std::vector<unsigned int> indiceData;
     glm::mat4 modelMatrix;
+};
+
+class cube : public object
+{
+  public:
+    cube();
+};
+
+class sphere : public object
+{
+  public:
+    sphere(float radius = 0.1f, int sectors = 36, int stacks = 18);
 };

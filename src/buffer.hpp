@@ -6,7 +6,7 @@ class buffer
   public:
     buffer();
     unsigned int VBO, VAO, EBO;
-    void setBuffer(cube shape);
+    void setBuffer(object shape);
     void getNewVAO(std::vector<float> vertice);
 
   private:
