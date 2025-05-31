@@ -5,12 +5,8 @@
 
 render::render() : shader("../shader/graph.vert.glsl", "../shader/graph.frag.glsl")
 {
-    buffer.setBuffer(test);
-}
-
-void render::draw()
-{
-    glDrawElements(GL_TRIANGLES, test.indiceData.size(), GL_UNSIGNED_INT, 0);
+    test1.setBuffer(test1.coordData, test1.indiceData);
+    test.setBuffer(test.coordData, test.indiceData);
 }
 
 void render::start(camera camera)
@@ -19,21 +15,21 @@ void render::start(camera camera)
     render::setRenderingConfig();
     shader.use();
     render::initializeAndUpdateShaders(camera);
-    glBindVertexArray(buffer.VAO);
+    glBindVertexArray(test1.VAO);
     glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
     test.modelMatrix = glm::mat4(1.0f);
     shader.updateModelM(camera.changeInX, camera.changeInY, camera.cameraRotationSpeed, test);
-    render::draw();
-    test.modelMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(2.0f, 2.0f, -2.0f));
-    shader.updateModelM(camera.changeInX, camera.changeInY, camera.cameraRotationSpeed, test);
-    render::draw();
+    test.draw();
+    test1.modelMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(2.0f, 2.0f, -2.0f));
+    shader.updateModelM(camera.changeInX, camera.changeInY, camera.cameraRotationSpeed, test1);
+    test1.draw();
 }
 
 void render::initializeAndUpdateShaders(camera camera)
 {
     shader.updateProjectionM(camera.fov);
     shader.updateViewM(camera.cameraPosition, camera.cameraFront, camera.worldUp);
-    shader.updateModelM(camera.changeInX, camera.changeInY, camera.cameraRotationSpeed, test);
+    shader.updateModelM(camera.changeInX, camera.changeInY, camera.cameraRotationSpeed, test1);
 }
 
 void render::setRenderingConfig()

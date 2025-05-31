@@ -5,6 +5,12 @@ object::object()
     modelMatrix = glm::mat4(1.0f);
 };
 
+void object::draw()
+{
+    glBindVertexArray(VAO);
+    glDrawElements(GL_TRIANGLES, indiceData.size(), GL_UNSIGNED_INT, 0);
+};
+
 cube::cube()
 {
 
@@ -29,12 +35,12 @@ cube::cube()
     };
 }
 
+// https://songho.ca/opengl/gl_sphere.html
 sphere::sphere(float radius, int sectors, int stacks)
 {
     // Generate vertices (positions + colors)
     const float PI = 3.1415926f;
     float x, y, z, xy; // Vertex position
-    float nx, ny, nz;  // Normals (optional)
     float s, t;        // TexCoords (optional)
 
     for (int i = 0; i <= stacks; ++i)
@@ -52,16 +58,14 @@ sphere::sphere(float radius, int sectors, int stacks)
             y = xy * sinf(sectorAngle);
             coordData.insert(coordData.end(), {x, y, z});
 
-            // Color (example: gradient)
             coordData.insert(coordData.end(), {0.0f, 0.0f, 0.0f});
         }
     }
 
-    // Generate indices (EBO data)
     for (int i = 0; i < stacks; ++i)
     {
-        int k1 = i * (sectors + 1);
-        int k2 = k1 + sectors + 1;
+        unsigned int k1 = i * (sectors + 1);
+        unsigned int k2 = k1 + sectors + 1;
 
         for (int j = 0; j < sectors; ++j, ++k1, ++k2)
         {

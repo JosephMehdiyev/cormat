@@ -1,4 +1,5 @@
 #pragma once
+#include "buffer.hpp"
 #include "glad.h"
 #include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
@@ -10,10 +11,11 @@
 #define GREEN 0.0f, 1.0f, 0.0f
 #define BLUE 0.0f, 0.0f, 1.0f
 
-class object
+class object : public buffer
 {
   public:
     object();
+    void draw();
     std::vector<float> coordData;
     std::vector<unsigned int> indiceData;
     glm::mat4 modelMatrix;
