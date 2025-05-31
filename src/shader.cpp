@@ -1,14 +1,4 @@
 #include "shader.hpp"
-#include "glad.h"
-#include <GLFW/glfw3.h>
-#include <fstream>
-#include <glm/ext/matrix_transform.hpp>
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtc/type_ptr.hpp>
-#include <iostream>
-#include <sstream>
-#include <vector>
 
 shader::shader(const char *vertexFilePath, const char *fragmentFilePath)
 {
