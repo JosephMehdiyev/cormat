@@ -9,7 +9,7 @@ class buffer
     buffer();
     ~buffer();
     unsigned int VBO, VAO, EBO;
-    void setBuffer(std::vector<float> coordData, std::vector<unsigned int> indiceData);
+    void setBuffer(std::vector<float> coordData, std::vector<unsigned int> indiceData, std::vector<float> textureData);
 
   private:
     void initBuffer();

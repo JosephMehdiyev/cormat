@@ -88,13 +88,12 @@ sphere::sphere(float radius, int sectors, int stacks)
 
 rectangle::rectangle(float a, float b)
 {
-    coordData = {
-        -0.5f, -0.5f, 0.0f, BLACK, 0.5f, -0.5f, 0.0f, BLACK, 0.5f, 0.5f, 0.0f, BLACK, -0.5f, 0.5f, 0.0f, BLACK,
-    };
+    coordData = {-0.5f, -0.5f, 0.0f, BLACK, 0.0f, 0.0f, 0.5f,  -0.5f, 0.0f, BLACK, 1.0f, 0.0f,
+                 0.5f,  0.5f,  0.0f, BLACK, 1.0f, 1.0f, -0.5f, 0.5f,  0.0f, BLACK, 0.0f, 1.0f};
     indiceData = {
         //
         0, 1, 2, 2, 3, 0,
         //
     };
-    modelMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(1.0f, 1.0f, -1.0f));
+    textureData = {1.0f};
 };

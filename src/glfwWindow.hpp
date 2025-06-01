@@ -22,6 +22,7 @@ class glfwWindow
     void getMouseScroll();
     void getZoomInput(GLFWwindow *window, double xoffset, double yoffset);
     void cursorCallBack(GLFWwindow *window, double xpos, double ypos);
+    float lastCursorPositionX, lastCursorPositionY;
 
   public:
     static void staticFrameSizeCallBack(GLFWwindow *w, int width, int height);

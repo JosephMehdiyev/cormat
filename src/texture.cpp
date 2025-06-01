@@ -3,6 +3,7 @@
 #include "stb_image.hpp"
 #include <GL/gl.h>
 #include <iostream>
+#include <stdexcept>
 
 // TODO: feature to support more than 1 textures at a time.
 //       also calling the class twice is buggy(?).
@@ -22,12 +23,12 @@ void texture::loadTexture(const char *textureFileLocation)
     unsigned char *data = stbi_load(textureFileLocation, &width, &height, &nrChannels, 0);
     if (data)
     {
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
         glGenerateMipmap(GL_TEXTURE_2D);
     }
     else
     {
-        std::cout << "ERROR: COULDN'T LOAD THE TEXTURE" << std::endl;
+        throw std::runtime_error("ERROR: COULDN'T LOAD THE TEXTURE");
     }
     stbi_image_free(data);
 }

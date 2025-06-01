@@ -5,7 +5,7 @@
 camera::camera()
 {
     // Camera's Initial values
-    cameraPosition = glm::vec3(0.0f, 0.0f, 1.0f);
+    cameraPosition = glm::vec3(0.2f, 0.2f, 1.2f);
     cameraRotationSpeed = 0.2;
     worldUp = glm::vec3(0.0f, 1.0f, 0.0f);
     cameraFront = glm::vec3(0.0, 0.0, 1.0);
@@ -13,7 +13,6 @@ camera::camera()
     rotationX = 0.0f;
     rotationZ = 0.0f;
     updateCameraVectors();
-    firstMouse = true;
     fov = 60.0f;
     changeInX = 0;
     changeInY = 0;

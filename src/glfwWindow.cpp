@@ -8,6 +8,8 @@
 
 glfwWindow::glfwWindow(int screenWidth, int screenHeight)
 {
+    lastCursorPositionX = static_cast<float>(screenWidth) / 2;
+    lastCursorPositionY = static_cast<float>(screenHeight) / 2;
     if (!glfwInit())
         throw std::runtime_error("Failed to Initialize GLFW");
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
@@ -68,18 +70,28 @@ void glfwWindow::swapBuffers()
     glfwSwapBuffers(window);
 }
 
-// WARNING: the rotation is relative to the object itself. What it does mean it that, after object
-//          rotates 180* degrees, the rotation position gets reversed
 void glfwWindow::cursorCallBack([[maybe_unused]] GLFWwindow *windoww, double xpos, double ypos)
 {
     if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS)
     {
-        float sensitivity = 2.0f;
-        xpos *= sensitivity;
-        ypos *= sensitivity;
-        worldCamera.changeInX = xpos;
-        worldCamera.changeInY = ypos;
+
+        float sensitivity = 0.3f;
+        float xoffset = xpos - lastCursorPositionX;
+        float yoffset = ypos - lastCursorPositionY;
+        lastCursorPositionY = ypos;
+        lastCursorPositionX = xpos;
+
+        xoffset *= sensitivity;
+        yoffset *= sensitivity;
+        worldCamera.rotationX -= yoffset;
+        worldCamera.rotationY += xoffset;
+        if (worldCamera.rotationX > 89.0f)
+            worldCamera.rotationX = 89.0f;
+        if (worldCamera.rotationX < -89.0f)
+            worldCamera.rotationX = -89.0f;
     }
+    lastCursorPositionX = xpos;
+    lastCursorPositionY = ypos;
 }
 
 void glfwWindow::frameSizeCallBack([[maybe_unused]] GLFWwindow *w, int width, int height)

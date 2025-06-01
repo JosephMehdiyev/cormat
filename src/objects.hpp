@@ -20,6 +20,7 @@ class object : public buffer
     void draw();
     std::vector<float> coordData;
     std::vector<unsigned int> indiceData;
+    std::vector<float> textureData;
     glm::mat4 modelMatrix;
     void updateModelMatrix(camera camera, shader shader);
 };

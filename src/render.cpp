@@ -1,11 +1,13 @@
 #include "render.hpp"
 #include "glad.h"
 #include "shader.hpp"
+#include "texture.hpp"
 #include <GL/gl.h>
 
 render::render() : shader("../shader/graph.vert.glsl", "../shader/graph.frag.glsl")
 {
-    test.setBuffer(test1.coordData, test1.indiceData);
+    test.setBuffer(test.coordData, test.indiceData, test.textureData);
+    test1.setBuffer(test1.coordData, test1.indiceData, test1.textureData);
 }
 
 void render::start(camera camera)
@@ -15,12 +17,19 @@ void render::start(camera camera)
     shader.use();
     render::initializeAndUpdateMatrices(camera);
 
-    test.modelMatrix = glm::mat4(1.0f);
-    test.modelMatrix = glm ::scale(test.modelMatrix, glm::vec3(20.0f));
-    test.modelMatrix = glm::rotate(test.modelMatrix, static_cast<float>(glm::radians(90.0f)), glm::vec3(1.0f, 0.0f, 0.0f));
 
+
+    test.modelMatrix = glm::mat4(1.0f);
+    test.modelMatrix = glm ::scale(test.modelMatrix, glm::vec3(50.0f));
+    test.modelMatrix = glm::rotate(test.modelMatrix, static_cast<float>(glm::radians(90.0f)), glm::vec3(1.0f, 0.0f, 0.0f));
     test.updateModelMatrix(camera, shader);
     test.draw();
+
+    test1.modelMatrix = glm::mat4(1.0f);
+    test1.modelMatrix = glm::translate(test.modelMatrix, glm::vec3(0.0f, 0.0f, -0.3f));
+
+    test1.updateModelMatrix(camera, shader);
+    test1.draw();
 }
 
 void render::initializeAndUpdateMatrices(camera camera)

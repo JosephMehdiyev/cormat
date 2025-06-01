@@ -10,8 +10,8 @@ class render
   public:
     render();
     void start(camera camera);
-    sphere test;
-    rectangle test1;
+    rectangle test;
+    sphere test1;
     class shader shader;
     void initializeAndUpdateMatrices(camera camera);
 
