@@ -14,18 +14,19 @@ void render::start(camera camera)
 
     render::setRenderingConfig();
     shader.use();
-    render::initializeAndUpdateShaders(camera);
-    glBindVertexArray(test1.VAO);
+    render::initializeAndUpdateMatrices(camera);
     glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-    test.modelMatrix = glm::mat4(1.0f);
+    test.modelMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(1.0f, 2.0f, -2.0f));
+
     shader.updateModelM(camera.changeInX, camera.changeInY, camera.cameraRotationSpeed, test);
     test.draw();
+
     test1.modelMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(2.0f, 2.0f, -2.0f));
     shader.updateModelM(camera.changeInX, camera.changeInY, camera.cameraRotationSpeed, test1);
     test1.draw();
 }
 
-void render::initializeAndUpdateShaders(camera camera)
+void render::initializeAndUpdateMatrices(camera camera)
 {
     shader.updateProjectionM(camera.fov);
     shader.updateViewM(camera.cameraPosition, camera.cameraFront, camera.worldUp);

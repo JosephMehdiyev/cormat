@@ -2,12 +2,14 @@
 #include <GLFW/glfw3.h>
 #include <glm/geometric.hpp>
 #include <iostream>
+#include <stdexcept>
 
 // https://www.songho.ca/opengl/gl_camera.html
 
 glfwWindow::glfwWindow(int screenWidth, int screenHeight)
 {
-    glfwInit();
+    if (!glfwInit())
+        throw std::runtime_error("Failed to Initialize GLFW");
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
@@ -15,15 +17,13 @@ glfwWindow::glfwWindow(int screenWidth, int screenHeight)
     window = glfwCreateWindow(screenWidth, screenHeight, "Cormat", NULL, NULL);
     if (window == NULL)
     {
-        std::cout << "Failed to create GLFW window" << std::endl;
         glfwTerminate();
+        throw std::runtime_error("Failed to create GLFW window");
     }
     glfwMakeContextCurrent(window);
 
     if (!gladLoadGLLoader(reinterpret_cast<GLADloadproc>(glfwGetProcAddress)))
-    {
-        std::cout << "Failed to initialize GLAD" << std::endl;
-    }
+        throw std::runtime_error("Failed to initialize GLAD");
 
     glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR);
 

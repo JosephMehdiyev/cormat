@@ -1,9 +1,6 @@
 #include "objects.hpp"
 
-object::object()
-{
-    modelMatrix = glm::mat4(1.0f);
-};
+object::object() {};
 
 void object::draw()
 {

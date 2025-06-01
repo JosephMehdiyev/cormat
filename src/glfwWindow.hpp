@@ -10,10 +10,10 @@ class glfwWindow
     glfwWindow(int screenWidth, int screenHeight);
     ~glfwWindow();
     camera worldCamera;
-    GLFWwindow *window;
     void getInput();
     void swapBuffers();
     void frameSizeCallBack(GLFWwindow *w, int width, int height);
+    GLFWwindow *window;
 
   private:
     glm::mat4 GetViewMatrix;

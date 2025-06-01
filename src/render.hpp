@@ -13,7 +13,7 @@ class render
     sphere test;
     cube test1;
     class shader shader;
-    void initializeAndUpdateShaders(camera camera);
+    void initializeAndUpdateMatrices(camera camera);
 
   public:
     void setRenderingConfig();
