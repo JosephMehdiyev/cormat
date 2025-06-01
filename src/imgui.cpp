@@ -5,22 +5,8 @@ void myGui::mainGui(camera &camera)
 {
     ImVec2 windowSize(600, 300);
     ImGui::SetWindowSize(windowSize);
-    ImGui::Begin("Graph Control");
-    ImGui::SliderFloat("Rotation speed", &camera.cameraRotationSpeed, 0, 3);
+    ImGui::Begin("Control Panel");
     ImGui::SliderFloat("Walk speed", &camera.cameraSpeed, 0, 3);
-
-    float x = camera.cameraRotationSpeed;
-    static int clickedRotateButton = 0;
-    if (ImGui::Button("Stop/Start rotating"))
-        clickedRotateButton++;
-    if (clickedRotateButton & 1)
-    {
-        ImGui::SameLine();
-        camera.cameraRotationSpeed = 0;
-    }
-    else
-        camera.cameraRotationSpeed = x;
-
     ImGui::End();
 }
 

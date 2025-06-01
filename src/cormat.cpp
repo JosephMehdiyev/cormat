@@ -20,9 +20,17 @@ int main()
     render scene;
     myGui::initializeGui();
     myGui::setupPlatform(glfwCamera);
+    double lastTime = glfwGetTime();
 
     while (!glfwWindowShouldClose(glfwCamera.window))
     {
+        // --- Calculate deltaT ---
+        double currentTime = glfwGetTime();
+        double deltaT = currentTime - lastTime;
+        lastTime = currentTime;
+
+        // --- Clamp to avoid physics spikes ---
+        deltaT = std::min(deltaT, 0.1); // Limit to 100ms
         glfwPollEvents();
         myGui::startGuiFrames();
         myGui::mainGui(glfwCamera.worldCamera);

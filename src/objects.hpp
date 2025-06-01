@@ -2,6 +2,7 @@
 #include "buffer.hpp"
 #include "camera.hpp"
 #include "glad.h"
+#include "physics.hpp"
 #include "shader.hpp"
 #include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
@@ -13,11 +14,11 @@
 #define GREEN 0.0f, 1.0f, 0.0f
 #define BLUE 0.0f, 0.0f, 1.0f
 
-class object : public buffer
+class object : public buffer, public physics
 {
   public:
     object();
-    void draw();
+    void draw(camera camera, shader shader);
     std::vector<float> coordData;
     std::vector<unsigned int> indiceData;
     std::vector<float> textureData;
@@ -34,7 +35,7 @@ class cube : public object
 class sphere : public object
 {
   public:
-    sphere(float radius = 0.1f, int sectors = 36, int stacks = 18);
+    sphere(float radius = 0.5f, int sectors = 36, int stacks = 18);
 };
 
 class rectangle : public object

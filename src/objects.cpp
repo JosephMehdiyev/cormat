@@ -2,8 +2,9 @@
 
 object::object() {};
 
-void object::draw()
+void object::draw(camera camera, shader shader)
 {
+    updateModelMatrix(camera, shader);
     glBindVertexArray(VAO);
     glDrawElements(GL_TRIANGLES, indiceData.size(), GL_UNSIGNED_INT, 0);
 };
@@ -84,10 +85,19 @@ sphere::sphere(float radius, int sectors, int stacks)
             }
         }
     }
+
+    modelMatrix = glm::mat4(1.0f);
+    modelMatrix = glm::translate(modelMatrix, glm::vec3(0.0f, 50.0f, 0.0f));
 };
 
 rectangle::rectangle(float a, float b)
 {
+    modelMatrix = glm::mat4(1.0f);
+    modelMatrix = glm ::scale(modelMatrix, glm::vec3(50.0f));
+    modelMatrix = glm::rotate(modelMatrix, static_cast<float>(glm::radians(90.0f)), glm::vec3(1.0f, 0.0f, 0.0f));
+
+    type = bodyType::DYNAMIC;
+    position = {1, -1, 1};
     coordData = {-0.5f, -0.5f, 0.0f, BLACK, 0.0f, 0.0f, 0.5f,  -0.5f, 0.0f, BLACK, 1.0f, 0.0f,
                  0.5f,  0.5f,  0.0f, BLACK, 1.0f, 1.0f, -0.5f, 0.5f,  0.0f, BLACK, 0.0f, 1.0f};
     indiceData = {

@@ -19,17 +19,9 @@ void render::start(camera camera)
 
 
 
-    test.modelMatrix = glm::mat4(1.0f);
-    test.modelMatrix = glm ::scale(test.modelMatrix, glm::vec3(50.0f));
-    test.modelMatrix = glm::rotate(test.modelMatrix, static_cast<float>(glm::radians(90.0f)), glm::vec3(1.0f, 0.0f, 0.0f));
-    test.updateModelMatrix(camera, shader);
-    test.draw();
+    test.draw(camera, shader);
 
-    test1.modelMatrix = glm::mat4(1.0f);
-    test1.modelMatrix = glm::translate(test.modelMatrix, glm::vec3(0.0f, 0.0f, -0.3f));
-
-    test1.updateModelMatrix(camera, shader);
-    test1.draw();
+    test1.draw(camera, shader);
 }
 
 void render::initializeAndUpdateMatrices(camera camera)
