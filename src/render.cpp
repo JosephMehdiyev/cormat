@@ -5,8 +5,7 @@
 
 render::render() : shader("../shader/graph.vert.glsl", "../shader/graph.frag.glsl")
 {
-    test1.setBuffer(test1.coordData, test1.indiceData);
-    test.setBuffer(test.coordData, test.indiceData);
+    test.setBuffer(test1.coordData, test1.indiceData);
 }
 
 void render::start(camera camera)
@@ -15,15 +14,13 @@ void render::start(camera camera)
     render::setRenderingConfig();
     shader.use();
     render::initializeAndUpdateMatrices(camera);
-    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
-    test.modelMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(1.0f, 2.0f, -2.0f));
+    test.modelMatrix = glm::mat4(1.0f);
+    test.modelMatrix = glm ::scale(test.modelMatrix, glm::vec3(20.0f));
+    test.modelMatrix = glm::rotate(test.modelMatrix, static_cast<float>(glm::radians(90.0f)), glm::vec3(1.0f, 0.0f, 0.0f));
+
     test.updateModelMatrix(camera, shader);
     test.draw();
-
-    test1.modelMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(2.0f, 2.0f, -2.0f));
-    test1.updateModelMatrix(camera, shader);
-    test1.draw();
 }
 
 void render::initializeAndUpdateMatrices(camera camera)

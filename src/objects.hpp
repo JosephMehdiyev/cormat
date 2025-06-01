@@ -35,3 +35,9 @@ class sphere : public object
   public:
     sphere(float radius = 0.1f, int sectors = 36, int stacks = 18);
 };
+
+class rectangle : public object
+{
+  public:
+    rectangle(float a = 0.3f, float b = 0.1f);
+};

@@ -11,7 +11,7 @@ class render
     render();
     void start(camera camera);
     sphere test;
-    cube test1;
+    rectangle test1;
     class shader shader;
     void initializeAndUpdateMatrices(camera camera);
 

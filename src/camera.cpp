@@ -15,6 +15,8 @@ camera::camera()
     updateCameraVectors();
     firstMouse = true;
     fov = 60.0f;
+    changeInX = 0;
+    changeInY = 0;
     cameraSpeed = 0.05f;
 }
 

@@ -1,28 +1,25 @@
 #include "texture.hpp"
-#include "stb_image.hpp"
 #include "glad.h"
+#include "stb_image.hpp"
 #include <GL/gl.h>
 #include <iostream>
 
-//TODO: feature to support more than 1 textures at a time.
-//      also calling the class twice is buggy(?).
-void
-Texture::generateTexture()
+// TODO: feature to support more than 1 textures at a time.
+//       also calling the class twice is buggy(?).
+void texture::generateTexture()
 {
-    glGenTextures(1, &texture);
-    glBindTexture(GL_TEXTURE_2D, texture);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);	
+    glGenTextures(1, &Texture);
+    glBindTexture(GL_TEXTURE_2D, Texture);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 }
 
-
-void
-Texture::loadTexture(const char* textureFileLocation)
+void texture::loadTexture(const char *textureFileLocation)
 {
     int width, height, nrChannels;
-    unsigned char* data = stbi_load(textureFileLocation, &width, &height, &nrChannels, 0);
+    unsigned char *data = stbi_load(textureFileLocation, &width, &height, &nrChannels, 0);
     if (data)
     {
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
@@ -30,26 +27,22 @@ Texture::loadTexture(const char* textureFileLocation)
     }
     else
     {
-       std::cout << "ERROR: COULDN'T LOAD THE TEXTURE" << std::endl;
+        std::cout << "ERROR: COULDN'T LOAD THE TEXTURE" << std::endl;
     }
     stbi_image_free(data);
 }
 
-
-void
-Texture::bindTexture()
+void texture::bindTexture()
 {
-    glBindTexture(GL_TEXTURE_2D, texture);
+    glBindTexture(GL_TEXTURE_2D, Texture);
 }
 
-
-Texture::Texture(const char* textureFilePath)
-{   
-    Texture::generateTexture();
-    Texture::loadTexture(textureFilePath);
+texture::texture(const char *textureFilePath)
+{
+    texture::generateTexture();
+    texture::loadTexture(textureFilePath);
 }
 
-
-Texture::~Texture()
+texture::~texture()
 {
 }
