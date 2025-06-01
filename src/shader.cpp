@@ -103,14 +103,6 @@ void shader::checkErrors(unsigned int shaderType, bool isProgram)
     }
 }
 
-void shader::updateModelM(double changeX, double changeY, float rotationSpeed, object &cube)
-{
-    cube.modelMatrix = glm::rotate(cube.modelMatrix, static_cast<float>(glm::radians(changeX)), glm::vec3(0.0f, 1.0f, 0.0f));
-    cube.modelMatrix = glm::rotate(cube.modelMatrix, static_cast<float>(glfwGetTime() * rotationSpeed), glm::vec3(0.0f, 1.0f, 0.0f));
-    cube.modelMatrix = glm::rotate(cube.modelMatrix, static_cast<float>(glm::radians(changeY)), glm::vec3(1.0f, 0.0f, 0.0f));
-    setMat4("model", cube.modelMatrix);
-}
-
 void shader::updateViewM(glm::vec3 cameraPosition, glm::vec3 cameraFront, glm::vec3 worldUp)
 {
     view = glm::lookAt(cameraPosition, cameraPosition + cameraFront, worldUp);

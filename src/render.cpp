@@ -16,13 +16,13 @@ void render::start(camera camera)
     shader.use();
     render::initializeAndUpdateMatrices(camera);
     glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-    test.modelMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(1.0f, 2.0f, -2.0f));
 
-    shader.updateModelM(camera.changeInX, camera.changeInY, camera.cameraRotationSpeed, test);
+    test.modelMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(1.0f, 2.0f, -2.0f));
+    test.updateModelMatrix(camera, shader);
     test.draw();
 
     test1.modelMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(2.0f, 2.0f, -2.0f));
-    shader.updateModelM(camera.changeInX, camera.changeInY, camera.cameraRotationSpeed, test1);
+    test1.updateModelMatrix(camera, shader);
     test1.draw();
 }
 
@@ -30,7 +30,6 @@ void render::initializeAndUpdateMatrices(camera camera)
 {
     shader.updateProjectionM(camera.fov);
     shader.updateViewM(camera.cameraPosition, camera.cameraFront, camera.worldUp);
-    shader.updateModelM(camera.changeInX, camera.changeInY, camera.cameraRotationSpeed, test1);
 }
 
 void render::setRenderingConfig()

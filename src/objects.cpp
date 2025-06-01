@@ -8,6 +8,14 @@ void object::draw()
     glDrawElements(GL_TRIANGLES, indiceData.size(), GL_UNSIGNED_INT, 0);
 };
 
+void object::updateModelMatrix(camera camera, shader shader)
+{
+    modelMatrix = glm::rotate(modelMatrix, static_cast<float>(glm::radians(camera.changeInX)), glm::vec3(0.0f, 1.0f, 0.0f));
+    modelMatrix = glm::rotate(modelMatrix, static_cast<float>(glfwGetTime() * camera.cameraRotationSpeed), glm::vec3(0.0f, 1.0f, 0.0f));
+    modelMatrix = glm::rotate(modelMatrix, static_cast<float>(glm::radians(camera.changeInY)), glm::vec3(1.0f, 0.0f, 0.0f));
+    glUniformMatrix4fv(glGetUniformLocation(shader.shaderProgramID, "model"), 1, GL_FALSE, &modelMatrix[0][0]);
+}
+
 cube::cube()
 {
 

@@ -1,6 +1,8 @@
 #pragma once
 #include "buffer.hpp"
+#include "camera.hpp"
 #include "glad.h"
+#include "shader.hpp"
 #include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
 #include <vector>
@@ -19,6 +21,7 @@ class object : public buffer
     std::vector<float> coordData;
     std::vector<unsigned int> indiceData;
     glm::mat4 modelMatrix;
+    void updateModelMatrix(camera camera, shader shader);
 };
 
 class cube : public object
