@@ -17,8 +17,6 @@ void render::start(camera camera)
     shader.use();
     render::initializeAndUpdateMatrices(camera);
 
-
-
     test.draw(camera, shader);
 
     test1.draw(camera, shader);

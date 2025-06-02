@@ -1,4 +1,4 @@
-
+### The project will be repurposed as a 3D Physics Engine!! (README not yet changed)
 # About the project (In development) ![C++](https://img.shields.io/badge/c++-%2300599C.svg?style=Plastic&logo=c%2B%2B&logoColor=white) ![OpenGL](https://img.shields.io/badge/OpenGL-%23FFFFFF.svg?style=Plastic&logo=opengl) ![CMake](https://img.shields.io/badge/CMake-%23008FBA.svg?style=Plastic&logo=cmake&logoColor=white)
 **Cormat** is a graphical 3D math software intended for visualizing mathematical functions. In the future, I am planning to make this project expand to a 3D engine, mainly for physics simulations. Currently, it only is a graph software.
 # IMPORTANT

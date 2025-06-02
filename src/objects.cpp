@@ -14,6 +14,13 @@ void object::updateModelMatrix(camera camera, shader shader)
     // modelMatrix = glm::rotate(modelMatrix, static_cast<float>(glm::radians(camera.changeInX)), glm::vec3(0.0f, 1.0f, 0.0f));
     // modelMatrix = glm::rotate(modelMatrix, static_cast<float>(glfwGetTime() * camera.cameraRotationSpeed), glm::vec3(0.0f, 1.0f, 0.0f));
     // modelMatrix = glm::rotate(modelMatrix, static_cast<float>(glm::radians(camera.changeInY)), glm::vec3(1.0f, 0.0f, 0.0f));
+    modelMatrix = glm::mat4(1.0f);
+    modelMatrix = glm::translate(modelMatrix, position);
+    modelMatrix = glm::rotate(modelMatrix, glm::radians(rotation.x), glm::vec3(1.0f, 0.0f, 0.0f)); // X-axis
+    modelMatrix = glm::rotate(modelMatrix, glm::radians(rotation.y), glm::vec3(0.0f, 1.0f, 0.0f)); // Y-axis
+    modelMatrix = glm::rotate(modelMatrix, glm::radians(rotation.z), glm::vec3(0.0f, 0.0f, 1.0f)); // Z-axis
+    modelMatrix = glm::scale(modelMatrix, scale);
+
     glUniformMatrix4fv(glGetUniformLocation(shader.shaderProgramID, "model"), 1, GL_FALSE, &modelMatrix[0][0]);
 }
 
@@ -87,17 +94,15 @@ sphere::sphere(float radius, int sectors, int stacks)
     }
 
     modelMatrix = glm::mat4(1.0f);
-    modelMatrix = glm::translate(modelMatrix, glm::vec3(0.0f, 50.0f, 0.0f));
+    position = {0.0f, 10.0f, 0.0f};
 };
 
 rectangle::rectangle(float a, float b)
 {
-    modelMatrix = glm::mat4(1.0f);
-    modelMatrix = glm ::scale(modelMatrix, glm::vec3(50.0f));
-    modelMatrix = glm::rotate(modelMatrix, static_cast<float>(glm::radians(90.0f)), glm::vec3(1.0f, 0.0f, 0.0f));
+    scale = glm::vec3(50.0f);
+    rotation.x = 90.0f;
 
     type = bodyType::DYNAMIC;
-    position = {1, -1, 1};
     coordData = {-0.5f, -0.5f, 0.0f, BLACK, 0.0f, 0.0f, 0.5f,  -0.5f, 0.0f, BLACK, 1.0f, 0.0f,
                  0.5f,  0.5f,  0.0f, BLACK, 1.0f, 1.0f, -0.5f, 0.5f,  0.0f, BLACK, 0.0f, 1.0f};
     indiceData = {
