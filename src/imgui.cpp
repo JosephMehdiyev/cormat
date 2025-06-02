@@ -1,12 +1,16 @@
 #include "imgui.hpp"
 #include "imgui.h"
 
-void myGui::mainGui(camera &camera)
+void myGui::mainGui(camera &camera, render &scene)
 {
     ImVec2 windowSize(600, 300);
     ImGui::SetWindowSize(windowSize);
-    ImGui::Begin("Control Panel");
+    ImGui::Begin("Graph Control");
     ImGui::SliderFloat("Walk speed", &camera.cameraSpeed, 0, 3);
+    if (ImGui::Button("Polygon Mode"))
+    {
+        scene.test1.isPolygonMode = !scene.test1.isPolygonMode;
+    }
     ImGui::End();
 }
 

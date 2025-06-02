@@ -32,7 +32,7 @@ int main()
 
         glfwPollEvents();
         myGui::startGuiFrames();
-        myGui::mainGui(glfwCamera.worldCamera);
+        myGui::mainGui(glfwCamera.worldCamera, scene);
 
         glUniform1i(glGetUniformLocation(scene.shader.shaderProgramID, "TEXTURE_EXAMPLE"), 0);
 

@@ -20,5 +20,5 @@ class myGui
     static void startGuiFrames();
     static void renderGuiFrames();
     static void closeGui();
-    static void mainGui(camera &camera);
+    static void mainGui(camera &camera, render &scene);
 };

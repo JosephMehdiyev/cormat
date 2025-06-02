@@ -6,6 +6,10 @@ void object::draw(camera camera, shader shader)
 {
     updateModelMatrix(camera, shader);
     glBindVertexArray(VAO);
+    if (isPolygonMode)
+        glPolygonMode(GL_FRONT_AND_BACK, GL_POINT);
+    else
+        glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
     glDrawElements(GL_TRIANGLES, indiceData.size(), GL_UNSIGNED_INT, 0);
 };
 
