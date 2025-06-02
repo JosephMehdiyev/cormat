@@ -10,15 +10,14 @@ render::render() : shader("../shader/graph.vert.glsl", "../shader/graph.frag.gls
     test1.setBuffer(test1.coordData, test1.indiceData, test1.textureData);
 }
 
-void render::start(camera camera)
+void render::start(camera camera, float deltaT)
 {
 
     render::setRenderingConfig();
     shader.use();
     render::initializeAndUpdateMatrices(camera);
-
+    update(test1, deltaT);
     test.draw(camera, shader);
-
     test1.draw(camera, shader);
 }
 

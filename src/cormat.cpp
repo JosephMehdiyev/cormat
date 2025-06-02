@@ -39,7 +39,7 @@ int main()
 
         glfwCamera.getInput();
         glfwCamera.worldCamera.updateCameraVectors();
-        scene.start(glfwCamera.worldCamera);
+        scene.start(glfwCamera.worldCamera, deltaT);
         myGui::renderGuiFrames();
         glfwCamera.swapBuffers();
     }

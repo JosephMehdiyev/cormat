@@ -2,7 +2,6 @@
 #include "buffer.hpp"
 #include "camera.hpp"
 #include "glad.h"
-#include "physics.hpp"
 #include "shader.hpp"
 #include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
@@ -14,7 +13,13 @@
 #define GREEN 0.0f, 1.0f, 0.0f
 #define BLUE 0.0f, 0.0f, 1.0f
 
-class object : public buffer, public physics
+enum class bodyType
+{
+    STATIC,
+    DYNAMIC,
+};
+
+class object : public buffer
 {
   public:
     object();
@@ -23,6 +28,13 @@ class object : public buffer, public physics
     std::vector<unsigned int> indiceData;
     std::vector<float> textureData;
     glm::mat4 modelMatrix;
+    glm::vec3 velocity{0.0f, 0.0f, 0.0f};
+    glm::vec3 acceleration{0.0f, -0.2f, 0.0f};
+    glm::vec3 position{0.0f, 0.0f, 0.0f};
+    bodyType type = bodyType::DYNAMIC;
+    float mass = 1.0f;
+    glm::vec3 rotation{0.0f, 0.0f, 0.0f};
+    glm::vec3 scale = glm::vec3(1.0f);
     void updateModelMatrix(camera camera, shader shader);
 };
 
