@@ -97,9 +97,9 @@ sphere::sphere(float radius, int sectors, int stacks)
     position = {0.0f, 10.0f, 0.0f};
 };
 
-rectangle::rectangle(float a, float b)
+engineFloor::engineFloor(float a, float b)
 {
-    scale = glm::vec3(50.0f);
+    scale = glm::vec3(500.0f);
     rotation.x = 90.0f;
 
     type = bodyType::DYNAMIC;

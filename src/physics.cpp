@@ -1,9 +1,9 @@
 #include "physics.hpp"
 
-void physics::update(object &sphere, float deltaT)
+void physics::update(object &object, float deltaT)
 {
-    updateVelocity(sphere, deltaT);
-    updatePosition(sphere, deltaT);
+    updateVelocity(object, deltaT);
+    updatePosition(object, deltaT);
 }
 
 void physics::updateVelocity(object &object, float deltaT)

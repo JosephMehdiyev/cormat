@@ -3,6 +3,10 @@
 #include "glad.h"
 #include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
+#include <sstream>
+
+#define GAME_NAME "Cormat"
+#define VERSION "0.1.0-alpha"
 
 class glfwWindow
 {
@@ -14,8 +18,13 @@ class glfwWindow
     void swapBuffers();
     void frameSizeCallBack(GLFWwindow *w, int width, int height);
     GLFWwindow *window;
+    float FPS;
+    unsigned int nbFrames;
+    void showFPS();
 
   private:
+    float elapsedTime;
+    float lastTime = 0;
     glm::mat4 GetViewMatrix;
     void getKeyboard();
     void getMouseMovement();

@@ -122,3 +122,23 @@ void glfwWindow::staticCursorCallBack(GLFWwindow *w, double xpos, double ypos)
 {
     static_cast<glfwWindow *>(glfwGetWindowUserPointer(w))->cursorCallBack(w, xpos, ypos);
 }
+
+void glfwWindow::showFPS()
+{
+    double currentTime = glfwGetTime();
+    nbFrames++;
+    elapsedTime = currentTime - lastTime;
+    if (elapsedTime > 1.0)
+    { // If last cout was more than 1 sec ago
+
+        FPS = double(nbFrames) / elapsedTime;
+
+        std::stringstream ss;
+        ss << GAME_NAME << " " << VERSION << " [" << FPS << " FPS]";
+
+        glfwSetWindowTitle(window, ss.str().c_str());
+
+        nbFrames = 0;
+        lastTime = currentTime;
+    }
+}

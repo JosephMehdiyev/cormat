@@ -11,6 +11,5 @@ class physics
     static inline glm::vec3 gravity{0.0f, -9.81f, 0.0f};
     void updateVelocity(object &object, float deltaT);
     void updatePosition(object &object, float deltaT);
-
-    void update(object &sphere, float deltaT);
+    void update(object &object, float deltaT);
 };

@@ -29,7 +29,7 @@ class object : public buffer
     std::vector<float> textureData;
     glm::mat4 modelMatrix;
     glm::vec3 velocity{0.0f, 0.0f, 0.0f};
-    glm::vec3 acceleration{0.0f, -0.2f, 0.0f};
+    glm::vec3 acceleration{0.0f, 0.0f, 0.0f};
     glm::vec3 position{0.0f, 0.0f, 0.0f};
     bodyType type = bodyType::DYNAMIC;
     float mass = 1.0f;
@@ -50,8 +50,8 @@ class sphere : public object
     sphere(float radius = 1.0f, int sectors = 36, int stacks = 18);
 };
 
-class rectangle : public object
+class engineFloor : public object
 {
   public:
-    rectangle(float a = 0.3f, float b = 0.1f);
+    engineFloor(float a = 0.3f, float b = 0.1f);
 };

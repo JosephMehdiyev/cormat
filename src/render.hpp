@@ -11,7 +11,7 @@ class render : public physics
   public:
     render();
     void start(camera camera, float deltaT);
-    rectangle test;
+    engineFloor test;
     sphere test1;
     class shader shader;
     void initializeAndUpdateMatrices(camera camera);

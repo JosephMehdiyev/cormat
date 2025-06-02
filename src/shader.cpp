@@ -112,7 +112,7 @@ void shader::updateViewM(glm::vec3 cameraPosition, glm::vec3 cameraFront, glm::v
 void shader::updateProjectionM(float fov)
 {
     projection = glm::mat4(1.0f);
-    projection = glm::perspective(glm::radians(fov), static_cast<float>(SCR_WIDTH) / static_cast<float>(SCR_HEIGHT), 0.1f, 100.0f);
+    projection = glm::perspective(glm::radians(fov), static_cast<float>(SCR_WIDTH) / static_cast<float>(SCR_HEIGHT), 0.1f, 1000.0f);
     setMat4("projection", projection);
 }
 

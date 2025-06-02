@@ -24,13 +24,12 @@ int main()
 
     while (!glfwWindowShouldClose(glfwCamera.window))
     {
-        // --- Calculate deltaT ---
         double currentTime = glfwGetTime();
         double deltaT = currentTime - lastTime;
         lastTime = currentTime;
+        deltaT = std::min(deltaT, 0.1);
+        glfwCamera.showFPS();
 
-        // --- Clamp to avoid physics spikes ---
-        deltaT = std::min(deltaT, 0.1); // Limit to 100ms
         glfwPollEvents();
         myGui::startGuiFrames();
         myGui::mainGui(glfwCamera.worldCamera);

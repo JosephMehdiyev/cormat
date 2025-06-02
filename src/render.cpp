@@ -16,7 +16,7 @@ void render::start(camera camera, float deltaT)
     render::setRenderingConfig();
     shader.use();
     render::initializeAndUpdateMatrices(camera);
-    update(test1, deltaT);
+    physics::update(test1, deltaT);
     test.draw(camera, shader);
     test1.draw(camera, shader);
 }
