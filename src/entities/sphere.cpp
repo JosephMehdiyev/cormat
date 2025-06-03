@@ -2,20 +2,18 @@
 // https://songho.ca/opengl/gl_sphere.html
 sphere::sphere(float radius, int sectors, int stacks)
 {
-    // Generate vertices (positions + colors)
     const float PI = 3.1415926f;
-    float x, y, z, xy; // Vertex position
-    float s, t;        // TexCoords (optional)
+    float x, y, z, xy; 
 
     for (int i = 0; i <= stacks; ++i)
     {
-        float stackAngle = PI / 2 - i * PI / stacks; // From -π/2 to π/2
+        float stackAngle = PI / 2 - i * PI / stacks; 
         xy = radius * cosf(stackAngle);
         z = radius * sinf(stackAngle);
 
         for (int j = 0; j <= sectors; ++j)
         {
-            float sectorAngle = j * 2 * PI / sectors; // From 0 to 2π
+            float sectorAngle = j * 2 * PI / sectors; 
 
             // Position
             x = xy * cosf(sectorAngle);
@@ -44,7 +42,6 @@ sphere::sphere(float radius, int sectors, int stacks)
         }
     }
 
-    modelMatrix = glm::mat4(1.0f);
     position = {0.0f, 10.0f, 0.0f};
 };
 

@@ -24,7 +24,7 @@ class object : public buffer
 {
   public:
     object();
-    virtual void draw(camera camera, shader shader);
+    void draw(camera camera, shader shader);
     std::vector<float> coordData;
     std::vector<unsigned int> indiceData;
     glm::mat4 modelMatrix;

@@ -34,11 +34,8 @@ engineFloor::engineFloor(float a, float b)
 {
     float halfA = a / 2;
     float halfB = b / 2;
-
-
     scale = glm::vec3(500.0f);
     rotation.x = 90.0f;
-
     type = bodyType::STATIC;
     coordData = 
     {
@@ -52,6 +49,5 @@ engineFloor::engineFloor(float a, float b)
         0, 1, 2, 2, 3, 0,
     };
     hasTexture = true;
-
 };
 
