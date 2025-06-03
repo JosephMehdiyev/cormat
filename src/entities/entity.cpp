@@ -16,6 +16,7 @@ void entity::draw(camera camera, shader shader)
     else
         glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
     glDrawElements(GL_TRIANGLES, indiceData.size(), GL_UNSIGNED_INT, 0);
+
 };
 
 void entity::updateModelMatrix(camera camera, shader shader)
@@ -51,8 +52,6 @@ void entity::setBuffer()
                  static_cast<long long int>(sizeof(unsigned int) * indiceData.size()),
                  &indiceData[0],
                  GL_STATIC_DRAW);
-
-
     if (!hasTexture)
     {
 

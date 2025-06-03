@@ -7,6 +7,7 @@
 #include <glm/glm.hpp>
 #include <memory>
 #include <vector>
+#include "collision.hpp"
 
 #define BLACK 0.0f, 0.0f, 0.0f
 #define WHITE 1.0f, 1.0f, 1.0f
@@ -29,7 +30,7 @@ class entity : public buffer
     std::vector<unsigned int> indiceData;
     glm::mat4 modelMatrix;
     glm::vec3 velocity{0.0f, 0.0f, 0.0f};
-    glm::vec3 acceleration{0.0f, -0.1f, 0.0f};
+    glm::vec3 acceleration{0.0f, 0.0f, 0.0f};
     glm::vec3 position{0.0f, 0.0f, 0.0f};
     float mass = 1.0f;
     glm::vec3 rotation{0.0f, 0.0f, 0.0f};
@@ -39,6 +40,8 @@ class entity : public buffer
     void setBuffer();
     bool hasTexture = false;
     bodyType type = bodyType::DYNAMIC;
+    glm::vec3 min, max;
+    std::unique_ptr<collisionBox> collision;
 };
 
 

@@ -2,18 +2,20 @@
 // https://songho.ca/opengl/gl_sphere.html
 sphere::sphere(float radius, int sectors, int stacks)
 {
+
+    this->radius = radius;
     const float PI = 3.1415926f;
-    float x, y, z, xy; 
+    float x, y, z, xy;
 
     for (int i = 0; i <= stacks; ++i)
     {
-        float stackAngle = PI / 2 - i * PI / stacks; 
+        float stackAngle = PI / 2 - i * PI / stacks;
         xy = radius * cosf(stackAngle);
         z = radius * sinf(stackAngle);
 
         for (int j = 0; j <= sectors; ++j)
         {
-            float sectorAngle = j * 2 * PI / sectors; 
+            float sectorAngle = j * 2 * PI / sectors;
 
             // Position
             x = xy * cosf(sectorAngle);
@@ -41,7 +43,10 @@ sphere::sphere(float radius, int sectors, int stacks)
             }
         }
     }
+    acceleration = {0.05, -0.5f, 0.0f};
 
-    position = {0.0f, 10.0f, 0.0f};
+    position = {0.0f, 5.0f, 0.0f};
+    min = -glm::vec3(radius);
+    max = +glm::vec3(radius);
+    collision = std::make_unique<collisionBox>(*this);
 };
-
