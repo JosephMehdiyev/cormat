@@ -20,7 +20,7 @@ include(libraries)
 cmake_minimum_required(VERSION 3.29.6)
 project(cormat
         VERSION 0.0.1
-        DESCRIPTION "A 3D software for visualization of mathematical graphs"
+        DESCRIPTION "3D Physics Engine made from scratch"
         HOMEPAGE_URL "https://github.com/JosephMehdiyev/cormat"
         LANGUAGES CXX C
 )
@@ -32,6 +32,8 @@ set(GLFW_BUILD_DOCS OFF CACHE BOOL "Disable building GLFW documentation" FORCE)
 message("Fetching glfw")
 FetchContent_MakeAvailable(glfw)
 include_directories(${glm_SOURCE_DIR})
+include_directories(${cormat_SOURCE_DIR}/src)
+include_directories(${cormat_SOURCE_DIR}/src/entities)
 include_directories(${cormat_SOURCE_DIR}/lib/glad)
 include_directories(${cormat_SOURCE_DIR}/lib/stb_image)
 
@@ -44,6 +46,8 @@ file(GLOB_RECURSE SOURCE
     lib/stb_image/*.hpp
     lib/glad/glad.c
     lib/glad/glad.h
+    src/entities/*.cpp
+    src/entities/*.hpp
     src/*.c
     src/*.hpp
     src/*.h

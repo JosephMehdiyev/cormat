@@ -6,8 +6,8 @@
 
 render::render() : shader("../shader/graph.vert.glsl", "../shader/graph.frag.glsl")
 {
-    test.setBuffer();
-    test1.setBuffer();
+    floor.setBuffer();
+    particle.setBuffer();
 }
 
 void render::start(camera camera, float deltaT)
@@ -16,9 +16,11 @@ void render::start(camera camera, float deltaT)
     render::setRenderingConfig();
     shader.use();
     render::initializeAndUpdateMatrices(camera);
-    physics::update(test1, deltaT);
-    test.draw(camera, shader);
-    test1.draw(camera, shader);
+    physics::update(particle, deltaT);
+    floor.draw(camera, shader);
+    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+
+    particle.draw(camera, shader);
 }
 
 void render::initializeAndUpdateMatrices(camera camera)

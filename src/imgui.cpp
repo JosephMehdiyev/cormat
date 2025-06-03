@@ -9,7 +9,7 @@ void myGui::mainGui(camera &camera, render &scene)
     ImGui::SliderFloat("Walk speed", &camera.cameraSpeed, 0, 3);
     if (ImGui::Button("Polygon Mode"))
     {
-        scene.test1.isPolygonMode = !scene.test1.isPolygonMode;
+        scene.particle.isPolygonMode = !scene.particle.isPolygonMode;
     }
     ImGui::End();
 }
