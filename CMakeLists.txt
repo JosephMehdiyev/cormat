@@ -4,6 +4,16 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_LIST_DIR}/cmake")
+
+## ln -s build/compile_commands.json ../compile_commands.json
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
+execute_process(
+  COMMAND ${CMAKE_COMMAND} -E create_symlink
+          ${CMAKE_BINARY_DIR}/compile_commands.json
+          ${CMAKE_SOURCE_DIR}/compile_commands.json
+  RESULT_VARIABLE result
+)
 include(libraries)
 
 
