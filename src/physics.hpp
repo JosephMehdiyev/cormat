@@ -1,5 +1,5 @@
 #pragma once
-#include "objects.hpp"
+#include "entity.hpp"
 #include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
 
@@ -9,7 +9,7 @@ class physics
 {
   public:
     static inline glm::vec3 gravity{0.0f, -9.81f, 0.0f};
-    void updateVelocity(object &object, float deltaT);
-    void updatePosition(object &object, float deltaT);
-    void update(object &object, float deltaT);
+    void updateVelocity(entity &object, float deltaT);
+    void updatePosition(entity &object, float deltaT);
+    void update(entity &object, float deltaT);
 };

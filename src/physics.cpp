@@ -1,7 +1,6 @@
 #include "physics.hpp"
-#include "objects.hpp"
 
-void physics::update(object &object, float deltaT)
+void physics::update(entity &object, float deltaT)
 {
     if (object.type == bodyType::DYNAMIC)
     {
@@ -10,13 +9,13 @@ void physics::update(object &object, float deltaT)
     }
 }
 
-void physics::updateVelocity(object &object, float deltaT)
+void physics::updateVelocity(entity &object, float deltaT)
 {
     if (object.type == bodyType::DYNAMIC)
         object.velocity += object.acceleration * deltaT;
 }
 
-void physics::updatePosition(object &object, float deltaT)
+void physics::updatePosition(entity &object, float deltaT)
 {
     if (object.type == bodyType::DYNAMIC)
 

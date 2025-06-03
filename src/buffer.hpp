@@ -3,7 +3,7 @@
 #include <GL/gl.h>
 #include <vector>
 
-class object;
+class entity;
 
 class buffer
 {

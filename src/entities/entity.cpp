@@ -1,9 +1,9 @@
-#include "objects.hpp"
+#include "entity.hpp"
 #include <memory>
 
-object::object() {};
+entity::entity() {};
 
-void object::draw(camera camera, shader shader)
+void entity::draw(camera camera, shader shader)
 {
     updateModelMatrix(camera, shader);
     glBindVertexArray(VAO);
@@ -18,7 +18,7 @@ void object::draw(camera camera, shader shader)
     glDrawElements(GL_TRIANGLES, indiceData.size(), GL_UNSIGNED_INT, 0);
 };
 
-void object::updateModelMatrix(camera camera, shader shader)
+void entity::updateModelMatrix(camera camera, shader shader)
 {
     // modelMatrix = glm::rotate(modelMatrix, static_cast<float>(glm::radians(camera.changeInX)), glm::vec3(0.0f, 1.0f, 0.0f));
     // modelMatrix = glm::rotate(modelMatrix, static_cast<float>(glfwGetTime() * camera.cameraRotationSpeed), glm::vec3(0.0f, 1.0f, 0.0f));
@@ -34,7 +34,7 @@ void object::updateModelMatrix(camera camera, shader shader)
 }
 
 
-void object::setBuffer()
+void entity::setBuffer()
 {
     if (coordData.empty())
         throw std::invalid_argument("Vertice Data Cannot be Empty");

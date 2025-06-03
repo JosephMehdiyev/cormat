@@ -20,10 +20,10 @@ enum class bodyType
     DYNAMIC,
 };
 
-class object : public buffer
+class entity : public buffer
 {
   public:
-    object();
+    entity();
     void draw(camera camera, shader shader);
     std::vector<float> coordData;
     std::vector<unsigned int> indiceData;
@@ -40,6 +40,10 @@ class object : public buffer
     bool hasTexture = false;
     bodyType type = bodyType::DYNAMIC;
 };
+
+
+
+
 
 
 

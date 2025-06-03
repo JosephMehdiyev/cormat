@@ -1,6 +1,6 @@
 #pragma once
 #include "glfwWindow.hpp"
-#include "objects.hpp"
+#include "entity.hpp"
 #include "sphere.hpp"
 #include "physics.hpp"
 #include "shader.hpp"
