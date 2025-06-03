@@ -6,8 +6,8 @@
 
 render::render() : shader("../shader/graph.vert.glsl", "../shader/graph.frag.glsl")
 {
-    test.setBuffer(test.coordData, test.indiceData, test.textureData);
-    test1.setBuffer(test1.coordData, test1.indiceData, test1.textureData);
+    test.setBuffer();
+    test1.setBuffer();
 }
 
 void render::start(camera camera, float deltaT)

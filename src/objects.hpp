@@ -37,6 +37,7 @@ class object : public buffer
     glm::vec3 scale = glm::vec3(1.0f);
     void updateModelMatrix(camera camera, shader shader);
     bool isPolygonMode = false;
+    void setBuffer();
 
   private:
 };
