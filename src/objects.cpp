@@ -110,7 +110,7 @@ engineFloor::engineFloor(float a, float b)
     scale = glm::vec3(500.0f);
     rotation.x = 90.0f;
 
-    type = bodyType::DYNAMIC;
+    type = bodyType::STATIC;
     coordData = {-0.5f, -0.5f, 0.0f, BLACK, 0.0f, 0.0f, 0.5f,  -0.5f, 0.0f, BLACK, 1.0f, 0.0f,
                  0.5f,  0.5f,  0.0f, BLACK, 1.0f, 1.0f, -0.5f, 0.5f,  0.0f, BLACK, 0.0f, 1.0f};
     indiceData = {

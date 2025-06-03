@@ -28,7 +28,7 @@ class object : public buffer
     std::vector<unsigned int> indiceData;
     glm::mat4 modelMatrix;
     glm::vec3 velocity{0.0f, 0.0f, 0.0f};
-    glm::vec3 acceleration{0.0f, 0.0f, 0.0f};
+    glm::vec3 acceleration{0.0f, -0.1f, 0.0f};
     glm::vec3 position{0.0f, 0.0f, 0.0f};
     bodyType type = bodyType::DYNAMIC;
     float mass = 1.0f;
