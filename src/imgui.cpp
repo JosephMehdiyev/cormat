@@ -11,6 +11,10 @@ void myGui::mainGui(camera &camera, render &scene)
     {
         scene.particle.isPolygonMode = !scene.particle.isPolygonMode;
     }
+    if (ImGui::Button("Show Collision Hitbox"))
+    {
+        scene.isCollisionMode = !scene.isCollisionMode;
+    }
     ImGui::End();
 }
 

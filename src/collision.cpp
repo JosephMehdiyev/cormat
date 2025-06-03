@@ -14,7 +14,7 @@ void collisionBox::draw(entity &entity, camera camera, shader shader)
     glBindVertexArray(VAO);
     shader.setBool("useTexture", false);
 
-    glPolygonMode(GL_FRONT_AND_BACK, GL_LINES);
+    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
     glDrawElements(GL_LINES, indiceData.size(), GL_UNSIGNED_INT, 0);
 }
 
@@ -45,7 +45,6 @@ void collisionBox::setBuffer()
 
 std::vector<float> collisionBox::getVerticeData(glm::vec3 min, glm::vec3 max)
 {
-    std::cout << min.y << std::endl;
     return {min.x, min.y, min.z, RED, max.x, min.y, min.z, RED, min.x, max.y, min.z, RED, max.x, max.y, min.z, RED,
             min.x, min.y, max.z, RED, max.x, min.y, max.z, RED, min.x, max.y, max.z, RED, max.x, max.y, max.z, RED};
 }

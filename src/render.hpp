@@ -1,10 +1,10 @@
 #pragma once
-#include "glfwWindow.hpp"
 #include "entity.hpp"
-#include "sphere.hpp"
+#include "glfwWindow.hpp"
 #include "physics.hpp"
-#include "shader.hpp"
 #include "rectangle.hpp"
+#include "shader.hpp"
+#include "sphere.hpp"
 #include <string>
 #include <vector>
 
@@ -17,6 +17,7 @@ class render : public physics
     sphere particle;
     class shader shader;
     void initializeAndUpdateMatrices(camera camera);
+    bool isCollisionMode = false;
 
   public:
     void setRenderingConfig();

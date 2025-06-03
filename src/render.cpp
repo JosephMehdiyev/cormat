@@ -20,9 +20,12 @@ void render::start(camera camera, float deltaT)
     render::initializeAndUpdateMatrices(camera);
     physics::update(particle, deltaT);
     floor.draw(camera, shader);
-    floor.collision->draw(particle, camera, shader);
+    if (isCollisionMode)
+        floor.collision->draw(particle, camera, shader);
+    glPolygonMode(GL_FRONT_AND_BACK, GL_LINES);
     particle.draw(camera, shader);
-    particle.collision->draw(particle, camera, shader);
+    if (isCollisionMode)
+        particle.collision->draw(particle, camera, shader);
 }
 
 void render::initializeAndUpdateMatrices(camera camera)
