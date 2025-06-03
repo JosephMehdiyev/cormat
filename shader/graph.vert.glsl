@@ -1,7 +1,7 @@
 #version 430 core
-layout(location = 0) in vec3 pos;
-layout(location = 1) in vec3 color;
-layout(location = 2) in vec2 texture;
+layout(location = 0) in vec3 posData;
+layout(location = 1) in vec3 colorData;
+layout(location = 2) in vec2 textureData;
 
 uniform mat4 model;
 uniform mat4 view;
@@ -12,7 +12,7 @@ out vec2 textureCoord;
 
 void main()
 {
-    gl_Position = projection * view * model * vec4(pos, 1.0f);
-    textureCoord = texture;
-    finalColor = color;
+    gl_Position = projection * view * model * vec4(posData, 1.0f);
+    textureCoord = textureData;
+    finalColor = colorData;
 }

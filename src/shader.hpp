@@ -27,6 +27,7 @@ class shader
     void updateProjectionM(float fov);
     void updateViewM(glm::vec3 cameraPosition, glm::vec3 cameraFront, glm::vec3 worldUp);
     glm::mat4 view, projection;
+    void setBool(const std::string &name, bool value) const;
 
   private:
     // Returns a C-style string with input file directory path.

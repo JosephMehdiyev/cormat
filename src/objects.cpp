@@ -6,6 +6,10 @@ void object::draw(camera camera, shader shader)
 {
     updateModelMatrix(camera, shader);
     glBindVertexArray(VAO);
+    if (hasTexture)
+        shader.setBool("useTexture", true);
+    else
+        shader.setBool("useTexture", false);
     if (isPolygonMode)
         glPolygonMode(GL_FRONT_AND_BACK, GL_POINT);
     else
@@ -114,7 +118,7 @@ engineFloor::engineFloor(float a, float b)
         0, 1, 2, 2, 3, 0,
         //
     };
-    textureData = {1.0f};
+    hasTexture = true;
 };
 
 void object::setBuffer()
@@ -123,7 +127,7 @@ void object::setBuffer()
         throw std::invalid_argument("Vertice Data Cannot be Empty");
     if (indiceData.empty())
         throw std::invalid_argument("Indice Data Cannot be Empty");
-    if (textureData.empty())
+    if (!hasTexture)
     {
         glBindVertexArray(VAO);
         glBindBuffer(GL_ARRAY_BUFFER, VBO);

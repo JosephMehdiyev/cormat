@@ -26,7 +26,6 @@ class object : public buffer
     void draw(camera camera, shader shader);
     std::vector<float> coordData;
     std::vector<unsigned int> indiceData;
-    std::vector<float> textureData;
     glm::mat4 modelMatrix;
     glm::vec3 velocity{0.0f, 0.0f, 0.0f};
     glm::vec3 acceleration{0.0f, 0.0f, 0.0f};
@@ -37,6 +36,7 @@ class object : public buffer
     glm::vec3 scale = glm::vec3(1.0f);
     void updateModelMatrix(camera camera, shader shader);
     bool isPolygonMode = false;
+    bool hasTexture = false;
     void setBuffer();
 
   private:
