@@ -34,5 +34,5 @@ engineFloor::engineFloor(float a, float b)
     hasTexture = true;
     min = {-halfA, -halfB, -0.0001f};
     max = {halfA, halfB, 0.0001f};
-    collision = std::make_unique<collisionBox>(*this);
+    collision = std::make_unique<class collision>(*this);
 };

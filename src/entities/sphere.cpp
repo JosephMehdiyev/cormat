@@ -47,5 +47,5 @@ sphere::sphere(float radius, int sectors, int stacks)
     position = {0.0f, 10.0f, 0.0f};
     min = -glm::vec3(radius);
     max = +glm::vec3(radius);
-    collision = std::make_unique<collisionBox>(*this);
+    collision = std::make_unique<class collision>(*this);
 };

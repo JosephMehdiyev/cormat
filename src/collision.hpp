@@ -8,16 +8,17 @@ class camera;
 class shader;
 class entity;
 class sphere;
-class collisionBox : buffer
+class collision : buffer
 {
   public:
-    collisionBox(const entity &entity);
+    collision(const entity &entity);
     void draw(entity &entity, camera camera, shader shader);
     std::vector<float> getVerticeData(glm::vec3 min, glm::vec3 max);
     glm::vec3 min, max;
     std::vector<float> verticeData;
     void setBuffer();
     std::vector<unsigned int> indiceData;
-    static bool checkSphereAABB(const entity &AABB, const sphere &sphere);
+    static bool isCollidingSphereAABB(const entity &AABB, const sphere &sphere);
+    static bool isCollidingSphereSphere(const sphere &sphere1, const sphere &sphere2);
     static bool isPointInsideSphere(const glm::vec3 &point, const sphere &sphere);
 };

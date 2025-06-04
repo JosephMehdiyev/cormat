@@ -1,13 +1,13 @@
 #pragma once
 #include "buffer.hpp"
 #include "camera.hpp"
+#include "collision.hpp"
 #include "glad.h"
 #include "shader.hpp"
 #include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
 #include <memory>
 #include <vector>
-#include "collision.hpp"
 
 #define BLACK 0.0f, 0.0f, 0.0f
 #define WHITE 1.0f, 1.0f, 1.0f
@@ -41,17 +41,5 @@ class entity : public buffer
     bool hasTexture = false;
     bodyType type = bodyType::DYNAMIC;
     glm::vec3 min, max;
-    std::unique_ptr<collisionBox> collision;
+    std::unique_ptr<class collision> collision;
 };
-
-
-
-
-
-
-
-
-
-
-
-
