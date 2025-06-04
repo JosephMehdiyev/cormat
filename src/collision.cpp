@@ -56,7 +56,7 @@ bool collision::isPointInsideSphere(glm::vec3 &point, sphere &sphere)
     const float distance =
         sqrt(pow((point.x - sphere.getPosition().x), 2) + pow((point.y - sphere.getPosition().y), 2) +
              pow((point.z - sphere.getPosition().z), 2));
-    return distance < sphere.radius;
+    return distance < sphere.getRadius();
 }
 
 bool collision::isCollidingSphereAABB(sphere &sphere, entity &AABB)
@@ -74,7 +74,7 @@ bool collision::isCollidingSphereSphere(sphere &sphere1, sphere &sphere2)
                                 pow((sphere1.getPosition().y - sphere2.getPosition().y), 2) +
                                 pow((sphere1.getPosition().z - sphere2.getPosition().z), 2));
 
-    return distance < sphere1.radius + sphere2.radius;
+    return distance < sphere1.getRadius() + sphere2.getRadius();
 }
 
 bool collision::isCollidingAABBAABB(entity &a, entity &b)
@@ -86,4 +86,27 @@ bool collision::isCollidingAABBAABB(entity &a, entity &b)
 
 bool collision::checkCollisions(entity &first, entity &second)
 {
+    if (first.isSphere() && second.isSphere())
+        return collision::isCollidingSphereSphere(dynamic_cast<sphere &>(first), dynamic_cast<sphere &>(second));
+    else if (first.isSphere() && second.isAABB())
+        return collision::isCollidingSphereAABB(dynamic_cast<sphere &>(first), second);
+    else if (first.isAABB() && second.isSphere())
+        return collision::isCollidingSphereAABB(dynamic_cast<sphere &>(second), first);
+    else if (first.isAABB() && second.isAABB())
+        return collision::isCollidingAABBAABB(first, second);
+    else
+        return false;
+}
+
+void collision::handleCollisions(entity &first, entity &second)
+{
+    if (first.getBodyType() == BODY_TYPE::DYNAMIC)
+    {
+        first.getVelocity().y *= -1;
+    }
+
+    if (second.getBodyType() == BODY_TYPE::DYNAMIC)
+    {
+        second.getVelocity().y *= -1;
+    }
 }

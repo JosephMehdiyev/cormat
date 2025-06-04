@@ -2,6 +2,9 @@
 #include <memory>
 
 entity::entity() {};
+entity::~entity()
+{
+}
 
 void entity::draw(const camera &camera, const shader &shader)
 {

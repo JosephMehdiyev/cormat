@@ -20,6 +20,7 @@ class collision : buffer
     void setBuffer();
     std::vector<unsigned int> indiceData;
     static bool checkCollisions(entity &first, entity &second);
+    static void handleCollisions(entity &first, entity &second);
 
   private:
     static bool isCollidingSphereAABB(sphere &sphere, entity &AABB);

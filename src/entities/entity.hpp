@@ -31,6 +31,7 @@ class entity : public buffer
 {
   public:
     entity();
+    virtual ~entity();
     void draw(const camera &camera, const shader &shader);
     void updateModelMatrix(camera camera, shader shader);
     void setBuffer();
