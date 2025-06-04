@@ -1,4 +1,5 @@
 #include "entity.hpp"
+#include "collision.hpp"
 #include <memory>
 
 entity::entity() {};

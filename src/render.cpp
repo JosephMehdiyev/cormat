@@ -13,7 +13,8 @@ render::render() : shader("../shader/graph.vert.glsl", "../shader/graph.frag.gls
     for (auto &x : entities)
     {
         x->setBuffer();
-        x->getCollision()->setBuffer();
+        if (x->getCollision() != nullptr)
+            x->getCollision()->setBuffer();
     }
 }
 
@@ -29,7 +30,8 @@ void render::start(camera camera, float deltaT)
     {
         x->draw(camera, shader);
         if (isCollisionMode)
-            x->getCollision()->draw(camera, shader);
+            if (x->getCollision() != nullptr)
+                x->getCollision()->draw(camera, shader);
     }
 }
 

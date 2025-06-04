@@ -35,6 +35,8 @@ class entity : public buffer
     void draw(const camera &camera, const shader &shader);
     void updateModelMatrix(camera camera, shader shader);
     void setBuffer();
+    void disableCollision();
+
     // Getters
     glm::vec3 &getMin();
     glm::vec3 &getMax();
