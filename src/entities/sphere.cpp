@@ -2,6 +2,7 @@
 // https://songho.ca/opengl/gl_sphere.html
 sphere::sphere(float radius, int sectors, int stacks)
 {
+    setCollisionType(COLLISION_TYPE::SPHERE);
 
     this->radius = radius;
     const float PI = 3.1415926f;
@@ -20,9 +21,9 @@ sphere::sphere(float radius, int sectors, int stacks)
             // Position
             x = xy * cosf(sectorAngle);
             y = xy * sinf(sectorAngle);
-            coordData.insert(coordData.end(), {x, y, z});
+            getCoordData().insert(getCoordData().end(), {x, y, z});
 
-            coordData.insert(coordData.end(), {0.0f, 0.0f, 0.0f});
+            getCoordData().insert(getCoordData().end(), {0.0f, 0.0f, 0.0f});
         }
     }
 
@@ -35,17 +36,17 @@ sphere::sphere(float radius, int sectors, int stacks)
         {
             if (i != 0)
             {
-                indiceData.insert(indiceData.end(), {k1, k2, k1 + 1});
+                getIndiceData().insert(getIndiceData().end(), {k1, k2, k1 + 1});
             }
             if (i != stacks - 1)
             {
-                indiceData.insert(indiceData.end(), {k1 + 1, k2, k2 + 1});
+                getIndiceData().insert(getIndiceData().end(), {k1 + 1, k2, k2 + 1});
             }
         }
     }
-    acceleration = {0.00, -9.8f, 0.0f};
-    position = {0.0f, 10.0f, 0.0f};
-    min = -glm::vec3(radius);
-    max = +glm::vec3(radius);
-    collision = std::make_unique<class collision>(*this);
+    setAcceleration({0.00, -9.8f, 0.0f});
+    setPosition({0.0f, 10.0f, 0.0f});
+    setMin(-glm::vec3(radius));
+    setMax(glm::vec3(radius));
+    setCollision(std::make_unique<class collision>(*this));
 };

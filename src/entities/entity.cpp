@@ -3,7 +3,7 @@
 
 entity::entity() {};
 
-void entity::draw(camera camera, shader shader)
+void entity::draw(const camera &camera, const shader &shader)
 {
     updateModelMatrix(camera, shader);
     glBindVertexArray(VAO);
@@ -76,4 +76,161 @@ void entity::setBuffer()
             throw std::runtime_error("Failed to set Vertice or Indice Data to Buffers: " + std::to_string(err));
         }
     }
+}
+glm::vec3 &entity::getMin()
+{
+    return min;
+}
+
+glm::vec3 &entity::getMax()
+{
+    return max;
+}
+
+collision *entity::getCollision()
+{
+    return collision ? collision.get() : nullptr;
+}
+COLLISION_TYPE &entity::getCollisionType()
+{
+    return collisionType;
+}
+
+BODY_TYPE &entity::getBodyType()
+{
+    return bodyType;
+}
+
+glm::vec3 &entity::getVelocity()
+{
+    return velocity;
+}
+
+glm::vec3 &entity::getPosition()
+{
+    return position;
+}
+
+glm::vec3 &entity::getAcceleration()
+{
+    return acceleration;
+}
+
+bool entity::getIsPolygonMode()
+{
+    return isPolygonMode;
+}
+
+bool entity::getHasTexture()
+{
+    return hasTexture;
+}
+
+float entity::getMass()
+{
+    return mass;
+}
+
+glm::vec3 &entity::getRotation()
+{
+    return rotation;
+}
+
+glm::vec3 &entity::getScale()
+{
+    return scale;
+}
+
+std::vector<float> &entity::getCoordData()
+{
+    return coordData;
+}
+
+std ::vector<unsigned int> &entity::getIndiceData()
+{
+    return indiceData;
+}
+
+glm::mat4 &entity::getModelMatrix()
+{
+    return modelMatrix;
+}
+
+void entity::setMax(const glm::vec3 &data)
+{
+    max = data;
+}
+
+void entity::setMin(const glm::vec3 &data)
+{
+    min = data;
+}
+
+void entity::setCollision(std::unique_ptr<class collision> data)
+{
+    collision = std::move(data);
+}
+void entity::setCollisionType(const COLLISION_TYPE &data)
+{
+    collisionType = data;
+}
+
+void entity::setBodyType(const BODY_TYPE &data)
+{
+    bodyType = data;
+}
+
+void entity::setVelocity(const glm::vec3 &data)
+{
+    velocity = data;
+}
+
+void entity::setPosition(const glm::vec3 &data)
+{
+    position = data;
+}
+
+void entity::setAcceleration(const glm::vec3 &data)
+{
+    acceleration = data;
+}
+
+void entity::setIsPolygonMode(const bool &data)
+{
+    isPolygonMode = data;
+}
+
+void entity::setHasTexture(const bool &data)
+{
+    hasTexture = data;
+}
+
+void entity::setMass(const float &data)
+{
+    mass = data;
+}
+
+void entity::setRotation(const glm::vec3 &data)
+{
+    rotation = data;
+}
+
+void entity::setScale(const glm::vec3 &data)
+{
+    scale = data;
+}
+
+void entity::setCoordData(const std::vector<float> &data)
+{
+    coordData = data;
+}
+
+void entity::setIndiceData(const std::vector<unsigned int> &data)
+{
+    indiceData = data;
+}
+
+void entity::setModelMatrix(const glm::mat4 &data)
+{
+    modelMatrix = data;
 }

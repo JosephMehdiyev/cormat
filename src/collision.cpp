@@ -2,10 +2,10 @@
 #include "entity.hpp"
 #include "sphere.hpp"
 
-collision::collision(const entity &entity)
+collision::collision(entity &entity)
 {
-    min = entity.min;
-    max = entity.max;
+    min = entity.getMin();
+    max = entity.getMax();
     verticeData = getVerticeData(min, max);
     indiceData = {0, 1, 1, 3, 3, 2, 2, 0, 4, 5, 5, 7, 7, 6, 6, 4, 0, 4, 1, 5, 2, 6, 3, 7};
 }
@@ -51,27 +51,39 @@ std::vector<float> collision::getVerticeData(glm::vec3 min, glm::vec3 max)
             min.x, min.y, max.z, RED, max.x, min.y, max.z, RED, min.x, max.y, max.z, RED, max.x, max.y, max.z, RED};
 }
 
-bool collision::isPointInsideSphere(const glm::vec3 &point, const sphere &sphere)
+bool collision::isPointInsideSphere(glm::vec3 &point, sphere &sphere)
 {
-    const float distance = sqrt(pow((point.x - sphere.position.x), 2) + pow((point.y - sphere.position.y), 2) +
-                                pow((point.z - sphere.position.z), 2));
+    const float distance =
+        sqrt(pow((point.x - sphere.getPosition().x), 2) + pow((point.y - sphere.getPosition().y), 2) +
+             pow((point.z - sphere.getPosition().z), 2));
     return distance < sphere.radius;
 }
 
-bool collision::isCollidingSphereAABB(const entity &AABB, const sphere &sphere)
+bool collision::isCollidingSphereAABB(sphere &sphere, entity &AABB)
 {
-    const float x = std::max(AABB.min.x, std::min(sphere.position.x, AABB.max.x));
-    const float y = std::max(AABB.min.y, std::min(sphere.position.y, AABB.max.y));
-    const float z = std::max(AABB.min.z, std::min(sphere.position.z, AABB.max.z));
-    const glm::vec3 point = {x, y, z};
+    float x = std::max(AABB.getMin().x, std::min(sphere.getPosition().x, AABB.getMax().x));
+    float y = std::max(AABB.getMin().y, std::min(sphere.getPosition().y, AABB.getMax().y));
+    float z = std::max(AABB.getMin().z, std::min(sphere.getPosition().z, AABB.getMax().z));
+    glm::vec3 point = {x, y, z};
     return collision::isPointInsideSphere(point, sphere);
 }
 
-bool collision::isCollidingSphereSphere(const sphere &sphere1, const sphere &sphere2)
+bool collision::isCollidingSphereSphere(sphere &sphere1, sphere &sphere2)
 {
-    const float distance =
-        sqrt(pow((sphere1.position.x - sphere2.position.x), 2) + pow((sphere1.position.y - sphere2.position.y), 2) +
-             pow((sphere1.position.z - sphere2.position.z), 2));
+    const float distance = sqrt(pow((sphere1.getPosition().x - sphere2.getPosition().x), 2) +
+                                pow((sphere1.getPosition().y - sphere2.getPosition().y), 2) +
+                                pow((sphere1.getPosition().z - sphere2.getPosition().z), 2));
 
     return distance < sphere1.radius + sphere2.radius;
+}
+
+bool collision::isCollidingAABBAABB(entity &a, entity &b)
+{
+    return (a.getMin().x <= b.getMax().x && a.getMax().x >= b.getMin().x) &&
+           (a.getMin().y <= b.getMax().y && a.getMax().y >= b.getMin().y) &&
+           (a.getMin().z <= b.getMax().z && a.getMax().z >= b.getMin().z);
+}
+
+bool collision::checkCollisions(entity &first, entity &second)
+{
 }

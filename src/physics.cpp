@@ -4,7 +4,7 @@ void physics::update(std::vector<std::unique_ptr<entity>> &entities, float delta
 {
     for (auto &object : entities)
     {
-        if (object->type == bodyType::DYNAMIC)
+        if (object->getBodyType() == BODY_TYPE::DYNAMIC)
         {
             updateVelocity(object, deltaT);
             updatePosition(object, deltaT);
@@ -14,13 +14,13 @@ void physics::update(std::vector<std::unique_ptr<entity>> &entities, float delta
 
 void physics::updateVelocity(std::unique_ptr<entity> &object, float deltaT)
 {
-    if (object->type == bodyType::DYNAMIC)
-        object->velocity += object->acceleration * deltaT;
+    if (object->getBodyType() == BODY_TYPE::DYNAMIC)
+        object->setVelocity(object->getVelocity() + object->getAcceleration() * deltaT);
 }
 
 void physics::updatePosition(std::unique_ptr<entity> &object, float deltaT)
 {
-    if (object->type == bodyType::DYNAMIC)
+    if (object->getBodyType() == BODY_TYPE::DYNAMIC)
 
-        object->position += object->velocity * deltaT;
+        object->setPosition(object->getPosition() + object->getVelocity() * deltaT);
 }

@@ -7,11 +7,11 @@
 render::render() : shader("../shader/graph.vert.glsl", "../shader/graph.frag.glsl")
 {
     entities.push_back(std::make_unique<sphere>());
-    entities.push_back(std::make_unique<engineFloor>());
+    entities.push_back(std::make_unique<rectangle>(0.5f, 0.5f, "FLOOR"));
     for (auto &x : entities)
     {
         x->setBuffer();
-        x->collision->setBuffer();
+        x->getCollision()->setBuffer();
     }
 }
 
@@ -24,11 +24,11 @@ void render::start(camera camera, float deltaT)
     physics::update(entities, deltaT);
     entities[1]->draw(camera, shader);
     if (isCollisionMode)
-        entities[1]->collision->draw(camera, shader);
+        entities[1]->getCollision()->draw(camera, shader);
     glPolygonMode(GL_FRONT_AND_BACK, GL_LINES);
     entities[0]->draw(camera, shader);
     if (isCollisionMode)
-        entities[0]->collision->draw(camera, shader);
+        entities[0]->getCollision()->draw(camera, shader);
 }
 
 void render::initializeAndUpdateMatrices(camera camera)
