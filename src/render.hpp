@@ -13,8 +13,8 @@ class render : public physics
   public:
     render();
     void start(camera camera, float deltaT);
-    engineFloor floor;
-    sphere particle;
+    std::vector<std::unique_ptr<entity>> entities;
+
     class shader shader;
     void initializeAndUpdateMatrices(camera camera);
     bool isCollisionMode = false;

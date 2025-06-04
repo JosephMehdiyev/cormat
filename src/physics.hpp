@@ -9,7 +9,7 @@ class physics
 {
   public:
     static inline glm::vec3 gravity{0.0f, -9.81f, 0.0f};
-    void updateVelocity(entity &object, float deltaT);
-    void updatePosition(entity &object, float deltaT);
-    void update(entity &object, float deltaT);
+    void updateVelocity(std::unique_ptr<entity> &object, float deltaT);
+    void updatePosition(std::unique_ptr<entity> &object, float deltaT);
+    void update(std::vector<std::unique_ptr<entity>> &entities, float deltaT);
 };

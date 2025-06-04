@@ -9,7 +9,7 @@ void myGui::mainGui(camera &camera, render &scene)
     ImGui::SliderFloat("Walk speed", &camera.cameraSpeed, 0, 3);
     if (ImGui::Button("Polygon Mode"))
     {
-        scene.particle.isPolygonMode = !scene.particle.isPolygonMode;
+        scene.entities[0]->isPolygonMode = !scene.entities[0]->isPolygonMode;
     }
     if (ImGui::Button("Show Collision Hitbox"))
     {

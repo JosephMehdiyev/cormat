@@ -11,7 +11,7 @@ collision::collision(const entity &entity)
 }
 
 // FIXME: must ignore rotations
-void collision::draw(entity &entity, camera camera, shader shader)
+void collision::draw(camera camera, shader shader)
 {
     glBindVertexArray(VAO);
     shader.setBool("useTexture", false);

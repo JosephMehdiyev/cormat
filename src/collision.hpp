@@ -12,7 +12,7 @@ class collision : buffer
 {
   public:
     collision(const entity &entity);
-    void draw(entity &entity, camera camera, shader shader);
+    void draw(camera camera, shader shader);
     std::vector<float> getVerticeData(glm::vec3 min, glm::vec3 max);
     glm::vec3 min, max;
     std::vector<float> verticeData;
