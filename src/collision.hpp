@@ -1,11 +1,13 @@
 #pragma once
 #include "buffer.hpp"
+#include "math.h"
 #include <glm/glm.hpp>
 #include <stdexcept>
 #include <vector>
 class camera;
 class shader;
 class entity;
+class sphere;
 class collisionBox : buffer
 {
   public:
@@ -16,4 +18,6 @@ class collisionBox : buffer
     std::vector<float> verticeData;
     void setBuffer();
     std::vector<unsigned int> indiceData;
+    static bool checkSphereAABB(const entity &AABB, const sphere &sphere);
+    static bool isPointInsideSphere(const glm::vec3 &point, const sphere &sphere);
 };

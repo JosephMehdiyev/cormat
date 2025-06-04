@@ -1,5 +1,6 @@
 #include "collision.hpp"
 #include "entity.hpp"
+#include "sphere.hpp"
 
 collisionBox::collisionBox(const entity &entity)
 {
@@ -9,6 +10,7 @@ collisionBox::collisionBox(const entity &entity)
     indiceData = {0, 1, 1, 3, 3, 2, 2, 0, 4, 5, 5, 7, 7, 6, 6, 4, 0, 4, 1, 5, 2, 6, 3, 7};
 }
 
+// FIXME: must ignore rotations
 void collisionBox::draw(entity &entity, camera camera, shader shader)
 {
     glBindVertexArray(VAO);
@@ -47,4 +49,21 @@ std::vector<float> collisionBox::getVerticeData(glm::vec3 min, glm::vec3 max)
 {
     return {min.x, min.y, min.z, RED, max.x, min.y, min.z, RED, min.x, max.y, min.z, RED, max.x, max.y, min.z, RED,
             min.x, min.y, max.z, RED, max.x, min.y, max.z, RED, min.x, max.y, max.z, RED, max.x, max.y, max.z, RED};
+}
+
+bool collisionBox::isPointInsideSphere(const glm::vec3 &point, const sphere &sphere)
+{
+    const float distance = sqrt(pow((point.x - sphere.position.x), 2) + pow((point.y - sphere.position.y), 2) +
+                                pow((point.z - sphere.position.z), 2));
+    return distance < sphere.radius;
+}
+
+bool collisionBox::checkSphereAABB(const entity &AABB, const sphere &sphere)
+{
+    const float x = std::max(AABB.min.x, std::min(sphere.position.x, AABB.max.x));
+    const float y = std::max(AABB.min.y, std::min(sphere.position.y, AABB.max.y));
+    const float z = std::max(AABB.min.z, std::min(sphere.position.z, AABB.max.z));
+
+    const glm::vec3 point = {x, y, z};
+    return collisionBox::isPointInsideSphere(point, sphere);
 }

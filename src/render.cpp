@@ -19,6 +19,8 @@ void render::start(camera camera, float deltaT)
     shader.use();
     render::initializeAndUpdateMatrices(camera);
     physics::update(particle, deltaT);
+    if (collisionBox::checkSphereAABB(floor, particle))
+        particle.velocity.y = -particle.velocity.y;
     floor.draw(camera, shader);
     if (isCollisionMode)
         floor.collision->draw(particle, camera, shader);
