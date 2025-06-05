@@ -26,5 +26,4 @@ class collision : buffer
     static bool isCollidingSphereAABB(sphere &sphere, entity &AABB);
     static bool isCollidingAABBAABB(entity &entity1, entity &entity2);
     static bool isCollidingSphereSphere(sphere &sphere1, sphere &sphere2);
-    static bool isPointInsideSphere(glm::vec3 &point, sphere &sphere);
 };

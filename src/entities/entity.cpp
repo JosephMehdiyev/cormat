@@ -81,6 +81,20 @@ void entity::setBuffer()
         }
     }
 }
+
+bool entity::isStatic()
+{
+    if (bodyType == BODY_TYPE::STATIC)
+        return true;
+    else
+        return false;
+}
+
+bool entity::isDynamic()
+{
+    return !isStatic();
+}
+
 glm::vec3 &entity::getMin()
 {
     return min;

@@ -1,8 +1,8 @@
 ### The project will be repurposed as a 3D Physics Engine! This project is no longer for drawing Graphs
 # About the project (In development) ![C++](https://img.shields.io/badge/c++-%2300599C.svg?style=Plastic&logo=c%2B%2B&logoColor=white) ![OpenGL](https://img.shields.io/badge/OpenGL-%23FFFFFF.svg?style=Plastic&logo=opengl) ![CMake](https://img.shields.io/badge/CMake-%23008FBA.svg?style=Plastic&logo=cmake&logoColor=white)
 **Cormat** is a graphical 3D math software intended for visualizing mathematical functions. In the future, I am planning to make this project expand to a 3D engine, mainly for physics simulations. Currently, it only is a graph software.
-# Roadmap
-* EMTPY! 
+# TODO
+* Min/Max, collision box rendering and making are very buggy: FIX
 # Dependecies
 * [OpenGL](https://www.khronos.org/opengl/wiki/Getting_Started#Downloading_OpenGL)  API for rendering 2D-3D graphics
 * [GLFW](https://github.com/glfw/glfw) API for creating windows, reading input and handling events. **CMAKE AUTOMATICALLY INSTALLS LOCALLY VIA GIT**

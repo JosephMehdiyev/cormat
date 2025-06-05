@@ -1,6 +1,7 @@
 #include "collision.hpp"
 #include "entity.hpp"
 #include "sphere.hpp"
+#include <glm/geometric.hpp>
 
 collision::collision(entity &entity)
 {
@@ -51,30 +52,53 @@ std::vector<float> collision::getVerticeData(glm::vec3 min, glm::vec3 max)
             min.x, min.y, max.z, RED, max.x, min.y, max.z, RED, min.x, max.y, max.z, RED, max.x, max.y, max.z, RED};
 }
 
-bool collision::isPointInsideSphere(glm::vec3 &point, sphere &sphere)
-{
-    const float distance =
-        sqrt(pow((point.x - sphere.getPosition().x), 2) + pow((point.y - sphere.getPosition().y), 2) +
-             pow((point.z - sphere.getPosition().z), 2));
-    return distance < sphere.getRadius();
-}
-
 bool collision::isCollidingSphereAABB(sphere &sphere, entity &AABB)
 {
-    float x = std::max(AABB.getMin().x, std::min(sphere.getPosition().x, AABB.getMax().x));
-    float y = std::max(AABB.getMin().y, std::min(sphere.getPosition().y, AABB.getMax().y));
-    float z = std::max(AABB.getMin().z, std::min(sphere.getPosition().z, AABB.getMax().z));
-    glm::vec3 point = {x, y, z};
-    return collision::isPointInsideSphere(point, sphere);
+    glm::vec3 closestPoint = glm::clamp(sphere.getPosition(), AABB.getCollision()->min, AABB.getCollision()->max);
+    glm::vec3 difference = sphere.getPosition() - closestPoint;
+    float differenceLength = glm::length(difference);
+    // if they collide, do static collision handler so they are not inside each other
+    if (differenceLength < sphere.getRadius())
+    {
+        if (differenceLength == 0)
+            return true;
+        glm::vec3 normal = glm::normalize(difference);
+        if (sphere.isDynamic() && AABB.isStatic())
+            sphere.getPosition() += normal * (sphere.getRadius() - differenceLength);
+        else if (sphere.isDynamic() && AABB.isDynamic())
+        {
+            float penet = sphere.getRadius() - differenceLength;
+            glm::vec3 res = normal * (penet / 2);
+            AABB.getMin() -= res;
+            AABB.getMax() -= res;
+            sphere.getPosition() += res;
+        }
+        return true;
+    }
+    return false;
 }
 
 bool collision::isCollidingSphereSphere(sphere &sphere1, sphere &sphere2)
 {
-    const float distance = sqrt(pow((sphere1.getPosition().x - sphere2.getPosition().x), 2) +
-                                pow((sphere1.getPosition().y - sphere2.getPosition().y), 2) +
-                                pow((sphere1.getPosition().z - sphere2.getPosition().z), 2));
+    const float distance = glm::length(sphere1.getPosition() - sphere2.getPosition());
 
-    return distance < sphere1.getRadius() + sphere2.getRadius();
+    // If they collide, do static collision handler so they are not inside each other
+    if (distance < sphere1.getRadius() + sphere2.getRadius())
+    {
+        const glm::vec3 distanceVector = sphere1.getPosition() - sphere2.getPosition();
+        const float moveDistance = (sphere1.getRadius() + sphere2.getRadius() - distance) / 2;
+        if (sphere1.isDynamic() && sphere2.isDynamic())
+        {
+            sphere1.getPosition() += glm::normalize(distanceVector) * moveDistance;
+            sphere2.getPosition() -= glm::normalize(distanceVector) * moveDistance;
+        }
+        else if (sphere1.isStatic() && sphere2.isDynamic())
+            sphere2.getPosition() -= glm::normalize(distanceVector) * (moveDistance * 2);
+        else if (sphere1.isDynamic() && sphere2.isStatic())
+            sphere1.getPosition() -= glm::normalize(distanceVector) * (moveDistance * 2);
+        return true;
+    }
+    return false;
 }
 
 bool collision::isCollidingAABBAABB(entity &a, entity &b)
@@ -102,11 +126,11 @@ void collision::handleCollisions(entity &first, entity &second)
 {
     if (first.getBodyType() == BODY_TYPE::DYNAMIC)
     {
-        first.getVelocity().y *= -1;
+        first.getVelocity().y *= -0.5;
     }
 
     if (second.getBodyType() == BODY_TYPE::DYNAMIC)
     {
-        second.getVelocity().y *= -1;
+        second.getVelocity().y *= -0.5;
     }
 }

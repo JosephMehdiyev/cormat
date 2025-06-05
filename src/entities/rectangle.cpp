@@ -39,8 +39,8 @@ rectangle::rectangle(float a, float b, std ::string isFloor)
             0,
         });
         setHasTexture(true);
-        setMin({-halfA, -halfB, -0.0001f});
-        setMax({halfA, halfB, 0.0001f});
+        setMin({-halfA, -halfB, -0.01f});
+        setMax({halfA, halfB, 0.01f});
         setCollision(std::make_unique<class collision>(*this));
     }
 };

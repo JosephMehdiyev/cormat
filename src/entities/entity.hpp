@@ -37,6 +37,9 @@ class entity : public buffer
     void setBuffer();
     void disableCollision();
 
+    bool isStatic();
+    bool isDynamic();
+
     // Getters
     glm::vec3 &getMin();
     glm::vec3 &getMax();
@@ -94,6 +97,13 @@ class entity : public buffer
     glm::vec3 velocity{0.0f, 0.0f, 0.0f};
     glm::vec3 acceleration{0.0f, 0.0f, 0.0f};
     glm::vec3 position{0.0f, 0.0f, 0.0f};
+    glm::vec3 centerMass = position;
+
+    float angularVelocity = 0;
+    float angularAcceleration = 0;
+
+    float kineticEnergy;
+    float potentialEnergy;
 
     glm::vec3 rotation{0.0f, 0.0f, 0.0f};
     glm::vec3 scale = glm::vec3(1.0f);
