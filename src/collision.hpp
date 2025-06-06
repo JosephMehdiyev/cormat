@@ -2,23 +2,16 @@
 #include "buffer.hpp"
 #include "math.h"
 #include <glm/glm.hpp>
+
 #include <stdexcept>
 #include <vector>
-class camera;
-class shader;
+
 class entity;
 class sphere;
 class engineFloor;
-class collision : buffer
+class collision
 {
   public:
-    collision(entity &entity);
-    void draw(camera camera, shader shader);
-    std::vector<float> getVerticeData(glm::vec3 min, glm::vec3 max);
-    glm::vec3 min, max;
-    std::vector<float> verticeData;
-    void setBuffer();
-    std::vector<unsigned int> indiceData;
     static bool checkCollisions(entity &first, entity &second);
     static void handleCollisions(entity &first, entity &second);
 

@@ -3,6 +3,7 @@
 **Cormat** is a graphical 3D math software intended for visualizing mathematical functions. In the future, I am planning to make this project expand to a 3D engine, mainly for physics simulations. Currently, it only is a graph software.
 # TODO
 * Min/Max, collision box rendering and making are very buggy: FIX
+* Min/Max updating is also buggy, if object is not static it will cause problems
 # Dependecies
 * [OpenGL](https://www.khronos.org/opengl/wiki/Getting_Started#Downloading_OpenGL)  API for rendering 2D-3D graphics
 * [GLFW](https://github.com/glfw/glfw) API for creating windows, reading input and handling events. **CMAKE AUTOMATICALLY INSTALLS LOCALLY VIA GIT**

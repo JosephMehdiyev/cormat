@@ -1,4 +1,5 @@
 #include "sphere.hpp"
+#include "collisionBox.hpp"
 // https://songho.ca/opengl/gl_sphere.html
 sphere::sphere(float radius, int sectors, int stacks)
 {
@@ -7,6 +8,8 @@ sphere::sphere(float radius, int sectors, int stacks)
     this->radius = radius;
     const float PI = 3.1415926f;
     float x, y, z, xy;
+    std::vector<float> localVerticeData;
+    std::vector<unsigned int> localIndiceData;
 
     for (int i = 0; i <= stacks; ++i)
     {
@@ -21,11 +24,12 @@ sphere::sphere(float radius, int sectors, int stacks)
             // Position
             x = xy * cosf(sectorAngle);
             y = xy * sinf(sectorAngle);
-            getCoordData().insert(getCoordData().end(), {x, y, z});
+            localVerticeData.insert(localVerticeData.end(), {x, y, z});
 
-            getCoordData().insert(getCoordData().end(), {0.0f, 0.0f, 0.0f});
+            localVerticeData.insert(localVerticeData.end(), {0.0f, 0.0f, 0.0f});
         }
     }
+    setVerticeData(localVerticeData);
 
     for (int i = 0; i < stacks; ++i)
     {
@@ -36,17 +40,16 @@ sphere::sphere(float radius, int sectors, int stacks)
         {
             if (i != 0)
             {
-                getIndiceData().insert(getIndiceData().end(), {k1, k2, k1 + 1});
+                localIndiceData.insert(localIndiceData.end(), {k1, k2, k1 + 1});
             }
             if (i != stacks - 1)
             {
-                getIndiceData().insert(getIndiceData().end(), {k1 + 1, k2, k2 + 1});
+                localIndiceData.insert(localIndiceData.end(), {k1 + 1, k2, k2 + 1});
             }
         }
     }
+    setIndiceData(localIndiceData);
     setAcceleration({0.00, -9.8f, 0.0f});
     setPosition({0.0f, 10.0f, 0.0f});
-    setMin(-glm::vec3(radius));
-    setMax(glm::vec3(radius));
-    setCollision(nullptr);
+    setCollisionBox(nullptr);
 };

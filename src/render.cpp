@@ -1,4 +1,6 @@
 #include "render.hpp"
+#include "collisionBox.hpp"
+#include "entity.hpp"
 #include "glad.h"
 #include "shader.hpp"
 #include "texture.hpp"
@@ -7,14 +9,14 @@
 render::render() : shader("../shader/graph.vert.glsl", "../shader/graph.frag.glsl")
 {
     entities.push_back(std::make_unique<sphere>());
-    entities.push_back(std::make_unique<rectangle>(0.5f, 0.5f, "FLOOR"));
+    entities.push_back(std::make_unique<rectangle>(0.5f, 0.5f));
     entities.push_back(std::make_unique<sphere>());
-    entities[2]->setPosition({0.0f, 21.0f, 0.0f});
+    entities[2]->setPosition({0.0f, 21.0f, 1.0f});
     for (auto &x : entities)
     {
         x->setBuffer();
-        if (x->getCollision() != nullptr)
-            x->getCollision()->setBuffer();
+        if (x->getCollisionBox() != nullptr)
+            x->getCollisionBox()->setBuffer();
     }
 }
 
@@ -26,12 +28,13 @@ void render::start(camera camera, float deltaT)
     render::initializeAndUpdateMatrices(camera);
     physics::update(entities, deltaT);
 
+    // FIXME: if collisionBox is not draw after its base entity, it will cause issues
     for (auto &x : entities)
     {
         x->draw(camera, shader);
         if (isCollisionMode)
-            if (x->getCollision() != nullptr)
-                x->getCollision()->draw(camera, shader);
+            if (x->getCollisionBox() != nullptr)
+                x->getCollisionBox()->draw(camera, shader);
     }
 }
 

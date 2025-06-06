@@ -4,6 +4,13 @@
 class rectangle : public entity
 {
   public:
-    rectangle(float a = 0.5f, float b = 0.5f);
-    rectangle(float a = 0.5f, float b = 0.5f, std::string isFloor = "FLOOR");
+    rectangle(float width, float height, float thickness);
+    rectangle(float width, float height);
+    void updateDimensions();
+    float &getWidth();
+    float &getHeight();
+    float &getThickness();
+
+  private:
+    float width, height, thickness = 0;
 };
