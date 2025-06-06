@@ -8,10 +8,9 @@
 
 render::render() : shader("../shader/graph.vert.glsl", "../shader/graph.frag.glsl")
 {
-    entities.push_back(std::make_unique<sphere>());
     entities.push_back(std::make_unique<rectangle>(0.5f, 0.5f));
     entities.push_back(std::make_unique<sphere>());
-    entities[2]->setPosition({0.0f, 21.0f, 1.0f});
+    entities.push_back(std::make_unique<sphere>());
     for (auto &x : entities)
     {
         x->setBuffer();

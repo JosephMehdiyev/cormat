@@ -3,6 +3,7 @@
 #include "entity.hpp"
 #include "rectangle.hpp"
 #include "sphere.hpp"
+#include <cmath>
 #include <glm/geometric.hpp>
 
 bool collision::isCollidingSphereAABB(sphere &sphere, entity &AABB)
@@ -39,6 +40,7 @@ bool collision::isCollidingSphereAABB(sphere &sphere, entity &AABB)
     return false;
 }
 
+// FIXME:: Optimize this, it checks the NaN case for normals so bad optimization
 bool collision::isCollidingSphereSphere(sphere &sphere1, sphere &sphere2)
 {
     const float distance = glm::length(sphere1.getPosition() - sphere2.getPosition());
@@ -46,7 +48,9 @@ bool collision::isCollidingSphereSphere(sphere &sphere1, sphere &sphere2)
     // If they collide, do static collision handler so they are not inside each other
     if (distance < sphere1.getRadius() + sphere2.getRadius())
     {
-        const glm::vec3 distanceVector = sphere1.getPosition() - sphere2.getPosition();
+        glm::vec3 distanceVector = sphere1.getPosition() - sphere2.getPosition();
+        if (distanceVector == glm::vec3(0.0f))
+            distanceVector = (sphere1.getPosition() * 1.01f) - sphere2.getPosition();
         const float moveDistance = (sphere1.getRadius() + sphere2.getRadius() - distance) / 2;
         if (sphere1.isDynamic() && sphere2.isDynamic())
         {
