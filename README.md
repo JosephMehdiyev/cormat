@@ -32,7 +32,7 @@ There are no system specific code in the project (yet? imgui may give error). I 
 In future, there will be precompiled binaries for WINDOWS/LINUX/MACOS.
 # Gallery 
 300 Sphere Elastic, no Friction, no Energy Loss Collessions
-![](./gallery/scene.gif)
+![](https://github.com/JosephMehdiyev/cormat/blob/main/gallery/scene.gif)
 # License
 The project is licensed under the GNU GENERAL PUBLIC LICENSE.
 
