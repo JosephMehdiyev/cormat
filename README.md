@@ -13,7 +13,6 @@
 * [GCC](https://gcc.gnu.org/install/) to compile the project
 
 # Shortcuts
-* Use mouse to rotate the graph
 * Use mouse scrool to zoom in and out
 * Use W,A,S,D to move around
 # Build
@@ -30,14 +29,10 @@ make
 ```
 I only compiled this in Linux ARCH. I did not test this program on other distros.
 There are no system specific code in the project (yet? imgui may give error). I believe it should run smoothly on all the popular systems.
-In future, there will be precompiled binaries for WINDOWS/LINUX/MACOS. Do not worry!
-# Gallery (I will redesign the structure for better aesthetics)
-sin(x) + cos(y)
-![sin(x) + cos(y)](./gallery/cormat1.png)
-x^2 + y^2
-![x^2 + y^2](./gallery/cormat2.png)
-x/y
-![x/y](./gallery/cormat3.png)
+In future, there will be precompiled binaries for WINDOWS/LINUX/MACOS.
+# Gallery 
+300 Sphere Elastic, no Friction, no Energy Loss Collessions
+![](./gallery/scene.gif)
 # License
 The project is licensed under the GNU GENERAL PUBLIC LICENSE.
 
