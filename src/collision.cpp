@@ -90,15 +90,36 @@ bool collision::checkCollisions(entity &first, entity &second)
         return false;
 }
 
+// naive implementation
 void collision::handleCollisions(entity &first, entity &second)
 {
-    if (first.getBodyType() == BODY_TYPE::DYNAMIC)
-    {
-        first.getVelocity().y *= -0.5;
-    }
+    glm::vec3 normal;
+    if (first.isAABB() && second.isSphere())
+        normal =
+            glm::normalize(second.getPosition() - glm::clamp(second.getPosition(), first.getCollisionBox()->getMin(),
+                                                             first.getCollisionBox()->getMax()));
+    else if (first.isSphere() && second.isAABB())
+        normal =
+            glm::normalize(first.getPosition() - glm::clamp(first.getPosition(), second.getCollisionBox()->getMin(),
+                                                            second.getCollisionBox()->getMax()));
 
-    if (second.getBodyType() == BODY_TYPE::DYNAMIC)
+    else
+        normal = glm::normalize(second.getPosition() - first.getPosition());
+    float velNormal1 = glm::dot(first.getVelocity(), normal);
+    float velNormal2 = glm::dot(second.getVelocity(), normal);
+    float j = -1.8f * (velNormal1 - velNormal2);
+
+    if (!first.isStatic() && !second.isStatic())
     {
-        second.getVelocity().y *= -0.5;
+        j /= 2;
+        glm::vec3 impulse = j * normal;
+        first.getVelocity() += impulse;
+        second.getVelocity() -= impulse;
     }
+    else if (first.isStatic() && !second.isStatic())
+    {
+        second.getVelocity() -= (j * normal);
+    }
+    else if (!first.isStatic() && second.isStatic())
+        first.getVelocity() += (j * normal);
 }

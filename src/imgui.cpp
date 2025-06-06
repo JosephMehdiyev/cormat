@@ -15,6 +15,10 @@ void myGui::mainGui(camera &camera, render &scene)
     {
         scene.isCollisionMode = !scene.isCollisionMode;
     }
+    if (ImGui::Button("Start Phyiscs"))
+    {
+        scene.startUpdatingPhysics = !scene.startUpdatingPhysics;
+    }
     ImGui::End();
 }
 

@@ -7,11 +7,14 @@ collisionBox::collisionBox(entity &entity)
 {
     setHasTexture(false);
     initializeMinMax(entity);
+
     setVerticeData(generateVerticeData(min, max));
     setIndiceData({0, 1, 1, 3, 3, 2, 2, 0, 4, 5, 5, 7, 7, 6, 6, 4, 0, 4, 1, 5, 2, 6, 3, 7});
+
+    // FIXME:: min\max should be updated regularly
+
     glm::vec3 rad = glm::radians(entity.getRotation());
     glm::quat rotate = glm::quat(rad);
-    // FIXME:: min\max should be updated regularly
     min = (rotate * min) * entity.getScale();
     max = (rotate * max) * entity.getScale();
 }
@@ -20,7 +23,7 @@ void collisionBox::draw(camera &camera, shader &shader)
 {
     glBindVertexArray(getVAO());
     shader.setBool("useTexture", false);
-
+    glLineWidth(5.0f); // Set your desired thickness here
     glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
     glDrawElements(GL_LINES, getIndiceData().size(), GL_UNSIGNED_INT, 0);
 }
@@ -36,8 +39,8 @@ void collisionBox::initializeMinMax(entity &entity)
     else if (entity.isAABB())
     {
         auto *rect = dynamic_cast<rectangle *>(&entity);
-        min = {-rect->getWidth(), -rect->getHeight(), -rect->getThickness()};
-        max = {rect->getWidth(), rect->getHeight(), rect->getThickness()};
+        min = {-rect->getWidth(), -rect->getHeight(), -rect->getThickness() - 0.0001f};
+        max = {rect->getWidth(), rect->getHeight(), rect->getThickness() + 0.0001};
     }
 }
 

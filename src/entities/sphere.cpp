@@ -49,7 +49,8 @@ sphere::sphere(float radius, int sectors, int stacks)
         }
     }
     setIndiceData(localIndiceData);
+    setVelocity({0.5f, 1.0f, 0.5f});
     setAcceleration({0.00, -9.8f, 0.0f});
-    setPosition({0.0f, 10.0f, 0.0f});
+    setPosition({0.0f, 20.0f, 0.0f});
     setCollisionBox(nullptr);
 };

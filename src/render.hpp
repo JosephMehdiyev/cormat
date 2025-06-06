@@ -18,6 +18,7 @@ class render : public physics
     class shader shader;
     void initializeAndUpdateMatrices(camera camera);
     bool isCollisionMode = false;
+    bool startUpdatingPhysics = true;
 
   public:
     void setRenderingConfig();

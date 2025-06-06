@@ -6,7 +6,7 @@
 #include <sstream>
 
 #define GAME_NAME "Cormat"
-#define VERSION "0.1.0-alpha"
+#define VERSION "0.1.1-alpha"
 
 class glfwWindow
 {
